@@ -1,0 +1,25 @@
+@tailwind utilities;
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .animate-spin-slow {
+    animation: spin 10s linear infinite;
+  }
+  .animate-bounce-subtle {
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .animate-fade-in {
+    animation: fadeIn 1.5s ease-out;
+  }
+  .animate-scale-up {
+    animation: scaleUp 0.8s ease-out;
+  }
+  .animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+}

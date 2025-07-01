@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "NEG AI Banking Platform",
+        "description": "A secure, scalable digital banking solution for Nigeria, built with MongoDB, Flutterwave, and Express.js. Features include digital wallets, real-time balance checks, instant transfers, bill payments, JWT-based authentication, and webhook support for seamless transactions.",
+        "image": "/assets/images/neg-ai-banking-mockup.png",
+        "link": "https://github.com/oluwaseun/neg-ai-banking-mockup"
+    },
+    {
+        "id": 2,
+        "title": "AI-Powered Task Management Application",
+        "description": "A web-based productivity platform leveraging AI for task scheduling, featuring real-time chat, social feed, distributed file storage, role-based dashboards, and Microsoft Outlook integration for enhanced workflow efficiency.",
+        "image": "/assets/images/task-management-demo.gif",
+        "link": "https://github.com/oluwaseun/task-management-app"
+    },
+    {
+        "id": 3,
+        "title": "Student Grade Prediction Model",
+        "description": "A machine learning model developed to predict student performance in Lagos state's WASSCE, using Python, TensorFlow, and Scikit-learn to analyze historical data and provide actionable insights.",
+        "image": "/assets/images/grade-prediction-placeholder.jpg",
+        "link": "https://github.com/oluwaseun/grade-prediction-model"
+    },
+    {
+        "id": 4,
+        "title": "Chatbot Tutor",
+        "description": "An NLP-powered chatbot designed to assist students with personalized learning, built with Python and TensorFlow, offering interactive Q&A and study recommendations.",
+        "image": "/assets/images/chatbot-tutor-placeholder.jpg",
+        "link": "https://github.com/oluwaseun/chatbot-tutor"
+    },
+    {
+        "id": 5,
+        "title": "Fraud Detection Research",
+        "description": "A research project investigating fraud’s impact on Nigeria’s digital economy, proposing AI/ML-based solutions using anomaly detection and data analysis to enhance security.",
+        "image": "/assets/images/fraud-detection-placeholder.jpg",
+        "link": "https://github.com/oluwaseun/fraud-detection-research"
+    }
+]

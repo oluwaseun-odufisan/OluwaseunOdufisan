@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "AI Innovation Award",
+        "description": "Received the AI Innovation Award at the 2024 Tech Summit Nigeria for developing the NEG AI Banking Platform, recognized for its secure digital wallet and real-time transaction capabilities using MongoDB and Flutterwave.",
+        "date": "August 2024"
+    },
+    {
+        "id": 2,
+        "title": "Lead Machine Learning Researcher",
+        "description": "Led a team at Federal University of Technology, Akure (July 2023 – March 2024) to develop a Student Grade Prediction Model, achieving 92% accuracy in forecasting WASSCE performance, published in a peer-reviewed journal.",
+        "date": "July 2023 - March 2024"
+    },
+    {
+        "id": 3,
+        "title": "Outstanding ML Engineer Intern",
+        "description": "Earned the Outstanding Intern Award at Chronicles Software Development Company (January 2023 – June 2023) for building an NLP-powered Chatbot Tutor, adopted by 500+ students for personalized learning.",
+        "date": "January 2023 - June 2023"
+    },
+    {
+        "id": 4,
+        "title": "Community Impact Leader",
+        "description": "Served as CDS President for ICT, NYSC, Opudu LG (October 2024 – January 2025), implementing digital literacy programs that trained 200+ community members in software development and AI basics.",
+        "date": "October 2024 - January 2025"
+    },
+    {
+        "id": 5,
+        "title": "Open-Source Contributor",
+        "description": "Contributed to TensorFlow’s open-source community (November 2023 – April 2024), enhancing NLP model performance with 10+ merged pull requests, improving sentiment analysis accuracy by 15%.",
+        "date": "November 2023 - April 2024"
+    },
+    {
+        "id": 6,
+        "title": "Machine Learning Educator",
+        "description": "Organized and delivered free weekend workshops on Machine Learning and Neural Networks in Lagos (December 2023), impacting 300+ students and professionals, with 90% reporting improved understanding.",
+        "date": "December 2023"
+    }
+]

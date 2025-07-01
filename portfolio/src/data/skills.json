@@ -1,0 +1,46 @@
+{
+    "frontend": [
+        "React",
+        "Tailwind CSS",
+        "JavaScript (ES6+)",
+        "HTML5",
+        "CSS3",
+        "TypeScript"
+    ],
+    "backend": [
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Flutterwave API",
+        "JWT Authentication",
+        "RESTful APIs"
+    ],
+    "fullStack": [
+        "Full-Stack Development",
+        "API Design & Integration",
+        "Database Architecture",
+        "Microservices"
+    ],
+    "machineLearning": [
+        "Python",
+        "TensorFlow",
+        "PyTorch",
+        "Natural Language Processing (NLP)",
+        "Anomaly Detection",
+        "Scikit-learn"
+    ],
+    "softwareArchitecture": [
+        "System Design",
+        "Software Requirements Specification (SRS)",
+        "Database Design",
+        "Scalability",
+        "Unit Testing"
+    ],
+    "projectManagement": [
+        "Agile Methodologies",
+        "Scrum",
+        "Team Leadership",
+        "Workflow Optimization",
+        "Jira"
+    ]
+}
