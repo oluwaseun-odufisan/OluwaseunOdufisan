@@ -26,7 +26,7 @@ function Hero() {
             subtitleRef.current,
             { text: '' },
             {
-                text: 'AI Software Engineer | Crafting Innovative Solutions with Code & Intelligence',
+                text: 'AI Software Engineer | Building Solutions with Code & Intelligence',
                 duration: 2.5,
                 ease: 'none',
                 delay: 0.8,
@@ -121,7 +121,7 @@ function Hero() {
                     ref={subtitleRef}
                     className="text-xl sm:text-3xl lg:text-4xl font-inter text-gray-accent mb-10 animate-pulse-slow leading-relaxed"
                 >
-                    AI Software Engineer | Crafting Innovative Solutions with Code & Intelligence
+                    AI Software Engineer | Building Solutions with Code & Intelligence
                 </p>
                 <div ref={buttonWrapperRef} className="flex flex-col sm:flex-row justify-center gap-6">
                     <Button

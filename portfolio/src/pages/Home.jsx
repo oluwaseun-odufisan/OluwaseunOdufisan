@@ -8,7 +8,7 @@ import Contact from '../components/sections/Contact.jsx';
 
 function Home() {
     return (
-        <main id="main-content">
+        <main id="main-content" className="pt-20">
             <Hero />
             <About />
             <Skills />

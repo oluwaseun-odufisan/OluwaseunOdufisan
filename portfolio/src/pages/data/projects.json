@@ -1,0 +1,104 @@
+[
+    {
+        "id": 1,
+        "title": "E-Commerce Platform",
+        "description": "A full-stack e-commerce platform with payment integration and user authentication.",
+        "technologies": [
+            "React",
+            "Node.js",
+            "MongoDB",
+            "Stripe"
+        ],
+        "image": "/assets/images/ecommerce.jpg",
+        "link": "https://github.com/oluwaseun-odufisan/ecommerce",
+        "liveDemo": "https://ecommerce-demo.vercel.app",
+        "category": "Web Development"
+    },
+    {
+        "id": 2,
+        "title": "Task Manager App",
+        "description": "A mobile app for task management with real-time sync and reminders.",
+        "technologies": [
+            "React Native",
+            "Firebase",
+            "TypeScript"
+        ],
+        "image": "/assets/images/taskmanager.jpg",
+        "link": "https://github.com/oluwaseun-odufisan/task-manager",
+        "liveDemo": "https://taskmanager-demo.vercel.app",
+        "category": "Mobile Apps"
+    },
+    {
+        "id": 3,
+        "title": "AI Image Generator",
+        "description": "An AI-powered tool for generating images from text prompts.",
+        "technologies": [
+            "Python",
+            "TensorFlow",
+            "React",
+            "AWS"
+        ],
+        "image": "/assets/images/aiimage.jpg",
+        "link": "https://github.com/oluwaseun-odufisan/ai-image-generator",
+        "liveDemo": "https://aiimage-demo.vercel.app",
+        "category": "AI"
+    },
+    {
+        "id": 4,
+        "title": "Portfolio Website",
+        "description": "This very portfolio, showcasing modern web design and animations.",
+        "technologies": [
+            "React",
+            "Tailwind CSS",
+            "GSAP"
+        ],
+        "image": "/assets/images/portfolio.jpg",
+        "link": "https://github.com/oluwaseun-odufisan/portfolio",
+        "liveDemo": "https://oluwaseun-portfolio.vercel.app",
+        "category": "Web Development"
+    },
+    {
+        "id": 5,
+        "title": "AI-Powered Task Management Application",
+        "description": "A web-based productivity platform leveraging AI for task scheduling, featuring real-time chat, social feed, distributed file storage, role-based dashboards, and Microsoft Outlook integration for enhanced workflow efficiency.",
+        "technologies": [
+            "React",
+            "Node.js",
+            "AI",
+            "MongoDB"
+        ],
+        "image": "/assets/images/task-management-demo.gif",
+        "link": "https://github.com/oluwaseun/task-management-app",
+        "liveDemo": "",
+        "category": "AI"
+    },
+    {
+        "id": 6,
+        "title": "NEG AI Banking Platform",
+        "description": "A secure, scalable digital banking solution for Nigeria, built with MongoDB, Flutterwave, and Express.js. Features include digital wallets, real-time balance checks, instant transfers, bill payments, JWT-based authentication, and webhook support for seamless transactions.",
+        "technologies": [
+            "MongoDB",
+            "Flutterwave",
+            "Express.js",
+            "Node.js"
+        ],
+        "image": "/assets/images/neg-ai-banking-mockup.png",
+        "link": "https://github.com/oluwaseun/neg-ai-banking-mockup",
+        "liveDemo": "",
+        "category": "Web Development"
+    },
+    {
+        "id": 7,
+        "title": "Fraud Detection Research",
+        "description": "A research project investigating fraud’s impact on Nigeria’s digital economy, proposing AI/ML-based solutions using anomaly detection and data analysis to enhance security.",
+        "technologies": [
+            "Python",
+            "AI/ML",
+            "Data Analysis"
+        ],
+        "image": "/assets/images/fraud-detection-placeholder.jpg",
+        "link": "https://github.com/oluwaseun/fraud-detection-research",
+        "liveDemo": "",
+        "category": "AI"
+    }
+]

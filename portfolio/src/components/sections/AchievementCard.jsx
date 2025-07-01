@@ -10,6 +10,7 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
     const overlayRef = useRef(null);
     const iconRef = useRef(null);
     const borderRef = useRef(null);
+    const textRef = useRef(null); // Added ref for text elements
 
     const iconMap = {
         Award: <Award className="w-8 h-8 text-teal-500 achievement-icon" />,
@@ -28,7 +29,7 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             ease: 'power3.out',
         });
         gsap.to(overlayRef.current, {
-            opacity: 0.8,
+            opacity: 0.3, // Reduced opacity for better readability
             duration: 0.4,
             ease: 'power3.out',
         });
@@ -44,7 +45,13 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             duration: 0.6,
             ease: 'power2.out',
         });
-        if (markerRef?.current) { // Guard against undefined markerRef
+        gsap.to(textRef.current.children, {
+            color: '#1f2937', // Darker gray for better contrast (gray-800)
+            textShadow: '0 0 5px rgba(255, 255, 255, 0.8)', // Subtle white shadow for readability
+            duration: 0.4,
+            ease: 'power3.out',
+        });
+        if (markerRef?.current) {
             gsap.to(markerRef.current, {
                 scale: 1.5,
                 backgroundColor: '#14b8a6',
@@ -81,7 +88,13 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             duration: 0.6,
             ease: 'power2.out',
         });
-        if (markerRef?.current) { // Guard against undefined markerRef
+        gsap.to(textRef.current.children, {
+            color: '#4b5563', // Revert to original gray-600
+            textShadow: 'none',
+            duration: 0.4,
+            ease: 'power3.out',
+        });
+        if (markerRef?.current) {
             gsap.to(markerRef.current, {
                 scale: 1,
                 backgroundColor: '#5eead4',
@@ -167,7 +180,7 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
                         {iconMap[icon] || <Award className="w-8 h-8 text-teal-500 achievement-icon" />}
                     </div>
                 )}
-                <div>
+                <div ref={textRef}>
                     <h3 className="text-xl font-poppins font-semibold text-gray-600 mb-2 animate-fade-in">
                         {title}
                     </h3>
@@ -192,7 +205,7 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             </div>
             <div
                 ref={overlayRef}
-                className="absolute inset-0 bg-gradient-to-b from-teal-500/70 to-teal-600/30 opacity-0 transition-opacity duration-300"
+                className="absolute inset-0 bg-gradient-to-b from-teal-200/20 to-teal-300/10 opacity-0 transition-opacity duration-300"
             />
         </div>
     );

@@ -155,7 +155,6 @@ function Skills() {
                         duration: 0.4,
                         ease: 'power2.out',
                     });
-                    // Particle effect
                     gsap.to(card.querySelector('.particle-overlay'), {
                         opacity: 0.3,
                         duration: 0.4,
@@ -302,10 +301,11 @@ function Skills() {
                                     });
                                 }
                             }}
-                            className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-teal-500 animate-fade-in ${activeCategory === category
+                            className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-teal-500 animate-fade-in ${
+                                activeCategory === category
                                     ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/40'
                                     : 'bg-gray-50 text-gray-800 hover:bg-teal-50 hover:text-teal-500'
-                                }`}
+                            }`}
                             role="tab"
                             aria-selected={activeCategory === category}
                             aria-label={`Show ${category === 'all' ? 'all skills' : category.replace(/([A-Z])/g, ' $1').trim() + ' skills'}`}
@@ -370,8 +370,9 @@ function Skills() {
                                             </div>
                                             {(skill.description || skill.name || skill) && (
                                                 <div
-                                                    className={`absolute left-0 top-full mt-3 p-2 bg-teal-600 text-white text-sm rounded-lg shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-20 max-w-xs ${hoveredSkill === `${category}-${skillIndex}` ? 'opacity-100' : ''
-                                                        }`}
+                                                    className={`absolute left-0 bottom-full mb-2 p-2 bg-teal-600 text-white text-sm rounded-lg shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:delay-150 pointer-events-none z-30 max-w-xs ${
+                                                        hoveredSkill === `${category}-${skillIndex}` ? 'opacity-100' : ''
+                                                    }`}
                                                     role="tooltip"
                                                     id={`tooltip-${category}-${skillIndex}`}
                                                     aria-hidden={hoveredSkill !== `${category}-${skillIndex}`}

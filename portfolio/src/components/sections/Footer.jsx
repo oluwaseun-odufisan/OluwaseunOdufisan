@@ -1,12 +1,12 @@
-import { useEffect, useRef, useMemo } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useEffect, useRef, useMemo, useCallback } from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import ParticleBackground from '../common/ParticleBackground.jsx';
 import Button from '../common/Button.jsx';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function Footer() {
     const footerRef = useRef(null);
@@ -14,8 +14,9 @@ function Footer() {
     const socialRef = useRef(null);
     const buttonRef = useRef(null);
     const backToTopRef = useRef(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // Memoized navigation links
     const navLinks = useMemo(
         () => [
             { to: '/', label: 'Home' },
@@ -27,7 +28,6 @@ function Footer() {
         []
     );
 
-    // Memoized social links
     const socialLinks = useMemo(
         () => [
             {
@@ -49,8 +49,35 @@ function Footer() {
         []
     );
 
+    const handleSectionNav = useCallback(
+        (sectionId) => {
+            if (location.pathname !== '/') {
+                navigate('/');
+                setTimeout(() => {
+                    const element = document.getElementById(sectionId);
+                    if (element) {
+                        gsap.to(window, {
+                            scrollTo: { y: element, offsetY: 80 },
+                            duration: 0.8,
+                            ease: 'power3.out',
+                        });
+                    }
+                }, 100);
+            } else {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    gsap.to(window, {
+                        scrollTo: { y: element, offsetY: 80 },
+                        duration: 0.8,
+                        ease: 'power3.out',
+                    });
+                }
+            }
+        },
+        [location.pathname, navigate]
+    );
+
     useEffect(() => {
-        // Footer entrance animation
         gsap.fromTo(
             footerRef.current,
             { opacity: 0, y: 50 },
@@ -67,7 +94,6 @@ function Footer() {
             }
         );
 
-        // Navigation links entrance
         if (navRef.current) {
             gsap.fromTo(
                 navRef.current.children,
@@ -86,7 +112,6 @@ function Footer() {
                 }
             );
 
-            // Navigation links hover effects
             const navLinks = navRef.current.querySelectorAll('a');
             navLinks.forEach((link) => {
                 link.addEventListener('mouseenter', () => {
@@ -114,7 +139,6 @@ function Footer() {
             });
         }
 
-        // Social links entrance and hover effects
         if (socialRef.current) {
             const socialLinks = socialRef.current.querySelectorAll('a');
             gsap.fromTo(
@@ -154,7 +178,6 @@ function Footer() {
             });
         }
 
-        // Contact button animation
         if (buttonRef.current) {
             gsap.fromTo(
                 buttonRef.current,
@@ -181,7 +204,6 @@ function Footer() {
             });
         }
 
-        // Back to Top button animation
         if (backToTopRef.current) {
             gsap.fromTo(
                 backToTopRef.current,
@@ -232,10 +254,8 @@ function Footer() {
             className="relative bg-gradient-to-t from-teal-primary/20 via-teal-light/30 to-white-bg bg-opacity-90 backdrop-blur-glass py-50"
             aria-label="Footer"
         >
-            {/* Particle Background */}
             <ParticleBackground className="absolute inset-0 z-0 opacity-40" />
 
-            {/* Wave SVG */}
             <svg
                 className="absolute top-0 left-0 w-full h-32 text-teal-light"
                 viewBox="0 0 1440 120"
@@ -259,7 +279,6 @@ function Footer() {
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Navigation Links */}
                     <div className="text-center md:text-left">
                         <h3 className="text-xl font-poppins font-semibold text-teal-primary mb-4">
                             Explore
@@ -273,6 +292,11 @@ function Footer() {
                                 <NavLink
                                     key={index}
                                     to={link.to}
+                                    onClick={() => {
+                                        if (link.to.includes('#')) {
+                                            handleSectionNav(link.to.split('#')[1]);
+                                        }
+                                    }}
                                     className={({ isActive }) =>
                                         `text-gray-accent font-inter text-lg hover:text-teal-primary transition-colors ${isActive ? 'text-teal-primary font-bold' : ''
                                         }`
@@ -285,7 +309,6 @@ function Footer() {
                         </nav>
                     </div>
 
-                    {/* Social Links */}
                     <div className="text-center">
                         <h3 className="text-xl font-poppins font-semibold text-teal-primary mb-4">
                             Connect
@@ -310,9 +333,8 @@ function Footer() {
                         </div>
                     </div>
 
-                    {/* Contact CTA */}
                     <div className="text-center md:text-right">
-                        <h3 className="text-xl font-poppins font-semibold text-teal-primary mb-4">
+                        <h3 className="text-xl font-poppins font-semibold text-teal-primary mb-4 px-9">
                             Get in Touch
                         </h3>
                         <Button
@@ -323,7 +345,7 @@ function Footer() {
                                     <span>Contact Me</span>
                                 </span>
                             }
-                            to="/#contact"
+                            onClick={() => handleSectionNav('contact')}
                             variant="primary"
                             className="glass px-8 py-4 text-lg font-semibold text-teal-primary hover:bg-teal-dark hover:text-white transition-all duration-300"
                             aria-label="Navigate to Contact Section"
@@ -331,14 +353,12 @@ function Footer() {
                     </div>
                 </div>
 
-                {/* Copyright Notice */}
                 <div className="text-center mt-12">
                     <p className="text-gray-accent font-inter text-sm">
                         © {new Date().getFullYear()} Oluwaseun Odufisan. All rights reserved.
                     </p>
                 </div>
 
-                {/* Back to Top Button */}
                 <div className="text-center mt-8">
                     <Link
                         ref={backToTopRef}

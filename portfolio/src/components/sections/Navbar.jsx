@@ -2,37 +2,25 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
-import { Menu, X, Github, Linkedin, XCircle } from 'lucide-react';
+import { Menu, X, Github, Linkedin } from 'lucide-react';
 import Button from '../common/Button.jsx';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false); // Mobile menu state
-    const [isCvOpen, setIsCvOpen] = useState(false); // CV viewer state
     const navbarRef = useRef(null);
     const logoRef = useRef(null);
     const navLinksRef = useRef([]);
     const socialLinksRef = useRef([]);
     const buttonRef = useRef(null);
-    const cvLinkRef = useRef(null);
-    const cvViewerRef = useRef(null);
     const progressRef = useRef(null);
     const location = useLocation();
     const navigate = useNavigate();
 
-    const cvUrl = encodeURIComponent(window.location.origin + '/assets/documents/cv.pdf');
-    const googleDocsViewerUrl = `https://docs.google.com/viewer?url=${cvUrl}&embedded=true`;
-
     const toggleMenu = useCallback(() => {
         setIsOpen((prev) => !prev);
-        if (isCvOpen) setIsCvOpen(false); // Close CV viewer when mobile menu toggles
-    }, [isCvOpen]);
-
-    const toggleCvViewer = useCallback(() => {
-        setIsCvOpen((prev) => !prev);
-        if (isOpen) setIsOpen(false); // Close mobile menu when CV viewer toggles
-    }, [isOpen]);
+    }, []);
 
     const handleSectionNav = useCallback(
         (sectionId) => {
@@ -42,7 +30,7 @@ function Navbar() {
                     const element = document.getElementById(sectionId);
                     if (element) {
                         gsap.to(window, {
-                            scrollTo: { y: element, offsetY: 80 }, // Offset for navbar height
+                            scrollTo: { y: element, offsetY: 80 },
                             duration: 0.8,
                             ease: 'power3.out',
                         });
@@ -59,10 +47,15 @@ function Navbar() {
                 }
             }
             if (isOpen) toggleMenu();
-            if (isCvOpen) setIsCvOpen(false);
         },
-        [location.pathname, navigate, isOpen, toggleMenu, isCvOpen]
+        [location.pathname, navigate, isOpen, toggleMenu]
     );
+
+    const handleHomeClick = useCallback(() => {
+        // Force a full page reload to refresh the page and start from the top
+        window.location.assign('/');
+        if (isOpen) toggleMenu();
+    }, [isOpen, toggleMenu]);
 
     useEffect(() => {
         // Handle hash navigation on homepage
@@ -80,7 +73,7 @@ function Navbar() {
             }, 100);
         }
 
-        // Scroll to top on page navigation
+        // Scroll to top on page navigation (non-home pages)
         if (location.pathname !== '/' && !location.hash) {
             gsap.to(window, {
                 scrollTo: { y: 0, offsetY: 80 },
@@ -88,6 +81,14 @@ function Navbar() {
                 ease: 'power3.out',
             });
         }
+
+        // Set static navbar styles
+        gsap.set(navbarRef.current, {
+            height: '5rem',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(16px)',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+        });
 
         // Logo entrance with pulsating glow
         gsap.fromTo(
@@ -157,60 +158,6 @@ function Navbar() {
             }
         });
 
-        // CV link hover animation
-        if (cvLinkRef.current) {
-            gsap.fromTo(
-                cvLinkRef.current,
-                { opacity: 0, y: -20 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    ease: 'power3.out',
-                    delay: 0.8,
-                }
-            );
-
-            const handleCvMouseEnter = () => {
-                gsap.to(cvLinkRef.current, {
-                    scale: 1.1,
-                    color: '#14b8a6',
-                    boxShadow: '0 0 15px rgba(20, 184, 166, 0.5)',
-                    duration: 0.3,
-                    ease: 'power2.out',
-                });
-            };
-
-            const handleCvMouseLeave = () => {
-                gsap.to(cvLinkRef.current, {
-                    scale: 1,
-                    color: '#4b5563',
-                    boxShadow: 'none',
-                    duration: 0.3,
-                    ease: 'power2.out',
-                });
-            };
-
-            cvLinkRef.current.addEventListener('mouseenter', handleCvMouseEnter);
-            cvLinkRef.current.addEventListener('mouseleave', handleCvMouseLeave);
-
-            cvLinkRef.current._handlers = { mouseenter: handleCvMouseEnter, mouseleave: handleCvMouseLeave };
-        }
-
-        // CV viewer animation
-        if (cvViewerRef.current && isCvOpen) {
-            gsap.fromTo(
-                cvViewerRef.current,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    ease: 'power3.out',
-                }
-            );
-        }
-
         // Social links hover animation
         socialLinksRef.current.forEach((link, index) => {
             if (link) {
@@ -261,7 +208,7 @@ function Navbar() {
                     scale: 1,
                     duration: 0.6,
                     ease: 'power3.out',
-                    delay: 1.1,
+                    delay: 0.8,
                 }
             );
 
@@ -288,20 +235,6 @@ function Navbar() {
 
             buttonRef.current._handlers = { mouseenter: handleButtonMouseEnter, mouseleave: handleButtonMouseLeave };
         }
-
-        // Scroll-based navbar effect
-        gsap.to(navbarRef.current, {
-            height: '4.5rem',
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(16px)',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-            scrollTrigger: {
-                trigger: document.body,
-                start: 'top -10%',
-                end: 'top -10%',
-                scrub: true,
-            },
-        });
 
         // Scroll progress bar with gradient
         gsap.to(progressRef.current, {
@@ -332,11 +265,6 @@ function Navbar() {
                 }
             });
 
-            if (cvLinkRef.current && cvLinkRef.current._handlers) {
-                cvLinkRef.current.removeEventListener('mouseenter', cvLinkRef.current._handlers.mouseenter);
-                cvLinkRef.current.removeEventListener('mouseleave', cvLinkRef.current._handlers.mouseleave);
-            }
-
             socialLinksRef.current.forEach((link) => {
                 if (link && link._handlers) {
                     link.removeEventListener('mouseenter', link._handlers.mouseenter);
@@ -351,12 +279,12 @@ function Navbar() {
 
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
-    }, [isOpen, isCvOpen, location, handleSectionNav, toggleMenu]);
+    }, [isOpen, location, handleSectionNav, toggleMenu]);
 
     return (
         <nav
             ref={navbarRef}
-            className="fixed top-0 left-0 w-full bg-white-bg bg-opacity-80 backdrop-blur-glass shadow-glass z-100 transition-all duration-300"
+            className="fixed top-0 left-0 w-full bg-white-bg bg-opacity-80 backdrop-blur-glass shadow-glass z-[100] transition-colors duration-300"
             aria-label="Main Navigation"
         >
             <div
@@ -390,9 +318,9 @@ function Navbar() {
                         <NavLink
                             to="/"
                             ref={(el) => (navLinksRef.current[0] = el)}
+                            onClick={handleHomeClick}
                             className={({ isActive }) =>
-                                `text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${isActive && !location.hash ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''
-                                }`
+                                `text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${isActive && !location.hash ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''}`
                             }
                             aria-label="Navigate to Home"
                         >
@@ -402,8 +330,7 @@ function Navbar() {
                             to="/projects"
                             ref={(el) => (navLinksRef.current[1] = el)}
                             className={({ isActive }) =>
-                                `text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${isActive ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''
-                                }`
+                                `text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${isActive ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''}`
                             }
                             aria-label="Navigate to Projects"
                         >
@@ -412,32 +339,15 @@ function Navbar() {
                         <button
                             onClick={() => handleSectionNav('achievements')}
                             ref={(el) => (navLinksRef.current[2] = el)}
-                            className={`text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${location.pathname === '/' && location.hash === '#achievements'
-                                    ? 'text-teal-500 font-bold border-b-2 border-teal-500'
-                                    : ''
-                                }`}
+                            className={`text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${location.pathname === '/' && location.hash === '#achievements' ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''}`}
                             aria-label="Scroll to Achievements section"
                         >
                             Achievements
                         </button>
                         <button
-                            onClick={toggleCvViewer}
-                            ref={cvLinkRef}
-                            className={`text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${isCvOpen ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''
-                                }`}
-                            aria-label="Toggle CV Viewer"
-                            aria-controls="cv-viewer"
-                            aria-expanded={isCvOpen}
-                        >
-                            CV
-                        </button>
-                        <button
                             onClick={() => handleSectionNav('contact')}
-                            ref={(el) => (navLinksRef.current[4] = el)}
-                            className={`text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${location.pathname === '/' && location.hash === '#contact'
-                                    ? 'text-teal-500 font-bold border-b-2 border-teal-500'
-                                    : ''
-                                }`}
+                            ref={(el) => (navLinksRef.current[3] = el)}
+                            className={`text-gray-600 font-inter text-lg hover:text-teal-500 transition-colors ${location.pathname === '/' && location.hash === '#contact' ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''}`}
                             aria-label="Scroll to Contact section"
                         >
                             Contact
@@ -492,10 +402,9 @@ function Navbar() {
                         <div className="px-4 pt-4 pb-6 space-y-3">
                             <NavLink
                                 to="/"
-                                onClick={toggleMenu}
+                                onClick={handleHomeClick}
                                 className={({ isActive }) =>
-                                    `block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${isActive && !location.hash ? 'text-teal-500 font-bold' : ''
-                                    }`
+                                    `block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${isActive && !location.hash ? 'text-teal-500 font-bold' : ''}`
                                 }
                                 aria-label="Navigate to Home"
                             >
@@ -505,8 +414,7 @@ function Navbar() {
                                 to="/projects"
                                 onClick={toggleMenu}
                                 className={({ isActive }) =>
-                                    `block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${isActive ? 'text-teal-500 font-bold' : ''
-                                    }`
+                                    `block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${isActive ? 'text-teal-500 font-bold' : ''}`
                                 }
                                 aria-label="Navigate to Projects"
                             >
@@ -514,26 +422,14 @@ function Navbar() {
                             </NavLink>
                             <button
                                 onClick={() => handleSectionNav('achievements')}
-                                className={`block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${location.pathname === '/' && location.hash === '#achievements' ? 'text-teal-500 font-bold' : ''
-                                    }`}
+                                className={`block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${location.pathname === '/' && location.hash === '#achievements' ? 'text-teal-500 font-bold' : ''}`}
                                 aria-label="Scroll to Achievements section"
                             >
                                 Achievements
                             </button>
                             <button
-                                onClick={toggleCvViewer}
-                                className={`block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${isCvOpen ? 'text-teal-500 font-bold' : ''
-                                    }`}
-                                aria-label="Toggle CV Viewer"
-                                aria-controls="cv-viewer"
-                                aria-expanded={isCvOpen}
-                            >
-                                CV
-                            </button>
-                            <button
                                 onClick={() => handleSectionNav('contact')}
-                                className={`block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${location.pathname === '/' && location.hash === '#contact' ? 'text-teal-500 font-bold' : ''
-                                    }`}
+                                className={`block px-4 py-2 text-gray-600 font-inter text-lg hover:text-teal-500 hover:bg-teal-100 hover:bg-opacity-20 rounded-md ${location.pathname === '/' && location.hash === '#contact' ? 'text-teal-500 font-bold' : ''}`}
                                 aria-label="Scroll to Contact section"
                             >
                                 Contact
@@ -570,33 +466,6 @@ function Navbar() {
                     </div>
                 )}
             </div>
-
-            {/* CV Viewer */}
-            {isCvOpen && (
-                <div
-                    ref={cvViewerRef}
-                    id="cv-viewer"
-                    className="fixed top-20 left-0 w-full h-[80vh] bg-white-bg bg-opacity-90 backdrop-blur-glass shadow-glass z-90 flex flex-col items-center justify-center p-4"
-                >
-                    <div className="flex justify-end w-full max-w-4xl mb-2">
-                        <button
-                            onClick={toggleCvViewer}
-                            className="text-teal-500 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 rounded"
-                            aria-label="Close CV Viewer"
-                        >
-                            <XCircle className="w-8 h-8" />
-                        </button>
-                    </div>
-                    <div className="w-full max-w-4xl h-full overflow-y-auto rounded-lg border border-teal-200">
-                        <iframe
-                            src={googleDocsViewerUrl}
-                            className="w-full h-full min-h-[60vh] rounded-lg"
-                            title="Oluwaseun Odufisan's CV"
-                            allowFullScreen
-                        />
-                    </div>
-                </div>
-            )}
         </nav>
     );
 }
