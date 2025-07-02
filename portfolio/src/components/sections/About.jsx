@@ -358,13 +358,13 @@ function About() {
                         <div className="space-y-10">
                             <p
                                 ref={(el) => (paragraphRefs.current[0] = el)}
-                                data-text="I'm Oluwaseun Isaac Odufisan, an AI Software Engineer driven by a passion for creating transformative solutions that blend advanced technology with real-world impact. My expertise spans frontend (React, Tailwind CSS), backend (Node.js, MongoDB), and machine learning (TensorFlow, NLP), allowing me to craft scalable, user-focused applications."
+                                data-text="I'm Oluwaseun Isaac Odufisan, a software developer and creative technologist dedicated to building user-focused solutions that make a difference. With expertise spanning frontend, backend, full-stack development, and AI-driven applications, I thrive on turning ideas into visually stunning digital experiences. With a mastery of modern technologies like React, Next.js, Node.js, Python, and advanced AI frameworks, I specialize in building intuitive user interfaces, efficient backend architectures, and intelligent systems that drive impact."
                                 className="text-2xl sm:text-2xl font-inter text-gray-600 leading-relaxed relative"
                                 aria-describedby="about-description-1"
                             />
                             <p
                                 ref={(el) => (paragraphRefs.current[1] = el)}
-                                data-text="From leading the NEG AI Banking Platform to building AI-driven tools like the Chatbot Tutor, I excel at solving complex challenges. As CDS President for ICT, I’ve championed digital literacy in communities, and my contributions to open-source projects like TensorFlow underscore my commitment to pushing the boundaries of technology globally."
+                                data-text="Beyond coding, I’m dedicated to staying at the forefront of industry trends, constantly exploring new tools and methodologies with the goal of creating meaningful, lasting impact through technology. Let’s build something extraordinary together."
                                 className="text-2xl sm:text-2xl font-inter text-gray-600 leading-relaxed relative"
                                 aria-describedby="about-description-2"
                             />

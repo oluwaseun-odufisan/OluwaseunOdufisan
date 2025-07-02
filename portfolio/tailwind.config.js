@@ -2,11 +2,10 @@
 export default {
     content: [
         './index.html',
-        './src/**/*.{js,jsx,ts,tsx}',
+        './src/**/*.{js,jsx,ts,tsx,css}', // Added .css to scan CSS files
     ],
     theme: {
         extend: {
-            // Custom Colors for Teal-Green and White Theme
             colors: {
                 'teal-primary': '#14b8a6',
                 'teal-dark': '#0d9488',
@@ -14,12 +13,10 @@ export default {
                 'white-bg': '#ffffff',
                 'gray-accent': '#4b5563',
             },
-            // Custom Fonts
             fontFamily: {
                 inter: ['Inter', 'sans-serif'],
                 poppins: ['Poppins', 'sans-serif'],
             },
-            // Custom Animations for Mind-Blowing Effects
             animation: {
                 'float': 'float 3s ease-in-out infinite',
                 'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -29,7 +26,6 @@ export default {
                 'scale-up': 'scaleUp 0.8s ease-out',
                 'wiggle': 'wiggle 1s ease-in-out infinite',
             },
-            // Keyframes for Custom Animations
             keyframes: {
                 float: {
                     '0%, 100%': { transform: 'translateY(0)' },
@@ -60,11 +56,9 @@ export default {
                     '50%': { transform: 'rotate(3deg)' },
                 },
             },
-            // Custom Box Shadow for Glassmorphism
             boxShadow: {
                 'glass': '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
             },
-            // Custom Backdrop Blur for Glassmorphism
             backdropBlur: {
                 'glass': '10px',
             },

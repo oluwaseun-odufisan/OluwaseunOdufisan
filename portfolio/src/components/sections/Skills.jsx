@@ -301,11 +301,10 @@ function Skills() {
                                     });
                                 }
                             }}
-                            className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-teal-500 animate-fade-in ${
-                                activeCategory === category
+                            className={`px-5 py-2 rounded-lg font-semibold text-sm transition-all duration-300 relative focus:outline-none focus:ring-2 focus:ring-teal-500 animate-fade-in ${activeCategory === category
                                     ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/40'
                                     : 'bg-gray-50 text-gray-800 hover:bg-teal-50 hover:text-teal-500'
-                            }`}
+                                }`}
                             role="tab"
                             aria-selected={activeCategory === category}
                             aria-label={`Show ${category === 'all' ? 'all skills' : category.replace(/([A-Z])/g, ' $1').trim() + ' skills'}`}
@@ -357,29 +356,26 @@ function Skills() {
                                             onMouseLeave={() => setHoveredSkill(null)}
                                         >
                                             <div className="flex items-center space-x-3">
-                                                {iconMap[skill.name || skill] && (
-                                                    <span className="skill-icon text-teal-500">{iconMap[skill.name || skill]}</span>
+                                                {iconMap[skill.name] && (
+                                                    <span className="skill-icon text-teal-500">{iconMap[skill.name]}</span>
                                                 )}
-                                                <span>{skill.name || skill}</span>
+                                                <span>{skill.name}</span>
                                             </div>
                                             <div className="w-1/3 bg-gray-200 rounded-full h-2">
                                                 <div
-                                                    className="progress-bar bg-teal-500 h-2 rounded-full"
-                                                    style={{ width: `${skill.proficiency || 75}%` }}
+                                                    className="progress-bar bg-teal-500 h-2 rounded-full transition-all duration-500 ease-out"
+                                                    style={{ width: `${skill.proficiency}%` }}
                                                 />
                                             </div>
-                                            {(skill.description || skill.name || skill) && (
-                                                <div
-                                                    className={`absolute left-0 bottom-full mb-2 p-2 bg-teal-600 text-white text-sm rounded-lg shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:delay-150 pointer-events-none z-30 max-w-xs ${
-                                                        hoveredSkill === `${category}-${skillIndex}` ? 'opacity-100' : ''
+                                            <div
+                                                className={`absolute left-0 bottom-full mb-2 p-2 bg-teal-600 text-white text-sm rounded-lg shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:delay-150 pointer-events-none z-30 max-w-xs ${hoveredSkill === `${category}-${skillIndex}` ? 'opacity-100' : ''
                                                     }`}
-                                                    role="tooltip"
-                                                    id={`tooltip-${category}-${skillIndex}`}
-                                                    aria-hidden={hoveredSkill !== `${category}-${skillIndex}`}
-                                                >
-                                                    {skill.description || `Proficient in ${skill.name || skill} (${skill.proficiency || 75}%)`}
-                                                </div>
-                                            )}
+                                                role="tooltip"
+                                                id={`tooltip-${category}-${skillIndex}`}
+                                                aria-hidden={hoveredSkill !== `${category}-${skillIndex}`}
+                                            >
+                                                {skill.description || `Proficient in ${skill.name} (${skill.proficiency}%)`}
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>

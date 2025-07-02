@@ -7,3 +7,6 @@ export default defineConfig({
       'text/javascript': ['js', 'jsx'], // Explicitly map .jsx to text/javascript
     },
 });
+
+
+

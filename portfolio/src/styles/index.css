@@ -4,7 +4,7 @@
 
 @layer components {
   .glass {
-    @apply bg-white-bg bg-opacity-20 backdrop-blur-glass border border-gray-200 shadow-glass rounded-lg;
+    @apply bg-white bg-opacity-20 backdrop-blur-[10px] border border-gray-200 shadow-glass rounded-lg;
   }
 }
 

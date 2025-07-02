@@ -1,46 +1,46 @@
 {
     "frontend": [
-        "React",
-        "Tailwind CSS",
-        "JavaScript (ES6+)",
-        "HTML5",
-        "CSS3",
-        "TypeScript"
+        {"name": "React", "proficiency": 92, "description": "Building dynamic and responsive UIs with component-based architecture"},
+        {"name": "Tailwind CSS", "proficiency": 88, "description": "Crafting modern, utility-first CSS designs"},
+        {"name": "JavaScript (ES6+)", "proficiency": 95, "description": "Advanced JavaScript for interactive web applications"},
+        {"name": "HTML5", "proficiency": 85, "description": "Semantic and accessible markup"},
+        {"name": "CSS3", "proficiency": 87, "description": "Styling with modern CSS techniques"},
+        {"name": "TypeScript", "proficiency": 85, "description": "Type-safe JavaScript development"}
     ],
     "backend": [
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Flutterwave API",
-        "JWT Authentication",
-        "RESTful APIs"
+        {"name": "Node.js", "proficiency": 90, "description": "Server-side JavaScript runtime for scalable applications"},
+        {"name": "Express.js", "proficiency": 88, "description": "Fast and minimal web framework for Node.js"},
+        {"name": "MongoDB", "proficiency": 85, "description": "NoSQL database for flexible data storage"},
+        {"name": "Flutterwave API", "proficiency": 80, "description": "Integrating payment gateways for seamless transactions"},
+        {"name": "JWT Authentication", "proficiency": 87, "description": "Secure authentication with JSON Web Tokens"},
+        {"name": "RESTful APIs", "proficiency": 92, "description": "Designing and consuming RESTful services"}
     ],
     "fullStack": [
-        "Full-Stack Development",
-        "API Design & Integration",
-        "Database Architecture",
-        "Microservices"
+        {"name": "Full-Stack Development", "proficiency": 90, "description": "End-to-end application development"},
+        {"name": "API Design & Integration", "proficiency": 88, "description": "Creating and integrating robust APIs"},
+        {"name": "Database Architecture", "proficiency": 85, "description": "Designing efficient database structures"},
+        {"name": "Microservices", "proficiency": 60, "description": "Building modular and scalable services"}
     ],
     "machineLearning": [
-        "Python",
-        "TensorFlow",
-        "PyTorch",
-        "Natural Language Processing (NLP)",
-        "Anomaly Detection",
-        "Scikit-learn"
+        {"name": "Python", "proficiency": 95, "description": "Core language for data science and ML"},
+        {"name": "TensorFlow", "proficiency": 90, "description": "Deep learning framework for neural networks"},
+        {"name": "PyTorch", "proficiency": 88, "description": "Flexible framework for ML research"},
+        {"name": "Natural Language Processing (NLP)", "proficiency": 75, "description": "Text analysis and language models"},
+        {"name": "Anomaly Detection", "proficiency": 80, "description": "Identifying outliers in data"},
+        {"name": "Scikit-learn", "proficiency": 87, "description": "Machine learning library for Python"}
     ],
     "softwareArchitecture": [
-        "System Design",
-        "Software Requirements Specification (SRS)",
-        "Database Design",
-        "Scalability",
-        "Unit Testing"
+        {"name": "System Design", "proficiency": 90, "description": "Architecting scalable and maintainable systems"},
+        {"name": "Software Requirements Specification (SRS)", "proficiency": 85, "description": "Defining clear software requirements"},
+        {"name": "Database Design", "proficiency": 88, "description": "Creating optimized database schemas"},
+        {"name": "Scalability", "proficiency": 87, "description": "Ensuring systems handle growth"},
+        {"name": "Unit Testing", "proficiency": 90, "description": "Writing tests for reliable code"}
     ],
     "projectManagement": [
-        "Agile Methodologies",
-        "Scrum",
-        "Team Leadership",
-        "Workflow Optimization",
-        "Jira"
+        {"name": "Agile Methodologies", "proficiency": 92, "description": "Implementing iterative development processes"},
+        {"name": "Scrum", "proficiency": 90, "description": "Facilitating team collaboration with Scrum"},
+        {"name": "Team Leadership", "proficiency": 88, "description": "Leading teams to achieve project goals"},
+        {"name": "Workflow Optimization", "proficiency": 85, "description": "Streamlining project workflows"},
+        {"name": "Jira", "proficiency": 65, "description": "Managing projects with Jira"}
     ]
 }
