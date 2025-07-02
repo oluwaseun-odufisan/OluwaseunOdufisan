@@ -18,7 +18,7 @@ function Hero() {
         // Split name into individual letters and assign refs
         const name = "Oluwaseun Isaac Odufisan";
         const letters = name.split('');
-        
+
         // Letter assembly animation (Iron Man suit style)
         letterRefs.current.forEach((letter, index) => {
             const randomX = (Math.random() - 0.5) * 1000; // Random X position (-500 to 500)
@@ -163,14 +163,15 @@ function Hero() {
 
         return () => {
             Array.from(buttons).forEach((button) => {
-                button.removeEventListener('mouseenter', () => {});
-                button.removeEventListener('mouseleave', () => {});
+                button.removeEventListener('mouseenter', () => { });
+                button.removeEventListener('mouseleave', () => { });
             });
         };
     }, []);
 
     return (
         <section
+            id="hero"
             ref={heroRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white-bg"
         >
@@ -356,24 +357,7 @@ function Hero() {
                 </div>
             </div>
 
-            {/* Decorative Scroll Indicator */}
-            <div className="absolute bottom-0 left-0 right-0 text-center pb-8 z-10">
-                <Link
-                    to="/#about"
-                    className="text-black text-sm font-inter animate-bounce-subtle"
-                    aria-label="Scroll to About section"
-                >
-                    <svg
-                        className="w-10 h-10 mx-auto"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                </Link>
-            </div>
+            
         </section>
     );
 }

@@ -56,7 +56,7 @@ function Footer() {
                     const element = document.getElementById(sectionId);
                     if (element) {
                         gsap.to(window, {
-                            scrollTo: { y: element, offsetY: 80 },
+                            scrollTo: { y: element, offsetY: 0 },
                             duration: 0.8,
                             ease: 'power3.out',
                         });
@@ -66,7 +66,7 @@ function Footer() {
                 const element = document.getElementById(sectionId);
                 if (element) {
                     gsap.to(window, {
-                        scrollTo: { y: element, offsetY: 80 },
+                        scrollTo: { y: element, offsetY: 0 },
                         duration: 0.8,
                         ease: 'power3.out',
                     });
@@ -98,8 +98,6 @@ function Footer() {
                 navRef.current.children,
                 { opacity: 0, x: -20 },
                 {
-                   
-
                     opacity: 1,
                     x: 0,
                     duration: 0.8,
