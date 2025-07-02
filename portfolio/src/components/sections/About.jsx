@@ -358,7 +358,7 @@ function About() {
                         <div className="space-y-10">
                             <p
                                 ref={(el) => (paragraphRefs.current[0] = el)}
-                                data-text="I'm Oluwaseun Isaac Odufisan, a software developer and creative technologist dedicated to building user-focused solutions that make a difference. With expertise spanning frontend, backend, full-stack development, and AI-driven applications, I thrive on turning ideas into visually stunning digital experiences. With a mastery of modern technologies like React, Next.js, Node.js, Python, and advanced AI frameworks, I specialize in building intuitive user interfaces, efficient backend architectures, and intelligent systems that drive impact."
+                                data-text="I'm Oluwaseun Isaac Odufisan, a software engineer and creative technologist dedicated to building user-focused solutions that make a difference. With expertise spanning frontend, backend, full-stack development, and AI-driven applications, I thrive on turning ideas into visually stunning digital experiences. With a mastery of modern technologies like React, Next.js, Node.js, Python, and advanced AI frameworks, I specialize in building intuitive user interfaces, efficient backend architectures, and intelligent systems that drive impact."
                                 className="text-2xl sm:text-2xl font-inter text-gray-600 leading-relaxed relative"
                                 aria-describedby="about-description-1"
                             />

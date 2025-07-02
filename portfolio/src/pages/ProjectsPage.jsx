@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
 import { Filter, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProjectCard from './ProjectCard.jsx';
 import ParticleBackground from '../components/common/ParticleBackground.jsx';
 import Button from '../components/common/Button.jsx';
 import projectsData from './data/projects.json';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function ProjectsPage() {
     const sectionRef = useRef(null);
@@ -21,6 +21,8 @@ function ProjectsPage() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // Unique categories for filtering
     const categories = ['All', ...new Set(projectsData.map((project) => project.category))];
@@ -30,6 +32,25 @@ function ProjectsPage() {
         if (selectedCategory === 'All') return projectsData;
         return projectsData.filter((project) => project.category === selectedCategory);
     }, [selectedCategory]);
+
+    const handleHomeClick = () => {
+        if (location.pathname !== '/') {
+            navigate('/');
+            setTimeout(() => {
+                gsap.to(window, {
+                    scrollTo: { y: 0, offsetY: 80 },
+                    duration: 0.8,
+                    ease: 'power3.out',
+                });
+            }, 100);
+        } else {
+            gsap.to(window, {
+                scrollTo: { y: 0, offsetY: 80 },
+                duration: 0.8,
+                ease: 'power3.out',
+            });
+        }
+    };
 
     const openModal = (project) => {
         setSelectedProject(project);
@@ -310,7 +331,7 @@ function ProjectsPage() {
                                 <span>Back to Home</span>
                             </span>
                         }
-                        to="/"
+                        onClick={handleHomeClick}
                         variant="primary"
                         className="glass px-8 py-4 text-lg font-semibold text-teal-600 hover:bg-teal-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-teal-600/30"
                         aria-label="Return to Home Page"

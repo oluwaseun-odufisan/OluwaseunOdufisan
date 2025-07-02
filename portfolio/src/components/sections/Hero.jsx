@@ -74,7 +74,7 @@ function Hero() {
             subtitleRef.current,
             { text: '', opacity: 0 },
             {
-                text: 'AI Software Engineer | Building Solutions with Code & Intelligence',
+                text: 'Software Engineer | Building Solutions with Code & Intelligence',
                 opacity: 1,
                 duration: 2.5,
                 ease: 'none',
