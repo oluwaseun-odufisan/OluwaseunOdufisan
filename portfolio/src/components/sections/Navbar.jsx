@@ -52,10 +52,18 @@ function Navbar() {
     );
 
     const handleHomeClick = useCallback(() => {
-        // Force a full page reload to refresh the page and start from the top
-        window.location.assign('/');
+        // Navigate to home without reloading to preserve page content
+        if (location.pathname !== '/') {
+            navigate('/');
+        } else {
+            gsap.to(window, {
+                scrollTo: { y: 0, offsetY: 80 },
+                duration: 0.8,
+                ease: 'power3.out',
+            });
+        }
         if (isOpen) toggleMenu();
-    }, [isOpen, toggleMenu]);
+    }, [isOpen, toggleMenu, location.pathname, navigate]);
 
     useEffect(() => {
         // Handle hash navigation on homepage
@@ -255,7 +263,21 @@ function Navbar() {
                 { x: '100%', opacity: 0 },
                 { x: '0%', opacity: 1, duration: 0.5, ease: 'power3.out' }
             );
+        } else {
+            gsap.to('.mobile-menu', {
+                x: '100%',
+                opacity: 0,
+                duration: 0.5,
+                ease: 'power3.in',
+                onComplete: () => {
+                    // Ensure main content remains visible
+                    document.body.style.overflow = 'auto';
+                }
+            });
         }
+
+        // Ensure main content is not hidden when menu is toggled
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
 
         return () => {
             navLinksRef.current.forEach((link) => {
@@ -277,7 +299,10 @@ function Navbar() {
                 buttonRef.current.removeEventListener('mouseleave', buttonRef.current._handlers.mouseleave);
             }
 
+            ScrollTrigger.getබ
+
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            document.body.style.overflow = 'auto';
         };
     }, [isOpen, location, handleSectionNav, toggleMenu]);
 
@@ -373,12 +398,11 @@ function Navbar() {
                             </a>
                         </div>
                         <Button
-                            ref={buttonRef}
                             text="Download CV"
-                            href="/assets/documents/cv.pdf"
+                            href="/assets/pdf/Oluwaseun-Odufisan-cv.pdf"
                             download
-                            variant="primary"
-                            className="glass px-6 py-3 text-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 transition-all duration-300"
+                            variant="secondary"
+                            className="glass text-lg font-semibold px-8 py-4 bg-teal-500 text-white-bg transition-all duration-300"
                             aria-label="Download Oluwaseun's CV"
                         />
                     </div>
@@ -398,7 +422,7 @@ function Navbar() {
 
                 {/* Mobile Menu */}
                 {isOpen && (
-                    <div className="md:hidden mobile-menu bg-white-bg bg-opacity-90 backdrop-blur-glass border-t border-teal-200">
+                    <div className="md:hidden mobile-menu bg-teal-50 bg-opacity-95 backdrop-blur-glass border-t border-teal-200 absolute w-full top-20 left-0 z-50">
                         <div className="px-4 pt-4 pb-6 space-y-3">
                             <NavLink
                                 to="/"

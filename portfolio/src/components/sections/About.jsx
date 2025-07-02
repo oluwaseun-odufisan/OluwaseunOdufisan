@@ -375,9 +375,8 @@ function About() {
                                 <button
                                     key={index}
                                     ref={(el) => (skillRefs.current[index] = el)}
-                                    className={`flex items-center space-x-4 px-6 py-3 rounded-full bg-teal-500/20 text-gray-600 font-inter text-lg font-semibold hover:bg-teal-500/30 transition-all duration-300 relative overflow-hidden ${
-                                        hoveredSkill === index ? 'scale-110 shadow-xl shadow-teal-500/50' : ''
-                                    }`}
+                                    className={`flex items-center space-x-4 px-6 py-3 rounded-full bg-teal-500/20 text-gray-600 font-inter text-lg font-semibold hover:bg-teal-500/30 transition-all duration-300 relative overflow-hidden ${hoveredSkill === index ? 'scale-110 shadow-xl shadow-teal-500/50' : ''
+                                        }`}
                                     role="listitem"
                                     aria-label={`Skill: ${skill}`}
                                     onClick={() => {
@@ -405,7 +404,7 @@ function About() {
                         </div>
                         <Button
                             text="Download CV"
-                            href="/assets/pdf/cv.pdf"
+                            href="/assets/pdf/Oluwaseun-Odufisan-cv.pdf"
                             download
                             variant="primary"
                             className="glass px-10 py-5 text-2xl font-semibold text-white bg-teal-500 hover:bg-teal-600 transition-all duration-300 shadow-xl hover:shadow-teal-500/70 relative overflow-hidden"
@@ -418,7 +417,7 @@ function About() {
                     {/* Profile Image */}
                     <div ref={imageRef} className="relative max-w-md mx-auto">
                         <img
-                            src="/assets/images/profile.jpg"
+                            src="/assets/images/profile.JPEG"
                             alt="Oluwaseun Isaac Odufisan, AI Software Engineer"
                             className="w-full rounded-3xl shadow-glass"
                             loading="lazy"

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ParticleBackground from '../common/ParticleBackground.jsx';
 import Button from '../common/Button.jsx';
@@ -22,9 +22,9 @@ function Projects() {
     const [scrollPosition, setScrollPosition] = useState(0);
 
     const openModal = (project) => {
-        setScrollPosition(window.scrollY); // Save current scroll position
+        setScrollPosition(window.scrollY);
         setSelectedProject(project);
-        setCurrentImageIndex(0); // Reset to first image
+        setCurrentImageIndex(0);
         setIsModalOpen(true);
         gsap.fromTo(
             modalRef.current,
@@ -48,7 +48,7 @@ function Projects() {
                 setIsModalOpen(false);
                 setSelectedProject(null);
                 setCurrentImageIndex(0);
-                window.scrollTo({ top: scrollPosition, behavior: 'instant' }); // Restore scroll position
+                window.scrollTo({ top: scrollPosition, behavior: 'instant' });
             },
         });
     };
@@ -205,14 +205,16 @@ function Projects() {
                     ))}
                 </div>
                 <div className="text-center mt-12">
-                    <Button
+                    <NavLink
+                        to="/projects"
                         ref={buttonRef}
-                        text="View All Projects"
-                        href="/projects"
-                        variant="primary"
-                        className="relative text-lg font-semibold px-8 py-4 glass hover:bg-teal-dark transition-all duration-300"
+                        className={({ isActive }) =>
+                            `relative text-lg font-semibold px-8 py-4 glass bg-teal-primary text-white-bg hover:bg-teal-dark transition-all duration-300 ${isActive ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''}`
+                        }
                         aria-label="View all projects"
-                    />
+                    >
+                        View All Projects
+                    </NavLink>
                 </div>
             </div>
             {isModalOpen && selectedProject && (
@@ -333,6 +335,3 @@ function Projects() {
 }
 
 export default Projects;
-
-//improved 
-//better

@@ -36,11 +36,13 @@
         {"name": "Scalability", "proficiency": 87, "description": "Ensuring systems handle growth"},
         {"name": "Unit Testing", "proficiency": 90, "description": "Writing tests for reliable code"}
     ],
-    "projectManagement": [
+    "project & productManagement": [
         {"name": "Agile Methodologies", "proficiency": 92, "description": "Implementing iterative development processes"},
         {"name": "Scrum", "proficiency": 90, "description": "Facilitating team collaboration with Scrum"},
         {"name": "Team Leadership", "proficiency": 88, "description": "Leading teams to achieve project goals"},
         {"name": "Workflow Optimization", "proficiency": 85, "description": "Streamlining project workflows"},
-        {"name": "Jira", "proficiency": 65, "description": "Managing projects with Jira"}
+        {"name": "Jira", "proficiency": 65, "description": "Managing projects with Jira"},
+        {"name": "Product Management", "proficiency": 95, "description": "Defining product vision, prioritizing features, and aligning stakeholder requirements"},
+        {"name": "Product Documentation", "proficiency": 90, "description": "Creating comprehensive PRDs, user guides, and technical documentation for product clarity"}
     ]
 }

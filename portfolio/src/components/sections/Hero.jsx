@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger, TextPlugin } from 'gsap/all';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ParticleBackground from '../common/ParticleBackground.jsx';
 import Button from '../common/Button.jsx';
 
@@ -339,16 +339,18 @@ function Hero() {
                     Software Engineer | Building Solutions with Code & Intelligence
                 </p>
                 <div ref={buttonWrapperRef} className="flex flex-col sm:flex-row justify-center gap-6">
-                    <Button
-                        text="Explore My Work"
-                        href="/projects"
-                        variant="primary"
-                        className="glass text-lg font-semibold px-8 py-4 bg-teal-primary text-white-bg transition-all duration-300"
-                        aria-label="Explore Oluwaseun's Projects"
-                    />
+                    <NavLink
+                        to="/projects"
+                        className={({ isActive }) =>
+                            `glass text-lg font-semibold px-8 py-4 bg-teal-primary text-white-bg transition-all duration-300 ${isActive ? 'border-b-2 border-teal-500' : 'glass text-lg font-semibold px-8 py-4 bg-teal-500 text-white-bg rounded-xl text-white transition-all duration-300'}`
+                        }
+                        aria-label="Navigate to Projects"
+                    >
+                        Explore My Work
+                    </NavLink>
                     <Button
                         text="Download CV"
-                        href="/assets/pdf/cv.pdf"
+                        href="/assets/pdf/Oluwaseun-Odufisan-cv.pdf"
                         download
                         variant="secondary"
                         className="glass text-lg font-semibold px-8 py-4 bg-gray-600 text-white-bg transition-all duration-300"
@@ -356,8 +358,6 @@ function Hero() {
                     />
                 </div>
             </div>
-
-            
         </section>
     );
 }
