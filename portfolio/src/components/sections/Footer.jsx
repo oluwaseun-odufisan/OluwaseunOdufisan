@@ -1,5 +1,5 @@
 import { useEffect, useRef, useMemo, useCallback } from 'react';
-import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
@@ -19,11 +19,10 @@ function Footer() {
 
     const navLinks = useMemo(
         () => [
-            { to: '/', label: 'Home' },
-            { to: '/projects', label: 'Projects' },
-            { to: '/#achievements', label: 'Achievements' },
-            { to: '/#cv', label: 'CV' },
-            { to: '/#contact', label: 'Contact' },
+            { to: '/#hero', label: 'Home', sectionId: 'hero' },
+            { to: '/#projects', label: 'Projects', sectionId: 'projects' },
+            { to: '/#achievements', label: 'Achievements', sectionId: 'achievements' },
+            { to: '/#contact', label: 'Contact', sectionId: 'contact' },
         ],
         []
     );
@@ -99,6 +98,8 @@ function Footer() {
                 navRef.current.children,
                 { opacity: 0, x: -20 },
                 {
+                   
+
                     opacity: 1,
                     x: 0,
                     duration: 0.8,
@@ -112,9 +113,9 @@ function Footer() {
                 }
             );
 
-            const navLinks = navRef.current.querySelectorAll('a');
+            const navLinks = navRef.current.querySelectorAll('button');
             navLinks.forEach((link) => {
-                link.addEventListener('mouseenter', () => {
+                const handleMouseEnter = () => {
                     gsap.to(link, {
                         scale: 1.1,
                         color: '#14b8a6',
@@ -124,8 +125,8 @@ function Footer() {
                         ease: 'power2.out',
                         borderBottom: '2px solid #14b8a6',
                     });
-                });
-                link.addEventListener('mouseleave', () => {
+                };
+                const handleMouseLeave = () => {
                     gsap.to(link, {
                         scale: 1,
                         color: '#4b5563',
@@ -135,7 +136,10 @@ function Footer() {
                         ease: 'power2.out',
                         borderBottom: 'none',
                     });
-                });
+                };
+                link.addEventListener('mouseenter', handleMouseEnter);
+                link.addEventListener('mouseleave', handleMouseLeave);
+                link._handlers = { mouseenter: handleMouseEnter, mouseleave: handleMouseLeave };
             });
         }
 
@@ -159,22 +163,25 @@ function Footer() {
             );
 
             socialLinks.forEach((link) => {
-                link.addEventListener('mouseenter', () => {
+                const handleMouseEnter = () => {
                     gsap.to(link, {
                         scale: 1.2,
                         color: '#14b8a6',
                         duration: 0.3,
                         ease: 'power2.out',
                     });
-                });
-                link.addEventListener('mouseleave', () => {
+                };
+                const handleMouseLeave = () => {
                     gsap.to(link, {
                         scale: 1,
                         color: '#4b5563',
                         duration: 0.3,
                         ease: 'power2.out',
                     });
-                });
+                };
+                link.addEventListener('mouseenter', handleMouseEnter);
+                link.addEventListener('mouseleave', handleMouseLeave);
+                link._handlers = { mouseenter: handleMouseEnter, mouseleave: handleMouseLeave };
             });
         }
 
@@ -231,22 +238,26 @@ function Footer() {
 
         return () => {
             if (navRef.current) {
-                const navLinks = navRef.current.querySelectorAll('a');
+                const navLinks = navRef.current.querySelectorAll('button');
                 navLinks.forEach((link) => {
-                    link.removeEventListener('mouseenter', () => { });
-                    link.removeEventListener('mouseleave', () => { });
+                    if (link._handlers) {
+                        link.removeEventListener('mouseenter', link._handlers.mouseenter);
+                        link.removeEventListener('mouseleave', link._handlers.mouseleave);
+                    }
                 });
             }
             if (socialRef.current) {
                 const socialLinks = socialRef.current.querySelectorAll('a');
                 socialLinks.forEach((link) => {
-                    link.removeEventListener('mouseenter', () => { });
-                    link.removeEventListener('mouseleave', () => { });
+                    if (link._handlers) {
+                        link.removeEventListener('mouseenter', link._handlers.mouseenter);
+                        link.removeEventListener('mouseleave', link._handlers.mouseleave);
+                    }
                 });
             }
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
-    }, []);
+    }, [handleSectionNav]);
 
     return (
         <footer
@@ -285,26 +296,18 @@ function Footer() {
                         </h3>
                         <nav
                             ref={navRef}
-                            className="flex flex-col space-y-2"
+                            className="flex flex-col space-y-2 items-center md:items-start"
                             aria-label="Footer Navigation"
                         >
                             {navLinks.map((link, index) => (
-                                <NavLink
+                                <button
                                     key={index}
-                                    to={link.to}
-                                    onClick={() => {
-                                        if (link.to.includes('#')) {
-                                            handleSectionNav(link.to.split('#')[1]);
-                                        }
-                                    }}
-                                    className={({ isActive }) =>
-                                        `text-gray-accent font-inter text-lg hover:text-teal-primary transition-colors ${isActive ? 'text-teal-primary font-bold' : ''
-                                        }`
-                                    }
-                                    aria-label={link.label}
+                                    onClick={() => handleSectionNav(link.sectionId)}
+                                    className={`text-gray-accent font-inter text-lg hover:text-teal-primary transition-colors w-full text-center md:text-left ${location.pathname === '/' && location.hash === `#${link.sectionId}` ? 'text-teal-primary font-bold' : ''}`}
+                                    aria-label={`Scroll to ${link.label} section`}
                                 >
                                     {link.label}
-                                </NavLink>
+                                </button>
                             ))}
                         </nav>
                     </div>
@@ -360,14 +363,14 @@ function Footer() {
                 </div>
 
                 <div className="text-center mt-8">
-                    <Link
+                    <button
                         ref={backToTopRef}
-                        to="/#"
+                        onClick={() => handleSectionNav('hero')}
                         className="text-teal-primary text-sm font-inter"
-                        aria-label="Scroll to Top"
+                        aria-label="Scroll to Hero Section"
                     >
                         <ArrowUp className="w-8 h-8 mx-auto" />
-                    </Link>
+                    </button>
                 </div>
             </div>
         </footer>

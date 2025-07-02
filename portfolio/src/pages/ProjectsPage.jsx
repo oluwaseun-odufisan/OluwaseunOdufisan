@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Filter, ArrowLeft } from 'lucide-react';
+import { Filter, ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProjectCard from './ProjectCard.jsx';
 import ParticleBackground from '../components/common/ParticleBackground.jsx';
 import Button from '../components/common/Button.jsx';
@@ -15,10 +15,12 @@ function ProjectsPage() {
     const titleRef = useRef(null);
     const filterRef = useRef(null);
     const modalRef = useRef(null);
+    const imageRef = useRef(null);
     const cardRefs = useRef([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedProject, setSelectedProject] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     // Unique categories for filtering
     const categories = ['All', ...new Set(projectsData.map((project) => project.category))];
@@ -31,8 +33,8 @@ function ProjectsPage() {
 
     const openModal = (project) => {
         setSelectedProject(project);
+        setCurrentImageIndex(0); // Reset to first image
         setIsModalOpen(true);
-        // Ensure the modal is positioned at the top of the viewport
         window.scrollTo({ top: 0, behavior: 'instant' });
         gsap.fromTo(
             modalRef.current,
@@ -57,8 +59,35 @@ function ProjectsPage() {
             onComplete: () => {
                 setIsModalOpen(false);
                 setSelectedProject(null);
+                setCurrentImageIndex(0);
             },
         });
+    };
+
+    const nextImage = () => {
+        if (selectedProject && selectedProject.images && selectedProject.images.length > 0) {
+            setCurrentImageIndex((prevIndex) =>
+                prevIndex === selectedProject.images.length - 1 ? 0 : prevIndex + 1
+            );
+            gsap.fromTo(
+                imageRef.current,
+                { opacity: 0, x: 50 },
+                { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }
+            );
+        }
+    };
+
+    const prevImage = () => {
+        if (selectedProject && selectedProject.images && selectedProject.images.length > 0) {
+            setCurrentImageIndex((prevIndex) =>
+                prevIndex === 0 ? selectedProject.images.length - 1 : prevIndex - 1
+            );
+            gsap.fromTo(
+                imageRef.current,
+                { opacity: 0, x: -50 },
+                { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }
+            );
+        }
     };
 
     useEffect(() => {
@@ -133,7 +162,7 @@ function ProjectsPage() {
 
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-            gsap.killTweensOf([titleRef.current, filterRef.current?.children, cardRefs.current, modalRef.current]);
+            gsap.killTweensOf([titleRef.current, filterRef.current?.children, cardRefs.current, modalRef.current, imageRef.current]);
         };
     }, [selectedCategory]);
 
@@ -224,11 +253,10 @@ function ProjectsPage() {
                                     ease: 'power2.out',
                                 });
                             }}
-                            className={`glass px-6 py-3 rounded-full font-inter text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-teal-200/50 ${
-                                selectedCategory === category
+                            className={`glass px-6 py-3 rounded-full font-inter text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-teal-200/50 ${selectedCategory === category
                                     ? 'bg-teal-600 text-white shadow-xl shadow-teal-600/40'
                                     : 'text-teal-700 bg-white/70 hover:bg-teal-50 hover:text-teal-800'
-                            }`}
+                                }`}
                             role="tab"
                             aria-selected={selectedCategory === category}
                             aria-label={`Filter by ${category}`}
@@ -259,7 +287,7 @@ function ProjectsPage() {
                                     title={project.title}
                                     description={project.description}
                                     technologies={project.technologies}
-                                    image={project.image}
+                                    images={project.images}
                                     link={project.link}
                                     liveDemo={project.liveDemo}
                                     category={project.category}
@@ -343,11 +371,66 @@ function ProjectsPage() {
                             {selectedProject.title}
                         </h3>
                         <div className="relative w-full h-[28rem] sm:h-[32rem] mb-8 overflow-hidden rounded-xl shadow-md">
-                            <img
-                                src={selectedProject.image}
-                                alt={selectedProject.title}
-                                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                            />
+                            {selectedProject.images && selectedProject.images.length > 0 ? (
+                                <>
+                                    <img
+                                        ref={imageRef}
+                                        src={selectedProject.images[currentImageIndex] || '/assets/images/placeholder.jpg'}
+                                        alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                                        className="w-full h-full object-cover transition-transform duration-300"
+                                    />
+                                    {selectedProject.images.length > 1 && (
+                                        <div className="absolute inset-y-0 left-0 flex items-center">
+                                            <button
+                                                onClick={prevImage}
+                                                className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                aria-label="Previous image"
+                                            >
+                                                <ChevronLeft className="w-6 h-6" />
+                                            </button>
+                                        </div>
+                                    )}
+                                    {selectedProject.images.length > 1 && (
+                                        <div className="absolute inset-y-0 right-0 flex items-center">
+                                            <button
+                                                onClick={nextImage}
+                                                className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                aria-label="Next image"
+                                            >
+                                                <ChevronRight className="w-6 h-6" />
+                                            </button>
+                                        </div>
+                                    )}
+                                    {selectedProject.images.length > 1 && (
+                                        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                                            {selectedProject.images.map((_, index) => (
+                                                <button
+                                                    key={index}
+                                                    onClick={() => {
+                                                        setCurrentImageIndex(index);
+                                                        gsap.fromTo(
+                                                            imageRef.current,
+                                                            { opacity: 0, scale: 0.98 },
+                                                            { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }
+                                                        );
+                                                    }}
+                                                    className={`w-3 h-3 rounded-full ${index === currentImageIndex
+                                                            ? 'bg-teal-600'
+                                                            : 'bg-gray-400/50 hover:bg-gray-400'
+                                                        } transition-all duration-200`}
+                                                    aria-label={`Go to image ${index + 1}`}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <img
+                                    src="/assets/images/placeholder.jpg"
+                                    alt="No images available"
+                                    className="w-full h-full object-cover"
+                                />
+                            )}
                         </div>
                         <p className="text-lg sm:text-xl font-inter text-gray-700 mb-8 leading-relaxed">
                             {selectedProject.description}

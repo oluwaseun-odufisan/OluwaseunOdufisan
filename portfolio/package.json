@@ -16,7 +16,7 @@
     "@tsparticles/react": "^3.0.0",
     "autoprefixer": "^10.4.21",
     "emailjs-com": "^3.2.0",
-    "framer-motion": "^12.20.1",
+    "framer-motion": "^12.22.0",
     "gsap": "^3.13.0",
     "lucide-react": "^0.525.0",
     "postcss": "^8.5.6",
@@ -29,7 +29,9 @@
     "react-router-dom": "^7.6.3",
     "react-scroll-parallax": "^3.4.5",
     "react-tsparticles": "^2.12.2",
+    "styled-components": "^6.1.19",
     "tailwindcss": "^4.1.11",
+    "three": "^0.178.0",
     "tilt": "^0.2.0",
     "tsparticles": "^3.8.1"
   },

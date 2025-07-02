@@ -12,42 +12,79 @@ function Hero() {
     const titleRef = useRef(null);
     const subtitleRef = useRef(null);
     const buttonWrapperRef = useRef(null);
+    const letterRefs = useRef([]);
 
     useEffect(() => {
-        // Title fade-in and scale animation
-        gsap.fromTo(
-            titleRef.current,
-            { opacity: 0, scale: 0.8 },
-            { opacity: 1, scale: 1, duration: 1.2, ease: 'power4.out', delay: 0.3 }
-        );
+        // Split name into individual letters and assign refs
+        const name = "Oluwaseun Isaac Odufisan";
+        const letters = name.split('');
+        
+        // Letter assembly animation (Iron Man suit style)
+        letterRefs.current.forEach((letter, index) => {
+            const randomX = (Math.random() - 0.5) * 1000; // Random X position (-500 to 500)
+            const randomY = (Math.random() - 0.5) * 800; // Random Y position (-400 to 400)
+            const randomAngle = (Math.random() - 0.5) * 360; // Random rotation
+            const delay = index * 0.05; // Staggered entry
 
-        // Typewriter effect for subtitle
+            gsap.fromTo(
+                letter,
+                {
+                    x: randomX,
+                    y: randomY,
+                    rotation: randomAngle,
+                    opacity: 0,
+                    scale: 0.2,
+                },
+                {
+                    x: 0,
+                    y: 0,
+                    rotation: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.2,
+                    ease: 'power4.out',
+                    delay: delay,
+                    onStart: () => {
+                        // Spark effect on letter arrival
+                        gsap.to(letter, {
+                            boxShadow: '0 0 20px rgba(20, 184, 166, 0.8)',
+                            duration: 0.3,
+                            ease: 'power2.out',
+                            onComplete: () => {
+                                gsap.to(letter, { boxShadow: 'none', duration: 0.3 });
+                            },
+                        });
+                    },
+                }
+            );
+        });
+
+        // Glow pulse effect on assembled name
+        gsap.to(titleRef.current, {
+            boxShadow: '0 0 15px rgba(20, 184, 166, 0.5)',
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power1.inOut',
+            delay: letters.length * 0.05 + 0.5,
+        });
+
+        // Typewriter effect for subtitle with a futuristic twist
         gsap.fromTo(
             subtitleRef.current,
-            { text: '' },
+            { text: '', opacity: 0 },
             {
                 text: 'AI Software Engineer | Building Solutions with Code & Intelligence',
+                opacity: 1,
                 duration: 2.5,
                 ease: 'none',
-                delay: 0.8,
-            }
-        );
-
-        // Button entrance with bounce and glow
-        gsap.fromTo(
-            buttonWrapperRef.current.children,
-            { opacity: 0, y: 30, scale: 0.9 },
-            {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.8,
-                ease: 'back.out(1.7)',
-                stagger: 0.2,
-                delay: 1.2,
+                delay: letters.length * 0.05 + 0.8,
+                onUpdate: function () {
+                    subtitleRef.current.style.textShadow = '0 0 10px rgba(20, 184, 166, 0.6)';
+                },
                 onComplete: () => {
-                    gsap.to(buttonWrapperRef.current.children, {
-                        boxShadow: '0 0 15px rgba(20, 184, 166, 0.5)',
+                    gsap.to(subtitleRef.current, {
+                        textShadow: '0 0 5px rgba(20, 184, 166, 0.3)',
                         duration: 1,
                         repeat: -1,
                         yoyo: true,
@@ -57,9 +94,33 @@ function Hero() {
             }
         );
 
-        // Parallax effect on scroll
+        // Button entrance with enhanced bounce and glow
+        gsap.fromTo(
+            buttonWrapperRef.current.children,
+            { opacity: 0, y: 50, scale: 0.8 },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.8,
+                ease: 'back.out(2)',
+                stagger: 0.3,
+                delay: letters.length * 0.05 + 1.2,
+                onComplete: () => {
+                    gsap.to(buttonWrapperRef.current.children, {
+                        boxShadow: '0 0 20px rgba(20, 184, 166, 0.6)',
+                        duration: 1.2,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'power1.inOut',
+                    });
+                },
+            }
+        );
+
+        // Parallax effect on scroll for hero section
         gsap.to(heroRef.current, {
-            yPercent: 10,
+            yPercent: 15,
             ease: 'none',
             scrollTrigger: {
                 trigger: heroRef.current,
@@ -69,13 +130,13 @@ function Hero() {
             },
         });
 
-        // Button hover animation
+        // Enhanced button hover animation (no background color change)
         const buttons = buttonWrapperRef.current.children;
         Array.from(buttons).forEach((button) => {
             button.addEventListener('mouseenter', () => {
                 gsap.to(button, {
-                    scale: 1.15,
-                    boxShadow: '0 8px 20px rgba(20, 184, 166, 0.6)',
+                    scale: 1.2,
+                    boxShadow: '0 10px 25px rgba(20, 184, 166, 0.7)',
                     duration: 0.4,
                     ease: 'power3.out',
                 });
@@ -90,10 +151,20 @@ function Hero() {
             });
         });
 
+        // Particle background animation sync
+        gsap.to('.particle-canvas', {
+            opacity: 0.8,
+            scale: 1.1,
+            duration: 5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+        });
+
         return () => {
             Array.from(buttons).forEach((button) => {
-                button.removeEventListener('mouseenter', () => { });
-                button.removeEventListener('mouseleave', () => { });
+                button.removeEventListener('mouseenter', () => {});
+                button.removeEventListener('mouseleave', () => {});
             });
         };
     }, []);
@@ -101,25 +172,168 @@ function Hero() {
     return (
         <section
             ref={heroRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-teal-primary via-teal-light to-white-bg"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white-bg"
         >
+            {/* Cosmic Vortex Background Animation */}
+            <div className="absolute inset-0 z-0">
+                <style>
+                    {`
+                        .cosmic-vortex {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            overflow: hidden;
+                            pointer-events: none;
+                        }
+
+                        .vortex-core {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 500px;
+                            height: 500px;
+                            transform: translate(-50%, -50%);
+                            background: radial-gradient(circle, rgba(20, 184, 166, 0.4) 10%, transparent 70%);
+                            animation: vortex-pulse 6s ease-in-out infinite;
+                        }
+
+                        .vortex-core::before,
+                        .vortex-core::after {
+                            content: '';
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            border: 3px solid rgba(20, 184, 166, 0.5);
+                            border-radius: 50%;
+                            animation: vortex-spin 8s linear infinite;
+                            box-shadow: 0 0 20px rgba(20, 184, 166, 0.7), inset 0 0 15px rgba(20, 184, 166, 0.5);
+                        }
+
+                        .vortex-core::after {
+                            animation: vortex-spin-reverse 10s linear infinite;
+                            border: 2px dashed rgba(20, 184, 166, 0.3);
+                            transform: scale(1.2);
+                        }
+
+                        .vortex-particle {
+                            position: absolute;
+                            width: 10px;
+                            height: 10px;
+                            background: rgba(20, 184, 166, 0.8);
+                            border-radius: 50%;
+                            box-shadow: 0 0 15px rgba(20, 184, 166, 1);
+                            animation: particle-orbit 12s ease-in-out infinite;
+                        }
+
+                        .vortex-particle:nth-child(2) {
+                            top: 20%;
+                            left: 80%;
+                            animation: particle-orbit-reverse 9s ease-in-out infinite;
+                            animation-delay: -2s;
+                            width: 8px;
+                            height: 8px;
+                        }
+
+                        .vortex-particle:nth-child(3) {
+                            top: 70%;
+                            left: 30%;
+                            animation: particle-orbit 15s ease-in-out infinite;
+                            animation-delay: -4s;
+                            width: 12px;
+                            height: 12px;
+                        }
+
+                        @keyframes vortex-pulse {
+                            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+                            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+                            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+                        }
+
+                        @keyframes vortex-spin {
+                            0% { transform: rotate(0deg) scale(1); }
+                            100% { transform: rotate(360deg) scale(1.5); }
+                        }
+
+                        @keyframes vortex-spin-reverse {
+                            0% { transform: rotate(360deg) scale(1.2); }
+                            100% { transform: rotate(0deg) scale(0.8); }
+                        }
+
+                        @keyframes particle-orbit {
+                            0% { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); opacity: 0.8; }
+                            50% { opacity: 1; }
+                            100% { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); opacity: 0.8; }
+                        }
+
+                        @keyframes particle-orbit-reverse {
+                            0% { transform: translate(-50%, -50%) rotate(360deg) translateX(200px) rotate(-360deg); opacity: 0.8; }
+                            50% { opacity: 1; }
+                            100% { transform: translate(-50%, -50%) rotate(0deg) translateX(200px) rotate(0deg); opacity: 0.8; }
+                        }
+
+                        .energy-wave {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 600px;
+                            height: 600px;
+                            transform: translate(-50%, -50%);
+                            animation: wave-expand 7s ease-in-out infinite;
+                            pointer-events: none;
+                        }
+
+                        @keyframes wave-expand {
+                            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.2; }
+                            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+                            100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.2; }
+                        }
+                    `}
+                </style>
+                <div className="cosmic-vortex">
+                    <div className="vortex-core"></div>
+                    <div className="vortex-particle"></div>
+                    <div className="vortex-particle"></div>
+                    <div className="vortex-particle"></div>
+                    <svg className="energy-wave" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+                        <path
+                            d="M100,10 A90,90 0 0,1 190,100 A90,90 0 0,1 100,190 A90,90 0 0,1 10,100 A90,90 0 0,1 100,10"
+                            fill="none"
+                            stroke="rgba(20, 184, 166, 0.4)"
+                            strokeWidth="2"
+                            strokeDasharray="10,5"
+                        />
+                    </svg>
+                </div>
+            </div>
+
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-teal-primary/30 to-transparent z-5" />
+            <div className="absolute inset-0 bg-gradient-to-b from-teal-primary/20 to-transparent z-5" />
 
             {/* Particle Background */}
-            <ParticleBackground />
+            <ParticleBackground className="particle-canvas" />
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-9xl mx-auto">
                 <h1
                     ref={titleRef}
-                    className="text-5xl sm:text-7xl lg:text-8xl font-poppins font-extrabold text-white-bg mb-8 animate-float tracking-tight"
+                    className="text-5xl sm:text-7xl lg:text-8xl font-poppins font-extrabold text-black mb-8 tracking-tight"
                 >
-                    Oluwaseun Isaac Odufisan
+                    {'Oluwaseun Isaac Odufisan'.split('').map((char, index) => (
+                        <span
+                            key={index}
+                            ref={(el) => (letterRefs.current[index] = el)}
+                            className="inline-block"
+                            style={{ position: 'relative' }}
+                        >
+                            {char === ' ' ? '\u00A0' : char}
+                        </span>
+                    ))}
                 </h1>
                 <p
                     ref={subtitleRef}
-                    className="text-xl sm:text-3xl lg:text-4xl font-inter text-gray-accent mb-10 animate-pulse-slow leading-relaxed"
+                    className="text-xl sm:text-3xl lg:text-4xl font-inter text-gray-accent mb-10 leading-relaxed"
                 >
                     AI Software Engineer | Building Solutions with Code & Intelligence
                 </p>
@@ -128,7 +342,7 @@ function Hero() {
                         text="Explore My Work"
                         href="/projects"
                         variant="primary"
-                        className="glass text-lg font-semibold px-8 py-4 hover:bg-teal-dark transition-all duration-300"
+                        className="glass text-lg font-semibold px-8 py-4 bg-teal-primary text-white-bg transition-all duration-300"
                         aria-label="Explore Oluwaseun's Projects"
                     />
                     <Button
@@ -136,7 +350,7 @@ function Hero() {
                         href="/assets/pdf/cv.pdf"
                         download
                         variant="secondary"
-                        className="glass text-lg font-semibold px-8 py-4 hover:bg-gray-600 transition-all duration-300"
+                        className="glass text-lg font-semibold px-8 py-4 bg-gray-600 text-white-bg transition-all duration-300"
                         aria-label="Download Oluwaseun's CV"
                     />
                 </div>
@@ -146,7 +360,7 @@ function Hero() {
             <div className="absolute bottom-0 left-0 right-0 text-center pb-8 z-10">
                 <Link
                     to="/#about"
-                    className="text-white-bg text-sm font-inter animate-bounce-subtle"
+                    className="text-black text-sm font-inter animate-bounce-subtle"
                     aria-label="Scroll to About section"
                 >
                     <svg

@@ -9,7 +9,12 @@
             "MongoDB",
             "Stripe"
         ],
-        "image": "/assets/images/ecommerce.jpg",
+        "images": [
+            "/assets/images/ecommerce.jpg",
+            "/assets/images/ecommerce-product.jpg",
+            "/assets/images/ecommerce-cart.jpg",
+            "/assets/images/ecommerce-checkout.jpg"
+        ],
         "link": "https://github.com/oluwaseun-odufisan/ecommerce",
         "liveDemo": "https://ecommerce-demo.vercel.app",
         "category": "Web Development"
@@ -23,7 +28,11 @@
             "Firebase",
             "TypeScript"
         ],
-        "image": "/assets/images/taskmanager.jpg",
+        "images": [
+            "/assets/images/taskmanager.jpg",
+            "/assets/images/taskmanager-list.jpg",
+            "/assets/images/taskmanager-details.jpg"
+        ],
         "link": "https://github.com/oluwaseun-odufisan/task-manager",
         "liveDemo": "https://taskmanager-demo.vercel.app",
         "category": "Mobile Apps"
@@ -38,7 +47,11 @@
             "React",
             "AWS"
         ],
-        "image": "/assets/images/aiimage.jpg",
+        "images": [
+            "/assets/images/aiimage.jpg",
+            "/assets/images/aiimage-output.jpg",
+            "/assets/images/aiimage-prompt.jpg"
+        ],
         "link": "https://github.com/oluwaseun-odufisan/ai-image-generator",
         "liveDemo": "https://aiimage-demo.vercel.app",
         "category": "AI"
@@ -52,7 +65,11 @@
             "Tailwind CSS",
             "GSAP"
         ],
-        "image": "/assets/images/portfolio.jpg",
+        "images": [
+            "/assets/images/portfolio.jpg",
+            "/assets/images/portfolio-home.jpg",
+            "/assets/images/portfolio-about.jpg"
+        ],
         "link": "https://github.com/oluwaseun-odufisan/portfolio",
         "liveDemo": "https://oluwaseun-portfolio.vercel.app",
         "category": "Web Development"
@@ -67,9 +84,13 @@
             "AI",
             "MongoDB"
         ],
-        "image": "/assets/images/task-management-demo.gif",
+        "images": [
+            "/assets/images/task-management-demo.gif",
+            "/assets/images/task-management-dashboard.jpg",
+            "/assets/images/task-management-chat.jpg"
+        ],
         "link": "https://github.com/oluwaseun/task-management-app",
-        "liveDemo": "",
+        "liveDemo": "https://oluwaseun-portfolio.vercel.app",
         "category": "AI"
     },
     {
@@ -82,9 +103,13 @@
             "Express.js",
             "Node.js"
         ],
-        "image": "/assets/images/neg-ai-banking-mockup.png",
+        "images": [
+            "/assets/images/neg-ai-banking-mockup.png",
+            "/assets/images/neg-ai-banking-transfers.jpg",
+            "/assets/images/neg-ai-banking-wallet.jpg"
+        ],
         "link": "https://github.com/oluwaseun/neg-ai-banking-mockup",
-        "liveDemo": "",
+        "liveDemo": "https://oluwaseun-portfolio.vercel.app",
         "category": "Web Development"
     },
     {
@@ -96,7 +121,11 @@
             "AI/ML",
             "Data Analysis"
         ],
-        "image": "/assets/images/fraud-detection-placeholder.jpg",
+        "images": [
+            "/assets/images/fraud-detection-placeholder.jpg",
+            "/assets/images/fraud-detection-graph.jpg",
+            "/assets/images/fraud-detection-analysis.jpg"
+        ],
         "link": "https://github.com/oluwaseun/fraud-detection-research",
         "liveDemo": "",
         "category": "AI"

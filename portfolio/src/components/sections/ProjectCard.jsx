@@ -7,7 +7,7 @@ import Button from '../common/Button.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProjectCard({ id, title, description, image, link, index, onViewProject }) {
+function ProjectCard({ id, title, description, images = [], link, index, onViewProject }) {
     const cardRef = useRef(null);
     const imageRef = useRef(null);
     const overlayRef = useRef(null);
@@ -105,6 +105,11 @@ function ProjectCard({ id, title, description, image, link, index, onViewProject
             card.removeEventListener('mouseenter', handleHoverEnter);
             card.removeEventListener('mouseleave', handleHoverLeave);
             card.removeEventListener('mousemove', handleMouseMove);
+            ScrollTrigger.getAll().forEach((trigger) => {
+                if (trigger.trigger === cardRef.current) {
+                    trigger.kill();
+                }
+            });
         };
     }, [handleHoverEnter, handleHoverLeave, handleMouseMove, index]);
 
@@ -140,7 +145,7 @@ function ProjectCard({ id, title, description, image, link, index, onViewProject
             </svg>
             <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
                 <LazyLoadImage
-                    src={image}
+                    src={images[0] || '/assets/images/placeholder.jpg'}
                     alt={title}
                     effect="blur"
                     className="project-image w-full h-full object-cover transition-transform duration-300"

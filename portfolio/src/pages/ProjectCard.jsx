@@ -7,7 +7,7 @@ import Button from '../components/common/Button.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProjectCard({ title, description, technologies = [], image, liveDemo, category, index, onViewProject }) {
+function ProjectCard({ title, description, technologies = [], images = [], liveDemo, category, index, onViewProject }) {
     const cardRef = useRef(null);
     const imageRef = useRef(null);
 
@@ -86,7 +86,7 @@ function ProjectCard({ title, description, technologies = [], image, liveDemo, c
         >
             <div className="relative w-full h-52 sm:h-60 mb-5 overflow-hidden rounded-lg">
                 <LazyLoadImage
-                    src={image}
+                    src={images[0] || '/assets/images/placeholder.jpg'}
                     alt={title}
                     effect="blur"
                     className="w-full h-full object-cover transition-transform duration-300"

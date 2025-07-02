@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ParticleBackground from '../common/ParticleBackground.jsx';
 import Button from '../common/Button.jsx';
 import ProjectCard from './ProjectCard.jsx';
@@ -14,12 +15,16 @@ function Projects() {
     const titleRef = useRef(null);
     const buttonRef = useRef(null);
     const modalRef = useRef(null);
+    const imageRef = useRef(null);
     const [selectedProject, setSelectedProject] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const openModal = (project) => {
         setSelectedProject(project);
+        setCurrentImageIndex(0); // Reset to first image
         setIsModalOpen(true);
+        window.scrollTo({ top: 0, behavior: 'instant' }); // Ensure modal appears at top
         gsap.fromTo(
             modalRef.current,
             { opacity: 0, scale: 0.8 },
@@ -41,8 +46,35 @@ function Projects() {
             onComplete: () => {
                 setIsModalOpen(false);
                 setSelectedProject(null);
+                setCurrentImageIndex(0);
             },
         });
+    };
+
+    const nextImage = () => {
+        if (selectedProject && selectedProject.images && selectedProject.images.length > 0) {
+            setCurrentImageIndex((prevIndex) =>
+                prevIndex === selectedProject.images.length - 1 ? 0 : prevIndex + 1
+            );
+            gsap.fromTo(
+                imageRef.current,
+                { opacity: 0, x: 50 },
+                { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }
+            );
+        }
+    };
+
+    const prevImage = () => {
+        if (selectedProject && selectedProject.images && selectedProject.images.length > 0) {
+            setCurrentImageIndex((prevIndex) =>
+                prevIndex === 0 ? selectedProject.images.length - 1 : prevIndex - 1
+            );
+            gsap.fromTo(
+                imageRef.current,
+                { opacity: 0, x: -50 },
+                { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }
+            );
+        }
     };
 
     useEffect(() => {
@@ -106,7 +138,7 @@ function Projects() {
                     trigger.kill();
                 }
             });
-            gsap.killTweensOf([titleRef.current, buttonRef.current, sectionRef.current]);
+            gsap.killTweensOf([titleRef.current, buttonRef.current, sectionRef.current, modalRef.current, imageRef.current]);
         };
     }, []);
 
@@ -162,7 +194,7 @@ function Projects() {
                             id={project.id}
                             title={project.title}
                             description={project.description}
-                            image={project.image}
+                            images={project.images}
                             link={project.link}
                             index={index}
                             onViewProject={() => openModal(project)}
@@ -182,7 +214,7 @@ function Projects() {
             </div>
             {isModalOpen && selectedProject && (
                 <div
-                    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+                    className="fixed inset-0 bg-black/70 flex items-start justify-center z-50 p-4 sm:p-6 mt-16 sm:mt-20"
                     role="dialog"
                     aria-labelledby="modal-title"
                     aria-modal="true"
@@ -190,27 +222,82 @@ function Projects() {
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-white/90 backdrop-blur-md rounded-xl p-8 max-w-3xl w-full mx-4 max-h-[90vh] overflow-y-auto glass"
+                        className="relative bg-white/90 backdrop-blur-md rounded-xl p-10 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto glass shadow-2xl border border-teal-200/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
                             onClick={closeModal}
-                            className="absolute top-4 right-4 text-gray-800 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            className="absolute top-4 right-4 text-gray-800 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-full p-2 transition-colors duration-200"
                             aria-label="Close project details"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <h3 id="modal-title" className="text-2xl font-poppins font-semibold text-teal-primary mb-4">
+                        <h3 id="modal-title" className="text-3xl sm:text-4xl font-poppins font-semibold text-teal-primary mb-6">
                             {selectedProject.title}
                         </h3>
-                        <img
-                            src={selectedProject.image}
-                            alt={selectedProject.title}
-                            className="w-full h-96 object-cover rounded-lg mb-4"
-                        />
-                        <p className="text-base font-inter text-gray-accent mb-6">
+                        <div className="relative w-full h-[28rem] sm:h-[32rem] mb-8 overflow-hidden rounded-lg shadow-md">
+                            {selectedProject.images && selectedProject.images.length > 0 ? (
+                                <>
+                                    <img
+                                        ref={imageRef}
+                                        src={selectedProject.images[currentImageIndex] || '/assets/images/placeholder.jpg'}
+                                        alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                                        className="w-full h-full object-cover transition-transform duration-300"
+                                    />
+                                    {selectedProject.images.length > 1 && (
+                                        <>
+                                            <div className="absolute inset-y-0 left-0 flex items-center">
+                                                <button
+                                                    onClick={prevImage}
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    aria-label="Previous image"
+                                                >
+                                                    <ChevronLeft className="w-6 h-6" />
+                                                </button>
+                                            </div>
+                                            <div className="absolute inset-y-0 right-0 flex items-center">
+                                                <button
+                                                    onClick={nextImage}
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    aria-label="Next image"
+                                                >
+                                                    <ChevronRight className="w-6 h-6" />
+                                                </button>
+                                            </div>
+                                            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                                                {selectedProject.images.map((_, index) => (
+                                                    <button
+                                                        key={index}
+                                                        onClick={() => {
+                                                            setCurrentImageIndex(index);
+                                                            gsap.fromTo(
+                                                                imageRef.current,
+                                                                { opacity: 0, scale: 0.98 },
+                                                                { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }
+                                                            );
+                                                        }}
+                                                        className={`w-3 h-3 rounded-full ${index === currentImageIndex
+                                                                ? 'bg-teal-600'
+                                                                : 'bg-gray-400/50 hover:bg-gray-400'
+                                                            } transition-all duration-200`}
+                                                        aria-label={`Go to image ${index + 1}`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <img
+                                    src="/assets/images/placeholder.jpg"
+                                    alt="No images available"
+                                    className="w-full h-full object-cover"
+                                />
+                            )}
+                        </div>
+                        <p className="text-lg sm:text-xl font-inter text-gray-accent mb-8 leading-relaxed">
                             {selectedProject.description}
                         </p>
                         <div className="flex justify-center">
@@ -220,7 +307,7 @@ function Projects() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variant="primary"
-                                className="text-lg font-semibold px-6 py-3 hover:bg-teal-dark"
+                                className="text-lg sm:text-xl font-semibold px-8 py-3 hover:bg-teal-dark"
                                 aria-label={`Visit ${selectedProject.title} on GitHub`}
                             />
                         </div>

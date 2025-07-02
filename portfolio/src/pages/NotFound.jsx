@@ -14,6 +14,10 @@ function NotFound() {
     const messageRef = useRef(null);
     const buttonRef = useRef(null);
 
+    const handleHomeClick = () => {
+        window.location.href = '/'; // Forces full page reload to homepage
+    };
+
     useEffect(() => {
         // Title entrance with bounce
         gsap.fromTo(
@@ -97,10 +101,7 @@ function NotFound() {
             className="relative min-h-screen flex items-center justify-center py-16 bg-gradient-to-b from-white-bg via-teal-light/30 to-teal-primary/20 bg-opacity-90 backdrop-blur-glass"
             aria-label="Page Not Found"
         >
-            {/* Particle Background */}
             <ParticleBackground className="absolute inset-0 z-0 opacity-40" />
-
-            {/* Wave SVG */}
             <svg
                 className="absolute bottom-0 left-0 w-full h-32 text-teal-light"
                 viewBox="0 0 1440 120"
@@ -145,9 +146,10 @@ function NotFound() {
                         </span>
                     }
                     to="/"
+                    onClick={handleHomeClick}
                     variant="primary"
                     className="glass px-8 py-4 text-lg font-semibold text-teal-primary hover:bg-teal-dark hover:text-white transition-all duration-300"
-                    aria-label="Return to Home Page"
+                    aria-label="Return to Home Page with Reload"
                 />
             </div>
         </section>

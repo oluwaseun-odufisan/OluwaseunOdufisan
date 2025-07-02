@@ -3,22 +3,33 @@
         "id": 2,
         "title": "AI-Powered Task Management Application",
         "description": "A web-based productivity platform leveraging AI for task scheduling, featuring real-time chat, social feed, distributed file storage, role-based dashboards, and Microsoft Outlook integration for enhanced workflow efficiency.",
-        "image": "/assets/images/task-management-demo.gif",
+        "images": [
+            "/assets/images/task-management-demo.gif",
+            "/assets/images/task-management-dashboard.jpg",
+            "/assets/images/task-management-chat.jpg"
+        ],
         "link": "https://github.com/oluwaseun/task-management-app"
     },
     {
         "id": 1,
         "title": "NEG AI Banking Platform",
         "description": "A secure, scalable digital banking solution for Nigeria, built with MongoDB, Flutterwave, and Express.js. Features include digital wallets, real-time balance checks, instant transfers, bill payments, JWT-based authentication, and webhook support for seamless transactions.",
-        "image": "/assets/images/neg-ai-banking-mockup.png",
+        "images": [
+            "/assets/images/neg-ai-banking-mockup.png",
+            "/assets/images/neg-ai-banking-transfers.jpg",
+            "/assets/images/neg-ai-banking-wallet.jpg"
+        ],
         "link": "https://github.com/oluwaseun/neg-ai-banking-mockup"
     },
-    
     {
         "id": 5,
         "title": "Fraud Detection Research",
         "description": "A research project investigating fraud’s impact on Nigeria’s digital economy, proposing AI/ML-based solutions using anomaly detection and data analysis to enhance security.",
-        "image": "/assets/images/fraud-detection-placeholder.jpg",
+        "images": [
+            "/assets/images/fraud-detection-placeholder.jpg",
+            "/assets/images/fraud-detection-graph.jpg",
+            "/assets/images/fraud-detection-analysis.jpg"
+        ],
         "link": "https://github.com/oluwaseun/fraud-detection-research"
     }
 ]

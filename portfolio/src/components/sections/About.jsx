@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger, TextPlugin, CustomEase } from 'gsap/all';
 import Button from '../common/Button.jsx';
 import { SiReact, SiTailwindcss, SiJavascript, SiNodedotjs, SiMongodb, SiPython, SiTensorflow } from 'react-icons/si';
 import skillsData from '../../data/skills.json';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, TextPlugin, CustomEase);
 
 function About() {
     const sectionRef = useRef(null);
@@ -14,19 +14,19 @@ function About() {
     const titleRef = useRef(null);
     const paragraphRefs = useRef([]);
     const skillRefs = useRef([]);
+    const circuitRef = useRef(null);
     const [hoveredSkill, setHoveredSkill] = useState(null);
 
     const iconMap = {
-        React: <SiReact className="w-6 h-6 text-teal-500" />,
-        'Tailwind CSS': <SiTailwindcss className="w-6 h-6 text-teal-500" />,
-        'JavaScript (ES6+)': <SiJavascript className="w-6 h-6 text-teal-500" />,
-        'Node.js': <SiNodedotjs className="w-6 h-6 text-teal-500" />,
-        MongoDB: <SiMongodb className="w-6 h-6 text-teal-500" />,
-        Python: <SiPython className="w-6 h-6 text-teal-500" />,
-        TensorFlow: <SiTensorflow className="w-6 h-6 text-teal-500" />,
+        React: <SiReact className="w-8 h-8 text-teal-400" />,
+        'Tailwind CSS': <SiTailwindcss className="w-8 h-8 text-teal-400" />,
+        'JavaScript (ES6+)': <SiJavascript className="w-8 h-8 text-teal-400" />,
+        'Node.js': <SiNodedotjs className="w-8 h-8 text-teal-400" />,
+        MongoDB: <SiMongodb className="w-8 h-8 text-teal-400" />,
+        Python: <SiPython className="w-8 h-8 text-teal-400" />,
+        TensorFlow: <SiTensorflow className="w-8 h-8 text-teal-400" />,
     };
 
-    // Select a subset of skills for display
     const featuredSkills = [
         ...skillsData.Frontend?.slice(0, 3) || [],
         ...skillsData.Backend?.slice(0, 2) || [],
@@ -34,90 +34,130 @@ function About() {
     ].map(skill => skill.name || skill);
 
     useEffect(() => {
-        // Title animation with glowing effect
+        // Custom ease for fluid, magical animations
+        CustomEase.create('arcane', 'M0,0 C0.25,0.75 0.5,1 1,1');
+
+        // Title animation with ethereal glow
         gsap.fromTo(
             titleRef.current,
-            { opacity: 0, y: 50, scale: 0.9 },
+            { opacity: 0, y: 80, scale: 0.9 },
             {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 1,
-                ease: 'power4.out',
+                duration: 1.8,
+                ease: 'arcane',
                 scrollTrigger: {
                     trigger: titleRef.current,
-                    start: 'top 90%',
+                    start: 'top 85%',
                     toggleActions: 'play none none reverse',
                 },
                 onComplete: () => {
                     gsap.to(titleRef.current, {
-                        textShadow: '0 0 15px rgba(20, 184, 166, 0.7)',
-                        duration: 1.5,
+                        textShadow: '0 0 25px rgba(20, 184, 166, 0.9), 0 0 50px rgba(20, 184, 166, 0.5), 0 0 75px rgba(20, 184, 166, 0.3)',
+                        duration: 2.5,
                         repeat: -1,
                         yoyo: true,
-                        ease: 'power1.inOut',
+                        ease: 'sine.inOut',
                     });
                 },
             }
         );
 
-        // Paragraph animations (staggered entry)
+        // Typewriter effect for paragraphs with magical sparkles
         paragraphRefs.current.forEach((p, index) => {
             if (p) {
                 gsap.fromTo(
                     p,
-                    { opacity: 0, y: 30 },
+                    { text: '', opacity: 0, filter: 'blur(6px)' },
                     {
+                        text: p.dataset.text,
                         opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        ease: 'power3.out',
-                        delay: index * 0.2,
+                        filter: 'blur(0px)',
+                        duration: 2.5,
+                        ease: 'none',
+                        delay: index * 0.5,
                         scrollTrigger: {
                             trigger: p,
-                            start: 'top 85%',
+                            start: 'top 80%',
                             toggleActions: 'play none none reverse',
+                        },
+                        onUpdate: () => {
+                            if (Math.random() > 0.85) {
+                                const sparkle = document.createElement('span');
+                                sparkle.className = 'sparkle';
+                                p.appendChild(sparkle);
+                                gsap.fromTo(
+                                    sparkle,
+                                    { scale: 0, opacity: 0.8, x: Math.random() * p.offsetWidth, y: Math.random() * p.offsetHeight },
+                                    {
+                                        scale: 1.5,
+                                        opacity: 0,
+                                        duration: 0.5,
+                                        ease: 'power2.out',
+                                        onComplete: () => sparkle.remove(),
+                                    }
+                                );
+                            }
+                            p.style.textShadow = '0 0 15px rgba(20, 184, 166, 0.7)';
+                        },
+                        onComplete: () => {
+                            gsap.to(p, {
+                                textShadow: '0 0 10px rgba(20, 184, 166, 0.5)',
+                                duration: 2,
+                                repeat: -1,
+                                yoyo: true,
+                                ease: 'sine.inOut',
+                            });
                         },
                     }
                 );
             }
         });
 
-        // Image 3D entrance with particle burst effect
+        // Image entrance with arcane reveal
         gsap.fromTo(
             imageRef.current,
-            { opacity: 0, scale: 0.8, rotateX: -15, rotateY: 15 },
+            { opacity: 0, scale: 0.9, filter: 'brightness(0.6)' },
             {
                 opacity: 1,
                 scale: 1,
-                rotateX: 0,
-                rotateY: 0,
-                duration: 1.2,
-                ease: 'back.out(1.7)',
+                filter: 'brightness(1)',
+                duration: 2,
+                ease: 'arcane',
                 scrollTrigger: {
                     trigger: imageRef.current,
                     start: 'top 80%',
                     toggleActions: 'play none none reverse',
                 },
+                onComplete: () => {
+                    gsap.to(imageRef.current.querySelector('.image-overlay'), {
+                        opacity: 0.5,
+                        duration: 2.5,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut',
+                    });
+                },
             }
         );
 
-        // Skill tags animation
+        // Skill tags with magical aura effect
         skillRefs.current.forEach((skill, index) => {
             if (skill) {
                 gsap.fromTo(
                     skill,
-                    { opacity: 0, scale: 0.5, rotate: 45 },
+                    { opacity: 0, scale: 0.4, y: 50 },
                     {
                         opacity: 1,
                         scale: 1,
-                        rotate: 0,
-                        duration: 0.6,
-                        ease: 'back.out(2)',
-                        delay: index * 0.1,
+                        y: 0,
+                        duration: 1,
+                        ease: 'back.out(1.8)',
+                        delay: index * 0.2,
                         scrollTrigger: {
                             trigger: skill,
-                            start: 'top 90%',
+                            start: 'top 85%',
                             toggleActions: 'play none none reverse',
                         },
                     }
@@ -126,99 +166,90 @@ function About() {
                 const handleMouseEnter = () => {
                     setHoveredSkill(index);
                     gsap.to(skill, {
-                        scale: 1.2,
-                        boxShadow: '0 0 15px rgba(20, 184, 166, 0.7)',
-                        duration: 0.3,
-                        ease: 'power2.out',
-                    });
-                    gsap.to(skill.querySelector('.skill-icon'), {
-                        rotate: 360,
-                        scale: 1.3,
+                        scale: 1.4,
+                        boxShadow: '0 0 30px rgba(20, 184, 166, 0.9), 0 0 60px rgba(20, 184, 166, 0.5)',
                         duration: 0.5,
                         ease: 'power3.out',
                     });
+                    gsap.to(skill.querySelector('.skill-icon'), {
+                        scale: 1.5,
+                        duration: 0.7,
+                        ease: 'power3.out',
+                    });
+                    // Magical aura effect
+                    const aura = document.createElement('span');
+                    aura.className = 'skill-aura';
+                    skill.appendChild(aura);
+                    gsap.fromTo(
+                        aura,
+                        { scale: 0, opacity: 0.6 },
+                        {
+                            scale: 3,
+                            opacity: 0,
+                            duration: 0.8,
+                            ease: 'power2.out',
+                            onComplete: () => aura.remove(),
+                        }
+                    );
                 };
 
                 const handleMouseLeave = () => {
                     setHoveredSkill(null);
                     gsap.to(skill, {
                         scale: 1,
-                        boxShadow: 'none',
-                        duration: 0.3,
-                        ease: 'power2.out',
+                        boxShadow: '0 0 15px rgba(20, 184, 166, 0.4)',
+                        duration: 0.5,
+                        ease: 'power3.out',
                     });
                     gsap.to(skill.querySelector('.skill-icon'), {
-                        rotate: 0,
                         scale: 1,
-                        duration: 0.5,
+                        duration: 0.7,
                         ease: 'power3.out',
                     });
                 };
 
                 skill.addEventListener('mouseenter', handleMouseEnter);
                 skill.addEventListener('mouseleave', handleMouseLeave);
-
                 skill._handlers = { mouseenter: handleMouseEnter, mouseleave: handleMouseLeave };
             }
         });
 
-        // Image hover effect
-        const image = imageRef.current;
-        if (image) {
-            const handleImageMouseEnter = () => {
-                gsap.to(image, {
-                    scale: 1.05,
-                    rotateX: 5,
-                    rotateY: 5,
-                    boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)',
-                    duration: 0.4,
-                    ease: 'power2.out',
-                });
-                gsap.to(image.querySelector('.image-overlay'), {
-                    opacity: 0.3,
-                    duration: 0.4,
-                    ease: 'power2.out',
-                });
-            };
+        // Circuit animation with data flow
+        gsap.to(circuitRef.current.querySelectorAll('.circuit-path'), {
+            strokeDashoffset: 0,
+            duration: 6,
+            ease: 'none',
+            repeat: -1,
+            scrollTrigger: {
+                trigger: circuitRef.current,
+                start: 'top 90%',
+            },
+        });
 
-            const handleImageMouseLeave = () => {
-                gsap.to(image, {
-                    scale: 1,
-                    rotateX: 0,
-                    rotateY: 0,
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                    duration: 0.4,
-                    ease: 'power2.out',
-                });
-                gsap.to(image.querySelector('.image-overlay'), {
-                    opacity: 0.2,
-                    duration: 0.4,
-                    ease: 'power2.out',
-                });
-            };
-
-            image.addEventListener('mouseenter', handleImageMouseEnter);
-            image.addEventListener('mouseleave', handleImageMouseLeave);
-
-            image._handlers = { mouseenter: handleImageMouseEnter, mouseleave: handleImageMouseLeave };
-        }
+        // Data stream particles
+        gsap.to(circuitRef.current.querySelectorAll('.data-stream'), {
+            x: '100vw',
+            opacity: 0,
+            duration: 4,
+            ease: 'none',
+            repeat: -1,
+            stagger: 0.5,
+            scrollTrigger: {
+                trigger: circuitRef.current,
+                start: 'top 90%',
+            },
+        });
 
         return () => {
-            // Clean up GSAP animations and ScrollTriggers
-            gsap.killTweensOf([titleRef.current, paragraphRefs.current, imageRef.current, skillRefs.current]);
+            gsap.killTweensOf([titleRef.current, paragraphRefs.current, imageRef.current, skillRefs.current, circuitRef.current]);
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-            // Clean up event listeners
             skillRefs.current.forEach((skill) => {
                 if (skill && skill._handlers) {
                     skill.removeEventListener('mouseenter', skill._handlers.mouseenter);
                     skill.removeEventListener('mouseleave', skill._handlers.mouseleave);
                 }
             });
-            if (image && image._handlers) {
-                image.removeEventListener('mouseenter', image._handlers.mouseenter);
-                image.removeEventListener('mouseleave', image._handlers.mouseleave);
-            }
         };
     }, []);
 
@@ -226,72 +257,133 @@ function About() {
         <section
             ref={sectionRef}
             id="about"
-            className="relative py-16 sm:py-24 bg-gradient-to-b from-white to-teal-100/30 backdrop-blur-glass overflow-hidden"
+            className="relative py-24 sm:py-40 bg-gradient-to-b from-white to-teal-100/10 backdrop-blur-glass overflow-hidden"
             aria-label="About Oluwaseun Isaac Odufisan"
         >
-            {/* Background Wave Effect */}
-            <svg
-                className="absolute bottom-0 left-0 w-full h-32 text-teal-100"
-                viewBox="0 0 1440 120"
-                preserveAspectRatio="none"
-            >
-                <path
-                    fill="currentColor"
-                    d="M0,80L48,74.7C96,69,192,59,288,64C384,69,480,89,576,96C672,101,768,89,864,80C960,69,1056,59,1152,64C1248,69,1344,89,1392,101.3L1440,112L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
-                >
-                    <animate
-                        attributeName="d"
-                        values="
-                            M0,80L48,74.7C96,69,192,59,288,64C384,69,480,89,576,96C672,101,768,89,864,80C960,69,1056,59,1152,64C1248,69,1344,89,1392,101.3L1440,112L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z;
-                            M0,90L48,84.7C96,79,192,69,288,74C384,79,480,99,576,106C672,111,768,99,864,90C960,79,1056,69,1152,74C1248,79,1344,99,1392,111.3L1440,122L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z;
-                            M0,80L48,74.7C96,69,192,59,288,64C384,69,480,89,576,96C672,101,768,89,864,80C960,69,1056,59,1152,64C1248,69,1344,89,1392,101.3L1440,112L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
-                        dur="10s"
-                        repeatCount="indefinite"
+            {/* Enchanted Circuit Background */}
+            <div className="absolute inset-0 z-0">
+                <style>
+                    {`
+                        .enchanted-bg {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            opacity: 0.25;
+                            pointer-events: none;
+                        }
+
+                        .circuit-path {
+                            stroke: rgba(20, 184, 166, 0.6);
+                            stroke-width: 3;
+                            stroke-dasharray: 25;
+                            stroke-dashoffset: 1000;
+                            fill: none;
+                        }
+
+                        .circuit-node {
+                            fill: rgba(20, 184, 166, 0.9);
+                            animation: pulse-node 2.5s ease-in-out infinite;
+                        }
+
+                        .data-stream {
+                            position: absolute;
+                            width: 12px;
+                            height: 12px;
+                            background: radial-gradient(circle, rgba(20, 184, 166, 1) 20%, transparent 70%);
+                            border-radius: 50%;
+                            box-shadow: 0 0 20px rgba(20, 184, 166, 0.8);
+                        }
+
+                        .sparkle {
+                            position: absolute;
+                            width: 8px;
+                            height: 8px;
+                            background: radial-gradient(circle, rgba(20, 184, 166, 0.9) 10%, transparent 70%);
+                            border-radius: 50%;
+                            pointer-events: none;
+                        }
+
+                        .skill-aura {
+                            position: absolute;
+                            inset: 0;
+                            background: radial-gradient(circle, rgba(20, 184, 166, 0.7) 10%, transparent 70%);
+                            border-radius: inherit;
+                            pointer-events: none;
+                        }
+
+                        @keyframes pulse-node {
+                            0% { transform: scale(1); opacity: 0.9; }
+                            50% { transform: scale(1.6); opacity: 1; }
+                            100% { transform: scale(1); opacity: 0.9; }
+                        }
+
+                        @keyframes stream-flow {
+                            0% { transform: translate(0, 0); opacity: 0.9; }
+                            50% { opacity: 0.6; }
+                            100% { transform: translate(100vw, 0); opacity: 0; }
+                        }
+                    `}
+                </style>
+                <svg ref={circuitRef} className="enchanted-bg" viewBox="0 0 1440 800" preserveAspectRatio="none">
+                    <path
+                        className="circuit-path"
+                        d="M100,150 H350 V350 H650 V550 H950 V350 H1150 V150 H1350 M200,250 V450 H450 M850,250 V450 H1050"
                     />
-                </path>
-            </svg>
+                    <path
+                        className="circuit-path"
+                        d="M150,200 H400 V400 H700 V600 H1000 V400 H1200"
+                    />
+                    <circle className="circuit-node" cx="350" cy="350" r="6" />
+                    <circle className="circuit-node" cx="650" cy="550" r="6" />
+                    <circle className="circuit-node" cx="950" cy="350" r="6" />
+                    <circle className="circuit-node" cx="1150" cy="150" r="6" />
+                    <div className="data-stream" style={{ top: '15%', left: '5%' }} />
+                    <div className="data-stream" style={{ top: '25%', left: '75%' }} />
+                    <div className="data-stream" style={{ top: '65%', left: '35%' }} />
+                </svg>
+            </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     {/* Content */}
-                    <div ref={contentRef} className="space-y-8">
+                    <div ref={contentRef} className="space-y-12">
                         <h2
                             ref={titleRef}
-                            className="text-4xl sm:text-5xl font-poppins font-extrabold text-teal-500 tracking-tight"
+                            className="text-5xl sm:text-6xl font-poppins font-extrabold text-teal-500 tracking-tight"
                         >
                             About Me
                         </h2>
-                        <div className="space-y-6">
+                        <div className="space-y-10">
                             <p
                                 ref={(el) => (paragraphRefs.current[0] = el)}
-                                className="text-lg sm:text-xl font-inter text-gray-600 leading-relaxed"
+                                data-text="I'm Oluwaseun Isaac Odufisan, an AI Software Engineer driven by a passion for creating transformative solutions that blend advanced technology with real-world impact. My expertise spans frontend (React, Tailwind CSS), backend (Node.js, MongoDB), and machine learning (TensorFlow, NLP), allowing me to craft scalable, user-focused applications."
+                                className="text-2xl sm:text-2xl font-inter text-gray-600 leading-relaxed relative"
                                 aria-describedby="about-description-1"
-                            >
-                                I'm Oluwaseun Isaac Odufisan, an AI Software Engineer passionate about crafting innovative solutions that fuse cutting-edge technology with real-world impact. My expertise spans <strong>frontend</strong> (React, Tailwind CSS), <strong>backend</strong> (Node.js, MongoDB), and <strong>machine learning</strong> (TensorFlow, NLP), enabling me to build scalable, user-centric applications.
-                            </p>
+                            />
                             <p
                                 ref={(el) => (paragraphRefs.current[1] = el)}
-                                className="text-lg sm:text-xl font-inter text-gray-600 leading-relaxed"
+                                data-text="From leading the NEG AI Banking Platform to building AI-driven tools like the Chatbot Tutor, I excel at solving complex challenges. As CDS President for ICT, I’ve championed digital literacy in communities, and my contributions to open-source projects like TensorFlow underscore my commitment to pushing the boundaries of technology globally."
+                                className="text-2xl sm:text-2xl font-inter text-gray-600 leading-relaxed relative"
                                 aria-describedby="about-description-2"
-                            >
-                                From spearheading the NEG AI Banking Platform to developing AI-powered tools like the Chatbot Tutor, I thrive on tackling complex challenges. As CDS President for ICT, I’ve empowered communities through digital literacy, and my contributions to open-source projects like TensorFlow reflect my commitment to advancing technology globally.
-                            </p>
+                            />
                         </div>
                         {/* Skill Tags */}
-                        <div className="flex flex-wrap gap-3" role="list" aria-label="Featured skills">
+                        <div className="flex flex-wrap gap-5" role="list" aria-label="Featured skills">
                             {featuredSkills.map((skill, index) => (
                                 <button
                                     key={index}
                                     ref={(el) => (skillRefs.current[index] = el)}
-                                    className={`flex items-center space-x-2 px-4 py-2 rounded-full bg-teal-500/10 text-gray-600 font-inter text-sm font-semibold hover:bg-teal-500/20 transition-all duration-300 ${
-                                        hoveredSkill === index ? 'scale-110 shadow-lg shadow-teal-500/30' : ''
+                                    className={`flex items-center space-x-4 px-6 py-3 rounded-full bg-teal-500/20 text-gray-600 font-inter text-lg font-semibold hover:bg-teal-500/30 transition-all duration-300 relative overflow-hidden ${
+                                        hoveredSkill === index ? 'scale-110 shadow-xl shadow-teal-500/50' : ''
                                     }`}
                                     role="listitem"
                                     aria-label={`Skill: ${skill}`}
                                     onClick={() => {
                                         gsap.to(skillRefs.current[index], {
-                                            scale: 1.2,
-                                            duration: 0.2,
+                                            scale: 1.4,
+                                            duration: 0.3,
                                             ease: 'power2.out',
                                             yoyo: true,
                                             repeat: 1,
@@ -307,6 +399,7 @@ function About() {
                                 >
                                     <span className="skill-icon">{iconMap[skill]}</span>
                                     <span>{skill}</span>
+                                    <span className="skill-aura" />
                                 </button>
                             ))}
                         </div>
@@ -315,9 +408,11 @@ function About() {
                             href="/assets/pdf/cv.pdf"
                             download
                             variant="primary"
-                            className="glass px-6 py-3 text-lg font-semibold text-white bg-teal-500 hover:bg-teal-600 transition-all duration-300 shadow-lg hover:shadow-teal-500/50"
+                            className="glass px-10 py-5 text-2xl font-semibold text-white bg-teal-500 hover:bg-teal-600 transition-all duration-300 shadow-xl hover:shadow-teal-500/70 relative overflow-hidden"
                             aria-label="Download Oluwaseun's CV"
-                        />
+                        >
+                            <span className="absolute inset-0 bg-gradient-to-r from-transparent to-teal-400/40 animate-pulse" />
+                        </Button>
                     </div>
 
                     {/* Profile Image */}
@@ -325,32 +420,46 @@ function About() {
                         <img
                             src="/assets/images/profile.jpg"
                             alt="Oluwaseun Isaac Odufisan, AI Software Engineer"
-                            className="w-full rounded-xl shadow-glass"
+                            className="w-full rounded-3xl shadow-glass"
                             loading="lazy"
                         />
-                        <div className="image-overlay absolute inset-0 bg-teal-500/20 rounded-xl glass transition-opacity duration-300" />
+                        <div className="image-overlay absolute inset-0 bg-teal-500/40 rounded-3xl glass transition-opacity duration-300" />
                         <svg
                             className="absolute inset-0 w-full h-full pointer-events-none"
-                            style={{ filter: 'drop-shadow(0 0 10px rgba(20, 184, 166, 0.5))' }}
+                            style={{ filter: 'drop-shadow(0 0 20px rgba(20, 184, 166, 0.7))' }}
                         >
                             <rect
-                                x="2"
-                                y="2"
-                                width="calc(100% - 4px)"
-                                height="calc(100% - 4px)"
+                                x="4"
+                                y="4"
+                                width="calc(100% - 8px)"
+                                height="calc(100% - 8px)"
                                 fill="none"
-                                stroke="#14b8a6"
-                                strokeWidth="2"
-                                strokeDasharray="20 20"
+                                stroke="rgba(20, 184, 166, 0.9)"
+                                strokeWidth="4"
+                                strokeDasharray="40 20"
                                 strokeDashoffset="0"
                             >
                                 <animate
                                     attributeName="stroke-dashoffset"
-                                    values="0;40"
-                                    dur="2s"
+                                    values="0;80"
+                                    dur="4s"
                                     repeatCount="indefinite"
                                 />
                             </rect>
+                            <path
+                                d="M15,15 Hcalc(100% - 15) Vcalc(100% - 15) H15 Z"
+                                fill="none"
+                                stroke="rgba(20, 184, 166, 0.5)"
+                                strokeWidth="3"
+                                strokeDasharray="20 10"
+                            >
+                                <animate
+                                    attributeName="stroke-dashoffset"
+                                    values="0;60"
+                                    dur="3s"
+                                    repeatCount="indefinite"
+                                />
+                            </path>
                         </svg>
                     </div>
                 </div>
