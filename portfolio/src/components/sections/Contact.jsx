@@ -1,11 +1,13 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
 import { Mail, Github, Linkedin, Twitter, Send, CheckCircle, AlertCircle } from 'lucide-react';
-import { send } from 'emailjs-com';
+import { send, init } from 'emailjs-com';
 import ParticleBackground from '../common/ParticleBackground.jsx';
 import Button from '../common/Button.jsx';
+
+// Initialize EmailJS with the public key
+init('zqeyLD5PgXJVZ9Qu5');
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,13 +17,20 @@ function Contact() {
     const formRef = useRef(null);
     const inputRefs = useRef([]);
     const socialRefs = useRef([]);
-    const feedbackRef = useRef(null);
+    const popupRef = useRef(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: '',
+        subject: 'New Contact Form Submission'
     });
-    const [status, setStatus] = useState(null);
+    const [status, setStatus] = useState(null); // null, 'sending', 'success', 'error', 'invalid'
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -30,58 +39,73 @@ function Contact() {
 
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
+
+        // Validation
+        if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+            setStatus('invalid');
+            setErrorMessage('Please fill in all fields');
+            showPopup();
+            return;
+        }
+
+        if (!validateEmail(formData.email)) {
+            setStatus('invalid');
+            setErrorMessage('Please enter a valid email address');
+            showPopup();
+            return;
+        }
+
+        setStatus('sending');
+        showPopup();
+
         send(
-            'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-            'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+            'service_s1kna01',
+            'template_1adviki',
             formData,
-            'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+            'zqeyLD5PgXJVZ9Qu5'
         )
-            .then(() => {
+            .then((response) => {
                 setStatus('success');
-                setFormData({ name: '', email: '', message: '' });
-                gsap.fromTo(
-                    feedbackRef.current,
-                    { opacity: 0, scale: 0.5, y: 20 },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        duration: 0.5,
-                        ease: 'back.out(1.7)',
-                    }
-                );
-                setTimeout(() => {
-                    gsap.to(feedbackRef.current, {
-                        opacity: 0,
-                        duration: 0.5,
-                        onComplete: () => setStatus(null),
-                    });
-                }, 3000);
+                setFormData({ name: '', email: '', message: '', subject: 'New Contact Form Submission' });
+                showPopup();
             })
-            .catch(() => {
+            .catch((error) => {
                 setStatus('error');
-                gsap.fromTo(
-                    feedbackRef.current,
-                    { opacity: 0, scale: 0.5, y: 20 },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        duration: 0.5,
-                        ease: 'back.out(1.7)',
-                    }
-                );
-                setTimeout(() => {
-                    gsap.to(feedbackRef.current, {
-                        opacity: 0,
-                        duration: 0.5,
-                        onComplete: () => setStatus(null),
-                    });
-                }, 3000);
+                setErrorMessage('Failed to send message. Please try again.');
+                showPopup();
             });
     }, [formData]);
 
-    const handleSocialHoverEnter = useCallback((social, index) => {
+    const showPopup = () => {
+        gsap.fromTo(
+            popupRef.current,
+            { opacity: 0, scale: 0.8 },
+            {
+                opacity: 1,
+                scale: 1,
+                duration: 0.3,
+                ease: 'power3.out',
+                onComplete: () => {
+                    if (status !== 'sending') {
+                        setTimeout(() => {
+                            gsap.to(popupRef.current, {
+                                opacity: 0,
+                                scale: 0.8,
+                                duration: 0.3,
+                                ease: 'power3.in',
+                                onComplete: () => {
+                                    setStatus(null);
+                                    setErrorMessage('');
+                                }
+                            });
+                        }, 3000);
+                    }
+                }
+            }
+        );
+    };
+
+    const handleSocialHoverEnter = useCallback((social) => {
         gsap.to(social, {
             scale: 1.2,
             rotate: 360,
@@ -96,7 +120,7 @@ function Contact() {
         });
     }, []);
 
-    const handleSocialHoverLeave = useCallback((social, index) => {
+    const handleSocialHoverLeave = useCallback((social) => {
         gsap.to(social, {
             scale: 1,
             rotate: 0,
@@ -203,8 +227,8 @@ function Contact() {
                     }
                 );
 
-                social.addEventListener('mouseenter', () => handleSocialHoverEnter(social, index));
-                social.addEventListener('mouseleave', () => handleSocialHoverLeave(social, index));
+                social.addEventListener('mouseenter', () => handleSocialHoverEnter(social));
+                social.addEventListener('mouseleave', () => handleSocialHoverLeave(social));
             }
         });
 
@@ -235,13 +259,10 @@ function Contact() {
         <section
             ref={sectionRef}
             id="contact"
-            className="relative py-16 sm:py-24 bg-gradient-to-b from-white-bg via-teal-light/30 to-teal-primary/20 bg-opacity-90 backdrop-blur-glass"
+            className="relative py-16 sm:py-24 bg-gradient-to-b from-white via-teal-light/30 to-teal-primary/20 bg-opacity-90 backdrop-blur-glass"
             aria-label="Contact Section"
         >
-            {/* Particle Background */}
             <ParticleBackground className="absolute inset-0 z-0 opacity-40" />
-
-            {/* Enhanced Wave SVG */}
             <svg
                 className="absolute bottom-0 left-0 w-full h-32 text-teal-light"
                 viewBox="0 0 1440 120"
@@ -273,10 +294,9 @@ function Contact() {
                 </h2>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Contact Form */}
                     <div
                         ref={formRef}
-                        className="glass p-6 rounded-xl shadow-glass"
+                        className="glass p-6 rounded-xl shadow-glass relative"
                         role="form"
                         aria-label="Contact Form"
                     >
@@ -296,7 +316,7 @@ function Contact() {
                                     value={formData.name}
                                     onChange={handleInputChange}
                                     required
-                                    className="w-full p-3 rounded-lg bg-white-bg bg-opacity-10 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all duration-300"
+                                    className="w-full p-3 rounded-lg bg-white bg-opacity-10 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all duration-300"
                                     placeholder="Your Name"
                                     aria-required="true"
                                 />
@@ -316,7 +336,7 @@ function Contact() {
                                     value={formData.email}
                                     onChange={handleInputChange}
                                     required
-                                    className="w-full p-3 rounded-lg bg-white-bg bg-opacity-10 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all duration-300"
+                                    className="w-full p-3 rounded-lg bg-white bg-opacity-10 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all duration-300"
                                     placeholder="Your Email"
                                     aria-required="true"
                                 />
@@ -336,7 +356,7 @@ function Contact() {
                                     onChange={handleInputChange}
                                     required
                                     rows="5"
-                                    className="w-full p-3 rounded-lg bg-white-bg bg-opacity-10 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all duration-300"
+                                    className="w-full p-3 rounded-lg bg-white bg-opacity-10 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all duration-300"
                                     placeholder="Your Message"
                                     aria-required="true"
                                 />
@@ -345,42 +365,48 @@ function Contact() {
                                 type="submit"
                                 text={
                                     <span className="flex items-center justify-center space-x-2">
-                                        <span>Send Message</span>
+                                        <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
                                         <Send className="w-5 h-5" />
                                     </span>
                                 }
                                 variant="primary"
                                 className="w-full text-lg font-semibold px-8 py-4 glass hover:bg-teal-dark transition-all duration-300"
                                 aria-label="Submit Contact Form"
+                                disabled={status === 'sending'}
                             />
                         </form>
                         {status && (
                             <div
-                                ref={feedbackRef}
-                                className="mt-4 flex items-center space-x-2 text-center"
+                                ref={popupRef}
+                                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 glass p-6 rounded-xl shadow-lg flex items-center space-x-2 z-50 bg-opacity-90 backdrop-blur-md"
                                 role="alert"
                                 aria-live="polite"
                             >
-                                {status === 'success' ? (
+                                {status === 'sending' && (
+                                    <>
+                                        <svg className="animate-spin h-6 w-6 text-teal-primary" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                        </svg>
+                                        <p className="text-teal-primary font-inter">Sending...</p>
+                                    </>
+                                )}
+                                {status === 'success' && (
                                     <>
                                         <CheckCircle className="w-6 h-6 text-teal-primary animate-bounce-subtle" />
-                                        <p className="text-teal-primary font-inter">
-                                            Message sent successfully!
-                                        </p>
+                                        <p className="text-teal-primary font-inter">Message sent successfully!</p>
                                     </>
-                                ) : (
+                                )}
+                                {(status === 'error' || status === 'invalid') && (
                                     <>
                                         <AlertCircle className="w-6 h-6 text-red-500 animate-bounce-subtle" />
-                                        <p className="text-red-500 font-inter">
-                                            Failed to send message. Please try again.
-                                        </p>
+                                        <p className="text-red-500 font-inter">{errorMessage}</p>
                                     </>
                                 )}
                             </div>
                         )}
                     </div>
 
-                    {/* Social Links */}
                     <div className="glass p-6 rounded-xl shadow-glass flex flex-col items-center justify-center">
                         <h3 className="text-xl font-poppins font-semibold text-gray-accent mb-6">
                             Connect with Me
