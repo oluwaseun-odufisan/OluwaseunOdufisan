@@ -336,7 +336,7 @@ function Hero() {
                     ref={subtitleRef}
                     className="text-xl sm:text-3xl lg:text-4xl font-inter text-gray-accent mb-10 leading-relaxed"
                 >
-                    AI Software Engineer | Building Solutions with Code & Intelligence
+                    Software Engineer | Building Solutions with Code & Intelligence
                 </p>
                 <div ref={buttonWrapperRef} className="flex flex-col sm:flex-row justify-center gap-6">
                     <Button

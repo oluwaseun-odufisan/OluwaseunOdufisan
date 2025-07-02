@@ -1,133 +1,265 @@
 [
     {
-        "id": 1,
-        "title": "E-Commerce Platform",
-        "description": "A full-stack e-commerce platform with payment integration and user authentication.",
-        "technologies": [
-            "React",
-            "Node.js",
-            "MongoDB",
-            "Stripe"
-        ],
-        "images": [
-            "/assets/images/ecommerce.jpg",
-            "/assets/images/ecommerce-product.jpg",
-            "/assets/images/ecommerce-cart.jpg",
-            "/assets/images/ecommerce-checkout.jpg"
-        ],
-        "link": "https://github.com/oluwaseun-odufisan/ecommerce",
-        "liveDemo": "https://ecommerce-demo.vercel.app",
-        "category": "Web Development"
-    },
-    {
-        "id": 2,
-        "title": "Task Manager App",
-        "description": "A mobile app for task management with real-time sync and reminders.",
-        "technologies": [
-            "React Native",
-            "Firebase",
-            "TypeScript"
-        ],
-        "images": [
-            "/assets/images/taskmanager.jpg",
-            "/assets/images/taskmanager-list.jpg",
-            "/assets/images/taskmanager-details.jpg"
-        ],
-        "link": "https://github.com/oluwaseun-odufisan/task-manager",
-        "liveDemo": "https://taskmanager-demo.vercel.app",
-        "category": "Mobile Apps"
-    },
-    {
-        "id": 3,
-        "title": "AI Image Generator",
-        "description": "An AI-powered tool for generating images from text prompts.",
-        "technologies": [
-            "Python",
-            "TensorFlow",
-            "React",
-            "AWS"
-        ],
-        "images": [
-            "/assets/images/aiimage.jpg",
-            "/assets/images/aiimage-output.jpg",
-            "/assets/images/aiimage-prompt.jpg"
-        ],
-        "link": "https://github.com/oluwaseun-odufisan/ai-image-generator",
-        "liveDemo": "https://aiimage-demo.vercel.app",
-        "category": "AI"
-    },
-    {
-        "id": 4,
-        "title": "Portfolio Website",
-        "description": "This very portfolio, showcasing modern web design and animations.",
-        "technologies": [
-            "React",
-            "Tailwind CSS",
-            "GSAP"
-        ],
-        "images": [
-            "/assets/images/portfolio.jpg",
-            "/assets/images/portfolio-home.jpg",
-            "/assets/images/portfolio-about.jpg"
-        ],
-        "link": "https://github.com/oluwaseun-odufisan/portfolio",
-        "liveDemo": "https://oluwaseun-portfolio.vercel.app",
-        "category": "Web Development"
-    },
-    {
         "id": 5,
         "title": "AI-Powered Task Management Application",
-        "description": "A web-based productivity platform leveraging AI for task scheduling, featuring real-time chat, social feed, distributed file storage, role-based dashboards, and Microsoft Outlook integration for enhanced workflow efficiency.",
+        "description": "This AI-powered Task Management Application is a comprehensive, web-based productivity platform designed for organizations to manage teams and operations more efficiently through automation and intelligent insights. It features a dynamic task management system with AI-assisted scheduling, auto-assignment, and smart prioritization based on machine learning models that analyze task urgency, team availability, and historical performance data. The platform includes a real-time chat system with end-to-end encryption, a social feed for company-wide updates and announcements, and a distributed file storage system inspired by Google Drive, supporting version control and collaborative editing. Employees benefit from AI-generated task summaries, personalized productivity suggestions, and automated reminders, while managers access role-based dashboards with real-time analytics, detailed performance reports, and goal-tracking features. The system integrates a custom payment mechanism for employee rewards, a secure URL shortener for sharing resources, and seamless Microsoft Outlook integration to sync tasks and meetings from emails. Scalable AI capabilities, including predictive analytics for workload forecasting, sentiment tracking for team morale, and a smart assistant chatbot for task queries, make this platform a transformative tool for optimizing workflows across organizations of all sizes.",
         "technologies": [
             "React",
             "Node.js",
             "AI",
-            "MongoDB"
+            "MongoDB",
+            "Express.js",
+            "Microsoft Outlook API",
+            "Socket.IO",
+            "TensorFlow",
+            "Redis"
         ],
         "images": [
+            "/assets/images/tm-signup.gif",
+            "/assets/images/tm-login.gif",
             "/assets/images/task-management-demo.gif",
-            "/assets/images/task-management-dashboard.jpg",
-            "/assets/images/task-management-chat.jpg"
+            "/assets/images/tm-pending.gif",
+            "/assets/images/tm-report.gif",
+            "/assets/images/tm-chat.gif",
+            "/assets/images/tm-social.gif",
+            "/assets/images/tm-storage.gif",
+            "/assets/images/tm-learning.gif",
+            "/assets/images/tm-calender.gif"
         ],
-        "link": "https://github.com/oluwaseun/task-management-app",
-        "liveDemo": "https://oluwaseun-portfolio.vercel.app",
+        "link": "https://github.com/oluwaseun-odufisan/NEGTM",
+        "liveDemo": "https://negaitm.vercel.app",
         "category": "AI"
     },
     {
         "id": 6,
         "title": "NEG AI Banking Platform",
-        "description": "A secure, scalable digital banking solution for Nigeria, built with MongoDB, Flutterwave, and Express.js. Features include digital wallets, real-time balance checks, instant transfers, bill payments, JWT-based authentication, and webhook support for seamless transactions.",
+        "description": "The NEG AI Banking Platform is a secure, modern digital banking solution tailored for seamless financial management in Nigeria’s dynamic fintech landscape. Built with a robust tech stack, it enables users to manage digital wallets, check real-time account balances, and execute instant internal or external bank transfers, validated through Flutterwave’s account resolution API for accuracy and reliability. Security is paramount, with JWT-based authentication, input sanitization to prevent injection attacks, and rate limiting to mitigate abuse. The platform sends detailed transaction email alerts, including debit alerts with fee breakdowns for senders and credit alerts for receivers, ensuring transparency. Real-time webhook support enables integration with third-party services, while comprehensive error logging and a scalable, API-driven architecture cater to both individual and business users. The system supports a wide range of bill payments, including electricity, waste management, school fees, government charges, religious donations, and more, positioning it as a comprehensive fintech solution. AI-driven features, such as transaction pattern analysis and fraud detection, enhance user trust and system efficiency, making it a reliable tool for funding, transferring, and tracking finances in real time.",
         "technologies": [
             "MongoDB",
             "Flutterwave",
             "Express.js",
-            "Node.js"
+            "Node.js",
+            "JWT",
+            "Webhooks",
+            "Nodemailer",
+            "Redis",
+            "AI/ML"
         ],
         "images": [
-            "/assets/images/neg-ai-banking-mockup.png",
+            "/assets/images/neg-bank.gif",
             "/assets/images/neg-ai-banking-transfers.jpg",
-            "/assets/images/neg-ai-banking-wallet.jpg"
+            "/assets/images/neg-ai-banking-wallet.jpg",
+            "/assets/images/neg-ai-banking-dashboard.jpg"
         ],
-        "link": "https://github.com/oluwaseun/neg-ai-banking-mockup",
-        "liveDemo": "https://oluwaseun-portfolio.vercel.app",
+        "link": "https://github.com/oluwaseun-odufisan/NEGAIBANKING",
+        "liveDemo": "",
+        "category": "Fintech"
+    },
+    {
+        "id": 11,
+        "title": "MERN Admin Dashboard",
+        "description": "A responsive admin dashboard built with the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Tailwind CSS, designed to streamline business operations and data management. The dashboard provides a comprehensive interface for managing users, products, orders, and analytics, featuring real-time data visualization with interactive charts and graphs powered by Chart.js. Key functionalities include role-based access control (admin, editor, viewer) for secure and tiered access, JWT-based authentication to protect sensitive operations, and full CRUD operations for seamless data management. The backend, powered by Express.js and MongoDB, ensures efficient data storage, retrieval, and scalability, with robust error handling and logging. The React frontend leverages a modular component structure for maintainability and performance, while Tailwind CSS delivers a modern, responsive design with customizable themes, ensuring usability across desktop and mobile devices. Additional features include exportable reports in CSV and PDF formats, a notification system for critical updates (e.g., order status changes or user activity), and integration with third-party APIs for extended functionality, such as email services or payment gateways. This dashboard is ideal for businesses seeking a powerful, user-friendly tool to monitor and manage operations effectively, from small startups to large enterprises.",
+        "technologies": [
+            "MongoDB",
+            "Express.js",
+            "React",
+            "Node.js",
+            "Tailwind CSS",
+            "JWT",
+            "Chart.js",
+            "Axios"
+        ],
+        "images": [
+            "/assets/images/adminDash.png",
+            "/assets/images/adminDash-users.jpg",
+            "/assets/images/adminDash-analytics.jpg",
+            "/assets/images/adminDash-orders.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/mern-admin-dashboard",
+        "liveDemo": "https://mern-admin-dashboard.vercel.app",
         "category": "Web Development"
     },
     {
         "id": 7,
         "title": "Fraud Detection Research",
-        "description": "A research project investigating fraud’s impact on Nigeria’s digital economy, proposing AI/ML-based solutions using anomaly detection and data analysis to enhance security.",
+        "description": "This research investigates the transformative potential of Artificial Intelligence (AI) and Machine Learning (ML) in combating fraud within Nigeria’s rapidly expanding digital economy, impacting critical sectors such as finance, e-commerce, healthcare, and education. The study critiques traditional fraud detection methods, which rely on static rules and manual processes, highlighting their limitations against sophisticated, evolving fraud schemes. By leveraging AI methodologies—supervised learning for labeled datasets, unsupervised learning for anomaly detection, and deep learning for complex pattern recognition—the research demonstrates applications in real-time anomaly detection, behavioral analysis, risk scoring, and text analysis for detecting fraudulent communications. The paper addresses challenges such as poor data quality, system integration complexities, and regulatory compliance in Nigeria’s digital landscape, while emphasizing AI’s ability to adapt to new fraud tactics, reduce false positives, and uncover hidden patterns in large datasets. The study provides actionable recommendations, including increased investment in AI infrastructure, robust data security protocols, cross-sector collaboration between public and private entities, and public awareness campaigns to foster a secure digital environment. The research has been published in a peer-reviewed journal, contributing to the global discourse on AI-driven fraud prevention.",
         "technologies": [
             "Python",
             "AI/ML",
-            "Data Analysis"
+            "Data Analysis",
+            "Pandas",
+            "Scikit-learn",
+            "TensorFlow",
+            "Jupyter Notebook",
+            "Matplotlib"
         ],
         "images": [
-            "/assets/images/fraud-detection-placeholder.jpg",
+            "/assets/images/research.png",
             "/assets/images/fraud-detection-graph.jpg",
-            "/assets/images/fraud-detection-analysis.jpg"
+            "/assets/images/fraud-detection-analysis.jpg",
+            "/assets/images/fraud-detection-model.jpg"
         ],
-        "link": "https://github.com/oluwaseun/fraud-detection-research",
+        "link": "https://doi.org/10.1016/j.jeconc.2025.100127",
         "liveDemo": "",
+        "category": "AI Research"
+    },
+    {
+        "id": 1,
+        "title": "Facial Age Estimation Mobile App",
+        "description": "A mobile application developed using React Native and Expo, designed to estimate a person’s age based on facial features extracted from uploaded images or real-time camera input. The app employs a pre-trained convolutional neural network (CNN) model, optimized for mobile devices via TensorFlow.js, to deliver accurate age predictions with minimal latency. Key features include a user-friendly interface with real-time image preview, secure image handling to protect user privacy, and offline model inference for seamless performance in low-connectivity environments. The app supports both iOS and Android platforms, with responsive design elements and intuitive navigation. Additional functionalities include result visualization with confidence scores, age range categorization, and the ability to save or share results securely. The project showcases the integration of AI in mobile development, combining efficient model deployment with a polished user experience tailored for accessibility and performance.",
+        "technologies": [
+            "React Native",
+            "Expo",
+            "TensorFlow.js",
+            "AI/ML",
+            "JavaScript",
+            "Expo Camera"
+        ],
+        "images": [
+            "/assets/images/facial-age-app.jpg",
+            "/assets/images/facial-age-camera.jpg",
+            "/assets/images/facial-age-result.jpg",
+            "/assets/images/facial-age-settings.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/facial-age-estimation",
+        "liveDemo": "https://facial-age-demo.vercel.app",
+        "category": "Mobile Apps"
+    },
+    {
+        "id": 2,
+        "title": "Real-Time Chat Application",
+        "description": "A high-performance, real-time chat application designed for seamless communication across teams and individuals. The app supports end-to-end encrypted messaging, group chat functionality, file sharing with size and type restrictions, and push notifications for instant updates. Built with WebSocket technology via Socket.IO, it ensures low-latency communication, even at scale. The backend, powered by Node.js and Express.js, handles user authentication with JWT, message persistence in MongoDB, and rate limiting for security. The frontend, built with React, offers a responsive and intuitive interface with features like typing indicators, read receipts, and message search. The app supports cross-platform use, with mobile responsiveness and integration with push notification services for iOS and Android. This project demonstrates expertise in real-time systems, secure communication protocols, and modern web development practices.",
+        "technologies": [
+            "React",
+            "Node.js",
+            "Socket.IO",
+            "MongoDB",
+            "JWT",
+            "WebSocket",
+            "Express.js",
+            "Tailwind CSS"
+        ],
+        "images": [
+            "/assets/images/chat-app.jpg",
+            "/assets/images/chat-group.jpg",
+            "/assets/images/chat-file-share.jpg",
+            "/assets/images/chat-notifications.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/realtime-chat",
+        "liveDemo": "https://realtime-chat-demo.vercel.app",
+        "category": "Web Development"
+    },
+    {
+        "id": 3,
+        "title": "AI-Powered Recommendation Engine",
+        "description": "An advanced AI-driven recommendation engine tailored for e-commerce platforms to deliver personalized product suggestions that enhance user engagement and sales. The system combines collaborative filtering and content-based algorithms, leveraging user behavior data (e.g., browsing history, purchases, and ratings) and product metadata to generate real-time recommendations. Built with Python and TensorFlow, the engine uses machine learning models to predict user preferences with high accuracy. The backend, powered by Flask and PostgreSQL, ensures scalability and efficient data retrieval, while Redis caches frequently accessed recommendations for performance optimization. The system includes an admin dashboard for monitoring recommendation performance, A/B testing for algorithm tuning, and analytics for user engagement metrics. Integration with RESTful APIs allows seamless embedding into existing e-commerce platforms, making it a versatile solution for businesses aiming to improve customer experiences and drive conversions.",
+        "technologies": [
+            "Python",
+            "TensorFlow",
+            "Flask",
+            "PostgreSQL",
+            "AI/ML",
+            "Redis",
+            "NumPy"
+        ],
+        "images": [
+            "/assets/images/recommendation-engine.jpg",
+            "/assets/images/recommendation-product.jpg",
+            "/assets/images/recommendation-dashboard.jpg",
+            "/assets/images/recommendation-analytics.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/recommendation-engine",
+        "liveDemo": "https://recommendation-engine-demo.vercel.app",
+        "category": "AI"
+    },
+    {
+        "id": 4,
+        "title": "Inventory Management System",
+        "description": "A robust, backend-driven inventory management system designed for businesses to efficiently track stock levels, manage supplier relationships, and automate reordering processes. The system features a RESTful API built with Node.js and Express.js, enabling seamless integration with third-party platforms. Real-time stock updates are powered by PostgreSQL, with TypeScript ensuring type safety and maintainable code. Key functionalities include role-based access control for admins and staff, barcode scanning integration for quick inventory updates, and detailed analytics dashboards for tracking inventory trends, stock turnover rates, and supplier performance. The system supports exportable reports in CSV and PDF formats, automated low-stock alerts, and predictive restocking based on historical data. Deployed with Docker for scalability and consistency, this solution is ideal for retail, warehouse, and manufacturing operations seeking to streamline inventory processes.",
+        "technologies": [
+            "Node.js",
+            "Express.js",
+            "PostgreSQL",
+            "Docker",
+            "TypeScript",
+            "Redis",
+            "Chart.js"
+        ],
+        "images": [
+            "/assets/images/inventory-system.jpg",
+            "/assets/images/inventory-stock.jpg",
+            "/assets/images/inventory-analytics.jpg",
+            "/assets/images/inventory-supplier.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/inventory-management",
+        "liveDemo": "https://inventory-management-demo.vercel.app",
+        "category": "Backend Development"
+    },
+    {
+        "id": 8,
+        "title": "Health Monitoring Mobile App",
+        "description": "A cross-platform mobile application built with Flutter to help users monitor and manage their health metrics, including heart rate, sleep patterns, and physical activity. The app integrates with wearable devices via Bluetooth APIs to collect real-time health data and uses Firebase for secure data storage and synchronization across devices. Features include personalized health insights powered by a lightweight AI model, goal-setting tools, and interactive charts for visualizing trends over time. The app supports push notifications for reminders (e.g., hydration or medication alerts) and offers a gamified rewards system to encourage healthy habits. With a focus on accessibility, the app includes multilingual support and a responsive UI optimized for both iOS and Android, making it a comprehensive tool for personal health management.",
+        "technologies": [
+            "Flutter",
+            "Firebase",
+            "Dart",
+            "AI/ML",
+            "Bluetooth API",
+            "Chart.js"
+        ],
+        "images": [
+            "/assets/images/health-app.jpg",
+            "/assets/images/health-metrics.jpg",
+            "/assets/images/health-charts.jpg",
+            "/assets/images/health-goals.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/health-monitoring-app",
+        "liveDemo": "https://health-monitoring-demo.vercel.app",
+        "category": "Mobile Apps"
+    },
+    {
+        "id": 9,
+        "title": "Serverless Blog Platform",
+        "description": "A serverless blogging platform designed for content creators, offering a lightweight and scalable solution for publishing and managing blog posts. Built with Next.js for server-side rendering and static site generation, the platform leverages AWS Lambda and DynamoDB for a serverless backend, ensuring high availability and low maintenance. Features include a rich text editor with Markdown support, SEO optimization, comment moderation with spam filtering, and integration with social media APIs for easy sharing. The platform supports user authentication via OAuth, customizable themes, and analytics for tracking post performance. Its serverless architecture reduces operational costs while maintaining performance, making it ideal for bloggers and small media outlets seeking a modern, hassle-free publishing solution.",
+        "technologies": [
+            "Next.js",
+            "AWS Lambda",
+            "DynamoDB",
+            "React",
+            "Tailwind CSS",
+            "OAuth"
+        ],
+        "images": [
+            "/assets/images/blog-platform.jpg",
+            "/assets/images/blog-editor.jpg",
+            "/assets/images/blog-post.jpg",
+            "/assets/images/blog-analytics.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/serverless-blog",
+        "liveDemo": "https://serverless-blog-demo.vercel.app",
+        "category": "Web Development"
+    },
+    {
+        "id": 10,
+        "title": "Predictive Maintenance System",
+        "description": "An AI-powered predictive maintenance system designed for industrial applications to monitor equipment health and predict potential failures before they occur. The system uses IoT sensors to collect real-time data on equipment performance (e.g., temperature, vibration, and pressure) and applies machine learning models to detect anomalies and forecast maintenance needs. Built with Python and TensorFlow, the backend processes large datasets and integrates with a GraphQL API for efficient data querying. The frontend, developed with Vue.js, provides a dashboard with real-time visualizations, maintenance schedules, and alert systems for technicians. The system supports integration with existing enterprise resource planning (ERP) systems and includes role-based access for managers and operators, reducing downtime and maintenance costs in industries like manufacturing and energy.",
+        "technologies": [
+            "Python",
+            "TensorFlow",
+            "Vue.js",
+            "GraphQL",
+            "IoT",
+            "AI/ML",
+            "PostgreSQL"
+        ],
+        "images": [
+            "/assets/images/predictive-maintenance.jpg",
+            "/assets/images/maintenance-dashboard.jpg",
+            "/assets/images/maintenance-alerts.jpg",
+            "/assets/images/maintenance-schedule.jpg"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/predictive-maintenance",
+        "liveDemo": "https://predictive-maintenance-demo.vercel.app",
         "category": "AI"
     }
 ]

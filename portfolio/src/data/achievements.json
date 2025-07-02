@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "title": "AI Innovation Award",
-        "description": "Received the AI Innovation Award at the 2024 Tech Summit Nigeria for developing the NEG AI Banking Platform, recognized for its secure digital wallet and real-time transaction capabilities using MongoDB and Flutterwave.",
+        "title": "Vice Chancellor's Award for Best Graduating Student",
+        "description": "Received the Vice Chancellor's Award as the Best Graduating Computer Engineering Student from the Federal University of Technology, Akure, Nigeria, having been on the Dean's List for nine semesters.",
         "date": "August 2024"
     },
     {
@@ -20,19 +20,19 @@
     {
         "id": 4,
         "title": "Community Impact Leader",
-        "description": "Served as CDS President for ICT, NYSC, Opudu LG (October 2024 – January 2025), implementing digital literacy programs that trained 200+ community members in software development and AI basics.",
+        "description": "Served as CDS President for ICT, NYSC, Ojodu LG (October 2024 – January 2025), implementing digital literacy programs that trained 200+ community members in software development and AI basics.",
         "date": "October 2024 - January 2025"
     },
     {
         "id": 5,
-        "title": "Open-Source Contributor",
-        "description": "Contributed to TensorFlow’s open-source community (November 2023 – April 2024), enhancing NLP model performance with 10+ merged pull requests, improving sentiment analysis accuracy by 15%.",
+        "title": "Best Research Assistant and Student Researcher",
+        "description": "Received recognition as the Best Research Assistant and Student Researcher at the Machine Learning Research Lab, Federal University of Technology, Akure, for outstanding contributions to machine learning research.",
         "date": "November 2023 - April 2024"
     },
     {
         "id": 6,
         "title": "Machine Learning Educator",
-        "description": "Organized and delivered free weekend workshops on Machine Learning and Neural Networks in Lagos (December 2023), impacting 300+ students and professionals, with 90% reporting improved understanding.",
+        "description": "Organized and delivered free weekend workshops on Machine Learning and Neural Networks in Lagos (December 2023), impacting 100+ students and professionals, with 90% reporting improved understanding.",
         "date": "December 2023"
     }
 ]

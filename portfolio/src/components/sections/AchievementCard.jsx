@@ -10,7 +10,8 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
     const overlayRef = useRef(null);
     const iconRef = useRef(null);
     const borderRef = useRef(null);
-    const textRef = useRef(null); // Added ref for text elements
+    const textRef = useRef(null);
+    const tooltipRef = useRef(null); // Added ref for tooltip
 
     const iconMap = {
         Award: <Award className="w-8 h-8 text-teal-500 achievement-icon" />,
@@ -29,7 +30,7 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             ease: 'power3.out',
         });
         gsap.to(overlayRef.current, {
-            opacity: 0.3, // Reduced opacity for better readability
+            opacity: 0.3,
             duration: 0.4,
             ease: 'power3.out',
         });
@@ -46,9 +47,16 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             ease: 'power2.out',
         });
         gsap.to(textRef.current.children, {
-            color: '#1f2937', // Darker gray for better contrast (gray-800)
-            textShadow: '0 0 5px rgba(255, 255, 255, 0.8)', // Subtle white shadow for readability
+            color: '#1f2937',
+            textShadow: '0 0 5px rgba(255, 255, 255, 0.8)',
             duration: 0.4,
+            ease: 'power3.out',
+        });
+        gsap.to(tooltipRef.current, {
+            opacity: 1,
+            y: -10,
+            visibility: 'visible',
+            duration: 0.3,
             ease: 'power3.out',
         });
         if (markerRef?.current) {
@@ -89,9 +97,16 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             ease: 'power2.out',
         });
         gsap.to(textRef.current.children, {
-            color: '#4b5563', // Revert to original gray-600
+            color: '#4b5563',
             textShadow: 'none',
             duration: 0.4,
+            ease: 'power3.out',
+        });
+        gsap.to(tooltipRef.current, {
+            opacity: 0,
+            y: 0,
+            visibility: 'hidden',
+            duration: 0.3,
             ease: 'power3.out',
         });
         if (markerRef?.current) {
@@ -106,7 +121,6 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
     }, [markerRef]);
 
     useEffect(() => {
-        // Entrance animation with 3D flip
         gsap.fromTo(
             cardRef.current,
             { opacity: 0, x: index % 2 === 0 ? -100 : 100, rotationY: index % 2 === 0 ? -90 : 90 },
@@ -125,7 +139,6 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
             }
         );
 
-        // Event listeners
         const card = cardRef.current;
         if (card) {
             card.addEventListener('mouseenter', handleHoverEnter);
@@ -146,7 +159,7 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
     return (
         <div
             ref={cardRef}
-            className={`glass p-6 rounded-xl w-full max-w-md transition-all duration-300 ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
+            className={`glass p-6 rounded-xl w-full max-w-md transition-all duration-300 relative ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
             role="listitem"
             aria-label={`Achievement: ${title}`}
             tabIndex={0}
@@ -173,6 +186,14 @@ function AchievementCard({ id, title, description, date, icon, link, index, mark
                     strokeDashoffset="120"
                 />
             </svg>
+
+            {/* Tooltip for full description */}
+            <div
+                ref={tooltipRef}
+                className="absolute -top-full left-0 w-full max-w-md bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-xl text-gray-600 font-inter text-sm opacity-0 invisible z-20"
+            >
+                {description}
+            </div>
 
             <div className="flex items-start space-x-4">
                 {icon && (

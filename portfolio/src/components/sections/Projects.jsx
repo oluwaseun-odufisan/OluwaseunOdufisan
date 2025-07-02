@@ -19,12 +19,13 @@ function Projects() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [scrollPosition, setScrollPosition] = useState(0);
 
     const openModal = (project) => {
+        setScrollPosition(window.scrollY); // Save current scroll position
         setSelectedProject(project);
         setCurrentImageIndex(0); // Reset to first image
         setIsModalOpen(true);
-        window.scrollTo({ top: 0, behavior: 'instant' }); // Ensure modal appears at top
         gsap.fromTo(
             modalRef.current,
             { opacity: 0, scale: 0.8 },
@@ -47,6 +48,7 @@ function Projects() {
                 setIsModalOpen(false);
                 setSelectedProject(null);
                 setCurrentImageIndex(0);
+                window.scrollTo({ top: scrollPosition, behavior: 'instant' }); // Restore scroll position
             },
         });
     };
@@ -196,6 +198,7 @@ function Projects() {
                             description={project.description}
                             images={project.images}
                             link={project.link}
+                            liveDemo={project.liveDemo}
                             index={index}
                             onViewProject={() => openModal(project)}
                         />
@@ -279,8 +282,8 @@ function Projects() {
                                                             );
                                                         }}
                                                         className={`w-3 h-3 rounded-full ${index === currentImageIndex
-                                                                ? 'bg-teal-600'
-                                                                : 'bg-gray-400/50 hover:bg-gray-400'
+                                                            ? 'bg-teal-600'
+                                                            : 'bg-gray-400/50 hover:bg-gray-400'
                                                             } transition-all duration-200`}
                                                         aria-label={`Go to image ${index + 1}`}
                                                     />
@@ -300,7 +303,7 @@ function Projects() {
                         <p className="text-lg sm:text-xl font-inter text-gray-accent mb-8 leading-relaxed">
                             {selectedProject.description}
                         </p>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center space-x-4">
                             <Button
                                 text="Visit GitHub"
                                 href={selectedProject.link}
@@ -310,6 +313,17 @@ function Projects() {
                                 className="text-lg sm:text-xl font-semibold px-8 py-3 hover:bg-teal-dark"
                                 aria-label={`Visit ${selectedProject.title} on GitHub`}
                             />
+                            {selectedProject.liveDemo && (
+                                <Button
+                                    text="Live Demo"
+                                    href={selectedProject.liveDemo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    variant="secondary"
+                                    className="text-lg sm:text-xl font-semibold px-8 py-3 hover:bg-teal-600"
+                                    aria-label={`Visit live demo of ${selectedProject.title}`}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>

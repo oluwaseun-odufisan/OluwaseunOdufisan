@@ -2,34 +2,40 @@
     {
         "id": 2,
         "title": "AI-Powered Task Management Application",
-        "description": "A web-based productivity platform leveraging AI for task scheduling, featuring real-time chat, social feed, distributed file storage, role-based dashboards, and Microsoft Outlook integration for enhanced workflow efficiency.",
+        "description": "This AI-powered Task Management Application is a comprehensive, web-based productivity platform designed for organizations to manage teams and operations more efficiently through automation and intelligent insights. It features a dynamic task management system with AI-assisted scheduling, auto-assignment, and smart prioritization, alongside built-in real-time chat, a social feed for company-wide updates, and a distributed file storage system similar to Google Drive. Employees can receive AI-generated task summaries, productivity suggestions, and reminders, while managers benefit from role-based dashboards, detailed reports, performance appraisals, and goal tracking. The system includes a custom payment mechanism for employee rewards, a secure URL shortener, and seamless Microsoft Outlook integration for syncing tasks from emails and meetings. With scalable AI capabilities such as predictive analytics, sentiment tracking, and a smart assistant chatbot, the platform transforms how work is organized, communicated, and optimized across teams.",
         "images": [
+            "/assets/images/tm-signup.gif",
+            "/assets/images/tm-login.gif",
             "/assets/images/task-management-demo.gif",
-            "/assets/images/task-management-dashboard.jpg",
-            "/assets/images/task-management-chat.jpg"
+            "/assets/images/tm-pending.gif",
+            "/assets/images/tm-report.gif",
+            "/assets/images/tm-chat.gif",
+            "/assets/images/tm-social.gif",
+            "/assets/images/tm-storage.gif",
+            "/assets/images/tm-learning.gif",
+            "/assets/images/tm-calender.gif"
         ],
-        "link": "https://github.com/oluwaseun/task-management-app"
+        "link": "https://github.com/oluwaseun-odufisan/NEGTM",
+        "liveDemo": "https://negaitm.vercel.app"
     },
     {
         "id": 1,
         "title": "NEG AI Banking Platform",
-        "description": "A secure, scalable digital banking solution for Nigeria, built with MongoDB, Flutterwave, and Express.js. Features include digital wallets, real-time balance checks, instant transfers, bill payments, JWT-based authentication, and webhook support for seamless transactions.",
+        "description": "The NEG AI Banking Platform is a secure, modern digital banking solution designed for seamless financial management in Nigeria. It offers a suite of features powered by Node.js, MongoDB, Flutterwave, and Express.js. Users can manage digital wallets, check real-time balances, and perform instant internal or external transfers to Nigerian banks, all validated through Flutterwave’s account resolution API. The platform ensures security through JWT authentication, input sanitization, and rate limiting, while providing detailed transaction email alerts—debit alerts for senders with fee details and credit alerts for receivers. With real-time webhook support, comprehensive error logging, and a scalable, API-driven architecture, it caters to both individuals and businesses. The system delivers transparency, reliability, and ease of use for funding, transferring, and tracking finances. Additionally, the platform supports the payment of various bills, including electricity, waste management, school fees, government charges, religious donations, and more—offering everything expected from a modern fintech application.",
         "images": [
-            "/assets/images/neg-ai-banking-mockup.png",
-            "/assets/images/neg-ai-banking-transfers.jpg",
-            "/assets/images/neg-ai-banking-wallet.jpg"
+            "/assets/images/neg-bank.gif"
         ],
-        "link": "https://github.com/oluwaseun/neg-ai-banking-mockup"
+        "link": "https://github.com/oluwaseun-odufisan/NEGAIBANKING",
+        "liveDemo": ""
     },
     {
         "id": 5,
-        "title": "Fraud Detection Research",
-        "description": "A research project investigating fraud’s impact on Nigeria’s digital economy, proposing AI/ML-based solutions using anomaly detection and data analysis to enhance security.",
+        "title": "MERN Admin Dashboard",
+        "description": "A responsive admin dashboard built with the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Tailwind CSS, designed to streamline business operations and data management. The dashboard provides a comprehensive interface for managing users, products, orders, and analytics, featuring real-time data visualization with interactive charts and graphs. Key functionalities include role-based access control (admin, editor, viewer), JWT-based authentication for secure access, and CRUD operations for seamless data management. The backend, powered by Express.js and MongoDB, ensures efficient data storage and retrieval, while the React frontend offers a modular component structure for scalability and maintainability. Tailwind CSS provides a modern, responsive design with customizable themes, supporting both desktop and mobile views. Additional features include exportable reports in CSV/PDF formats, a notification system for critical updates, and integration with third-party APIs for extended functionality. This dashboard is ideal for businesses seeking a powerful, user-friendly tool to monitor and manage operations effectively.",
         "images": [
-            "/assets/images/fraud-detection-placeholder.jpg",
-            "/assets/images/fraud-detection-graph.jpg",
-            "/assets/images/fraud-detection-analysis.jpg"
+            "/assets/images/adminDash.png"
         ],
-        "link": "https://github.com/oluwaseun/fraud-detection-research"
+        "link": "https://github.com/oluwaseun-odufisan/",
+        "liveDemo": "https://mern-admin-das1hboard.vercel.app"
     }
 ]

@@ -7,7 +7,7 @@ import Button from '../common/Button.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProjectCard({ id, title, description, images = [], link, index, onViewProject }) {
+function ProjectCard({ id, title, description, images = [], link, liveDemo, index, onViewProject }) {
     const cardRef = useRef(null);
     const imageRef = useRef(null);
     const overlayRef = useRef(null);
@@ -173,12 +173,12 @@ function ProjectCard({ id, title, description, images = [], link, index, onViewP
                 />
                 <Button
                     text="Live Demo"
-                    href={link}
+                    href={liveDemo || link} // Fallback to GitHub link if liveDemo is not provided
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="secondary"
                     className="flex-1 text-lg font-semibold hover:bg-teal-600"
-                    aria-label={`Visit ${title} on GitHub`}
+                    aria-label={`Visit live demo of ${title}`}
                 />
             </div>
         </div>
