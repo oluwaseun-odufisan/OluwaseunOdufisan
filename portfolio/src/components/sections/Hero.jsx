@@ -13,6 +13,7 @@ function Hero() {
     const subtitleRef = useRef(null);
     const buttonWrapperRef = useRef(null);
     const letterRefs = useRef([]);
+    const arrowRef = useRef(null);
 
     useEffect(() => {
         // Split name into individual letters and assign refs
@@ -122,6 +123,34 @@ function Hero() {
         gsap.to(heroRef.current, {
             yPercent: 15,
             ease: 'none',
+            scrollTrigger: {
+                trigger: heroRef.current,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true,
+            },
+        });
+
+        // Arrow animation
+        gsap.fromTo(
+            arrowRef.current,
+            { y: -10, opacity: 0.7 },
+            {
+                y: 10,
+                opacity: 1,
+                duration: 1,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut',
+                delay: letters.length * 0.05 + 1.5,
+            }
+        );
+
+        // Fade out arrow on scroll
+        gsap.to(arrowRef.current, {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.out',
             scrollTrigger: {
                 trigger: heroRef.current,
                 start: 'top top',
@@ -271,7 +300,9 @@ function Hero() {
                         @keyframes particle-orbit-reverse {
                             0% { transform: translate(-50%, -50%) rotate(360deg) translateX(200px) rotate(-360deg); opacity: 0.8; }
                             50% { opacity: 1; }
-                            100% { transform: translate(-50%, -50%) rotate(0deg) translateX(200px) rotate(0deg); opacity: 0.8; }
+                            100% { transform: translate(-50%, -50%) rotate(0deg) translateX(200px) rotate(0deg
+
+); opacity: 0.8; }
                         }
 
                         .energy-wave {
@@ -289,6 +320,42 @@ function Hero() {
                             0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.2; }
                             50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
                             100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.2; }
+                        }
+
+                        .scroll-arrow {
+                            position: absolute;
+                            bottom: 80px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 40px;
+                            height: 60px;
+                            z-index: 10;
+                            pointer-events: none;
+                        }
+
+                        .scroll-arrow svg {
+                            fill: none;
+                            stroke: rgba(20, 184, 166, 0.9);
+                            stroke-width: 3;
+                            filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.7));
+                        }
+
+                        .scroll-arrow::before {
+                            content: '';
+                            position: absolute;
+                            top: -10px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 50px;
+                            height: 50px;
+                            background: radial-gradient(circle, rgba(20, 184, 166, 0.3) 10%, transparent 70%);
+                            animation: arrow-pulse 2s ease-in-out infinite;
+                        }
+
+                        @keyframes arrow-pulse {
+                            0% { transform: translateX(-50%) scale(0.8); opacity: 0.3; }
+                            50% { transform: translateX(-50%) scale(1.2); opacity: 0.6; }
+                            100% { transform: translateX(-50%) scale(0.8); opacity: 0.3; }
                         }
                     `}
                 </style>
@@ -357,6 +424,13 @@ function Hero() {
                         aria-label="Download Oluwaseun's CV"
                     />
                 </div>
+            </div>
+
+            {/* Scroll Arrow */}
+            <div ref={arrowRef} className="scroll-arrow">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2 L12 18 M5 11 L12 18 L19 11" />
+                </svg>
             </div>
         </section>
     );
