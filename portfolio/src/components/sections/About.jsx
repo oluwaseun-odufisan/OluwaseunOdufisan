@@ -417,7 +417,7 @@ function About() {
                     {/* Profile Image */}
                     <div ref={imageRef} className="relative max-w-md mx-auto">
                         <img
-                            src="/assets/images/profile.jpeg"
+                            src="/assets/images/profile.JPEG"
                             alt="Oluwaseun Isaac Odufisan, AI Software Engineer"
                             className="w-full rounded-3xl shadow-glass"
                             loading="lazy"
