@@ -8,7 +8,7 @@ import Button from '../common/Button.jsx';
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function Navbar() {
-    const [isOpen, setIsOpen] = useState(false); // Mobile menu state
+    const [isOpen, setIsOpen] = useState(false);
     const navbarRef = useRef(null);
     const logoRef = useRef(null);
     const navLinksRef = useRef([]);
@@ -29,21 +29,13 @@ function Navbar() {
                 setTimeout(() => {
                     const element = document.getElementById(sectionId);
                     if (element) {
-                        gsap.to(window, {
-                            scrollTo: { y: element, offsetY: 80 },
-                            duration: 0.8,
-                            ease: 'power3.out',
-                        });
+                        gsap.to(window, { scrollTo: { y: element, offsetY: 80 }, duration: 0.8, ease: 'power3.out' });
                     }
                 }, 100);
             } else {
                 const element = document.getElementById(sectionId);
                 if (element) {
-                    gsap.to(window, {
-                        scrollTo: { y: element, offsetY: 80 },
-                        duration: 0.8,
-                        ease: 'power3.out',
-                    });
+                    gsap.to(window, { scrollTo: { y: element, offsetY: 80 }, duration: 0.8, ease: 'power3.out' });
                 }
             }
             if (isOpen) toggleMenu();
@@ -52,274 +44,104 @@ function Navbar() {
     );
 
     const handleHomeClick = useCallback(() => {
-        // Navigate to home without reloading to preserve page content
         if (location.pathname !== '/') {
             navigate('/');
         } else {
-            gsap.to(window, {
-                scrollTo: { y: 0, offsetY: 80 },
-                duration: 0.8,
-                ease: 'power3.out',
-            });
+            gsap.to(window, { scrollTo: { y: 0, offsetY: 80 }, duration: 0.8, ease: 'power3.out' });
         }
         if (isOpen) toggleMenu();
     }, [isOpen, toggleMenu, location.pathname, navigate]);
 
     useEffect(() => {
-        // Handle hash navigation on homepage
+        // Handle hash navigation
         const hash = location.hash.replace('#', '');
         if (location.pathname === '/' && hash) {
             setTimeout(() => {
                 const element = document.getElementById(hash);
+
+
                 if (element) {
-                    gsap.to(window, {
-                        scrollTo: { y: element, offsetY: 80 },
-                        duration: 0.8,
-                        ease: 'power3.out',
-                    });
+                    gsap.to(window, { scrollTo: { y: element, offsetY: 80 }, duration: 0.8, ease: 'power3.out' });
                 }
             }, 100);
         }
 
-        // Scroll to top on page navigation (non-home pages)
+        // Scroll to top on non-home pages
         if (location.pathname !== '/' && !location.hash) {
-            gsap.to(window, {
-                scrollTo: { y: 0, offsetY: 80 },
-                duration: 0.8,
-                ease: 'power3.out',
-            });
+            gsap.to(window, { scrollTo: { y: 0, offsetY: 80 }, duration: 0.8, ease: 'power3.out' });
         }
 
-        // Set static navbar styles
-        gsap.set(navbarRef.current, {
-            height: '5rem',
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(16px)',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-        });
+        // Simplified animations
+        gsap.set(navbarRef.current, { height: '5rem', backgroundColor: 'rgba(255, 255, 255, 0.95)', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' });
 
-        // Logo entrance with pulsating glow
         gsap.fromTo(
             logoRef.current,
-            { opacity: 0, y: -50 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: 'power3.out',
-                delay: 0.3,
-                onComplete: () => {
-                    gsap.to(logoRef.current, {
-                        textShadow: '0 0 15px rgba(20, 184, 166, 0.7)',
-                        duration: 1.5,
-                        repeat: -1,
-                        yoyo: true,
-                        ease: 'power1.inOut',
-                    });
-                },
-            }
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }
         );
 
-        // Staggered animation for nav links
         navLinksRef.current.forEach((link, index) => {
             if (link) {
                 gsap.fromTo(
                     link,
-                    { opacity: 0, y: -20 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.6,
-                        ease: 'power3.out',
-                        delay: 0.5 + index * 0.1,
-                    }
+                    { opacity: 0, y: -10 },
+                    { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: index * 0.1 }
                 );
-
-                const handleNavMouseEnter = () => {
-                    gsap.to(link, {
-                        scale: 1.1,
-                        color: '#14b8a6',
-                        rotateX: 5,
-                        rotateY: 5,
-                        duration: 0.3,
-                        ease: 'power2.out',
-                        borderBottom: '2px solid #14b8a6',
-                    });
-                };
-
-                const handleNavMouseLeave = () => {
-                    gsap.to(link, {
-                        scale: 1,
-                        color: '#4b5563',
-                        rotateX: 0,
-                        rotateY: 0,
-                        duration: 0.3,
-                        ease: 'power2.out',
-                        borderBottom: 'none',
-                    });
-                };
-
-                link.addEventListener('mouseenter', handleNavMouseEnter);
-                link.addEventListener('mouseleave', handleNavMouseLeave);
-
-                link._handlers = { mouseenter: handleNavMouseEnter, mouseleave: handleNavMouseLeave };
             }
         });
 
-        // Social links hover animation
         socialLinksRef.current.forEach((link, index) => {
             if (link) {
                 gsap.fromTo(
                     link,
-                    { opacity: 0, scale: 0.8 },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.6,
-                        ease: 'power3.out',
-                        delay: 0.9 + index * 0.1,
-                    }
+                    { opacity: 0, scale: 0.9 },
+                    { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out', delay: 0.4 + index * 0.1 }
                 );
-
-                const handleSocialMouseEnter = () => {
-                    gsap.to(link, {
-                        scale: 1.2,
-                        color: '#14b8a6',
-                        duration: 0.3,
-                        ease: 'power2.out',
-                    });
-                };
-
-                const handleSocialMouseLeave = () => {
-                    gsap.to(link, {
-                        scale: 1,
-                        color: '#4b5563',
-                        duration: 0.3,
-                        ease: 'power2.out',
-                    });
-                };
-
-                link.addEventListener('mouseenter', handleSocialMouseEnter);
-                link.addEventListener('mouseleave', handleSocialMouseLeave);
-
-                link._handlers = { mouseenter: handleSocialMouseEnter, mouseleave: handleSocialMouseLeave };
             }
         });
 
-        // Button hover animation
         if (buttonRef.current) {
             gsap.fromTo(
                 buttonRef.current,
-                { opacity: 0, scale: 0.8 },
-                {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.6,
-                    ease: 'power3.out',
-                    delay: 0.8,
-                }
+                { opacity: 0, scale: 0.9 },
+                { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out', delay: 0.6 }
             );
-
-            const handleButtonMouseEnter = () => {
-                gsap.to(buttonRef.current, {
-                    scale: 1.05,
-                    boxShadow: '0 0 15px rgba(20, 184, 166, 0.7)',
-                    duration: 0.3,
-                    ease: 'power2.out',
-                });
-            };
-
-            const handleButtonMouseLeave = () => {
-                gsap.to(buttonRef.current, {
-                    scale: 1,
-                    boxShadow: 'none',
-                    duration: 0.3,
-                    ease: 'power2.out',
-                });
-            };
-
-            buttonRef.current.addEventListener('mouseenter', handleButtonMouseEnter);
-            buttonRef.current.addEventListener('mouseleave', handleButtonMouseLeave);
-
-            buttonRef.current._handlers = { mouseenter: handleButtonMouseEnter, mouseleave: handleButtonMouseLeave };
         }
 
-        // Scroll progress bar with gradient
         gsap.to(progressRef.current, {
             width: '100%',
-            background: 'linear-gradient(to right, #14b8a6, #0d9488)',
             scrollTrigger: {
                 trigger: document.body,
                 start: 'top top',
                 end: 'bottom bottom',
-                scrub: true,
+                scrub: 0.5,
             },
         });
 
         // Mobile menu animation
         if (isOpen) {
-            gsap.fromTo(
-                '.mobile-menu',
-                { x: '100%', opacity: 0 },
-                { x: '0%', opacity: 1, duration: 0.5, ease: 'power3.out' }
-            );
+            gsap.fromTo('.mobile-menu', { x: '100%' }, { x: '0%', duration: 0.4, ease: 'power3.out' });
         } else {
-            gsap.to('.mobile-menu', {
-                x: '100%',
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power3.in',
-                onComplete: () => {
-                    // Ensure main content remains visible
-                    document.body.style.overflow = 'auto';
-                }
-            });
+            gsap.to('.mobile-menu', { x: '100%', duration: 0.4, ease: 'power3.in' });
         }
 
-        // Ensure main content is not hidden when menu is toggled
         document.body.style.overflow = isOpen ? 'hidden' : 'auto';
 
         return () => {
-            navLinksRef.current.forEach((link) => {
-                if (link && link._handlers) {
-                    link.removeEventListener('mouseenter', link._handlers.mouseenter);
-                    link.removeEventListener('mouseleave', link._handlers.mouseleave);
-                }
-            });
-
-            socialLinksRef.current.forEach((link) => {
-                if (link && link._handlers) {
-                    link.removeEventListener('mouseenter', link._handlers.mouseenter);
-                    link.removeEventListener('mouseleave', link._handlers.mouseleave);
-                }
-            });
-
-            if (buttonRef.current && buttonRef.current._handlers) {
-                buttonRef.current.removeEventListener('mouseenter', buttonRef.current._handlers.mouseenter);
-                buttonRef.current.removeEventListener('mouseleave', buttonRef.current._handlers.mouseleave);
-            }
-
-            ScrollTrigger.getබ
-
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
             document.body.style.overflow = 'auto';
         };
-    }, [isOpen, location, handleSectionNav, toggleMenu]);
+    }, [isOpen, location, handleSectionNav]);
 
     return (
         <nav
             ref={navbarRef}
-            className="fixed top-0 left-0 w-full bg-white-bg bg-opacity-80 backdrop-blur-glass shadow-glass z-[100] transition-colors duration-300"
+            className="fixed top-0 left-0 w-full bg-white-bg bg-opacity-80 backdrop-blur-glass shadow-glass z-[100]"
             aria-label="Main Navigation"
         >
-            <div
-                className="absolute bottom-0 left-0 h-1 bg-teal-primary"
-                ref={progressRef}
-                style={{ width: '0%' }}
-            />
+            <div className="absolute bottom-0 left-0 h-1 bg-teal-primary" ref={progressRef} style={{ width: '0%' }} />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
-                    {/* Skip to Content */}
                     <a
                         href="#main-content"
                         className="sr-only focus:not-sr-only focus:absolute focus:bg-teal-500 focus:text-white p-2 rounded"
@@ -327,8 +149,6 @@ function Navbar() {
                     >
                         Skip to content
                     </a>
-
-                    {/* Logo */}
                     <Link
                         to="/"
                         ref={logoRef}
@@ -337,8 +157,6 @@ function Navbar() {
                     >
                         Oluwaseun Odufisan
                     </Link>
-
-                    {/* Desktop Menu */}
                     <div className="hidden md:flex space-x-8 items-center">
                         <NavLink
                             to="/"
@@ -398,6 +216,7 @@ function Navbar() {
                             </a>
                         </div>
                         <Button
+                            ref={buttonRef}
                             text="Download CV"
                             href="/assets/pdf/Oluwaseun-Odufisan-cv.pdf"
                             download
@@ -406,8 +225,6 @@ function Navbar() {
                             aria-label="Download Oluwaseun's CV"
                         />
                     </div>
-
-                    {/* Hamburger Menu Button */}
                     <div className="md:hidden">
                         <button
                             onClick={toggleMenu}
@@ -419,8 +236,6 @@ function Navbar() {
                         </button>
                     </div>
                 </div>
-
-                {/* Mobile Menu */}
                 {isOpen && (
                     <div className="md:hidden mobile-menu bg-teal-50 bg-opacity-95 backdrop-blur-glass border-t border-teal-200 absolute w-full top-20 left-0 z-50">
                         <div className="px-4 pt-4 pb-6 space-y-3">

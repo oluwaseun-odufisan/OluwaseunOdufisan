@@ -337,34 +337,7 @@ function ProjectsPage() {
                         aria-label="Return to Home Page"
                     />
                 </div>
-                <div className="text-center mt-8">
-                    <Link
-                        to="/#contact"
-                        className="text-teal-600 text-sm font-inter animate-pulse"
-                        aria-label="Scroll to Contact section"
-                    >
-                        <svg
-                            className="w-10 h-10 mx-auto"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                            />
-                            <animate
-                                attributeName="opacity"
-                                values="1;0.5;1"
-                                dur="1.2s"
-                                repeatCount="indefinite"
-                            />
-                        </svg>
-                    </Link>
-                </div>
+                
             </div>
             {isModalOpen && selectedProject && (
                 <div
