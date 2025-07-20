@@ -29,13 +29,28 @@
         "liveDemo": ""
     },
     {
-        "id": 5,
-        "title": "MERN Admin Dashboard",
-        "description": "A responsive admin dashboard built with the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Tailwind CSS, designed to streamline business operations and data management. The dashboard provides a comprehensive interface for managing users, products, orders, and analytics, featuring real-time data visualization with interactive charts and graphs. Key functionalities include role-based access control (admin, editor, viewer), JWT-based authentication for secure access, and CRUD operations for seamless data management. The backend, powered by Express.js and MongoDB, ensures efficient data storage and retrieval, while the React frontend offers a modular component structure for scalability and maintainability. Tailwind CSS provides a modern, responsive design with customizable themes, supporting both desktop and mobile views. Additional features include exportable reports in CSV/PDF formats, a notification system for critical updates, and integration with third-party APIs for extended functionality. This dashboard is ideal for businesses seeking a powerful, user-friendly tool to monitor and manage operations effectively.",
+        "id": 3,
+        "title": "CarbuCarbu Ride-Sharing App",
+        "description": "CarbuCarbu is a mobile-first ride-sharing application built with Expo, React Native, and Clerk for secure authentication, designed to connect users with drivers for seamless transportation. The app features a sleek tab-based navigation system with screens for home, rides, chat, and profile, integrated with Google Maps API for real-time ride booking and location services. Users can sign in or up using email/password or Google OAuth, manage profiles, view ride history, and process payments via Stripe. The UI is styled with Tailwind CSS via NativeWind, featuring a modern neon purple aesthetic and PlusJakartaSans fonts for a responsive design. The backend leverages serverless APIs with Neon database for user and ride management, ensuring scalability and performance. Key features include animated tab navigation, bottom sheet interfaces for ride details, and robust error handling for network and authentication issues. CarbuCarbu offers a user-friendly, secure, and efficient solution for urban mobility.",
         "images": [
-            "/assets/images/adminDash.png"
+            "/assets/images/welcomescreen1.png",
+            "/assets/images/welcomescreen2.png",
+            "/assets/images/welcomescreen3.png",
+            "/assets/images/welcomescreen3.gif",
+            "/assets/images/signinscreen.png",
+            "/assets/images/signupscreen.gif",
+            "/assets/images/homescreen2.png",
+            "/assets/images/ridesscreen.png",
+            "/assets/images/profilescreen.png",
+            "/assets/images/findridescreen1.png",
+            "/assets/images/findridescreen2.png",
+            "/assets/images/selectridescreen1.png",
+            "/assets/images/selectridescreen2.png",
+            "/assets/images/bookridescreen.png",
+            "/assets/images/confirmridescreen.png",
+            "/assets/images/paymentscreen.png"
         ],
-        "link": "https://github.com/oluwaseun-odufisan/",
-        "liveDemo": "https://mern-admin-das1hboard.vercel.app"
+        "link": "https://github.com/oluwaseun-odufisan/CarbuCarbu",
+        "liveDemo": ""
     }
 ]

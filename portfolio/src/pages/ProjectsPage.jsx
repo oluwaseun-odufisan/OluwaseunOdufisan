@@ -275,8 +275,8 @@ function ProjectsPage() {
                                 });
                             }}
                             className={`glass px-6 py-3 rounded-full font-inter text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-teal-200/50 ${selectedCategory === category
-                                    ? 'bg-teal-600 text-white shadow-xl shadow-teal-600/40'
-                                    : 'text-teal-700 bg-white/70 hover:bg-teal-50 hover:text-teal-800'
+                                ? 'bg-teal-600 text-white shadow-xl shadow-teal-600/40'
+                                : 'text-teal-700 bg-white/70 hover:bg-teal-50 hover:text-teal-800'
                                 }`}
                             role="tab"
                             aria-selected={selectedCategory === category}
@@ -337,19 +337,20 @@ function ProjectsPage() {
                         aria-label="Return to Home Page"
                     />
                 </div>
-                
+
             </div>
             {isModalOpen && selectedProject && (
                 <div
                     className="fixed inset-0 bg-black/80 flex items-start justify-center z-50 p-4 sm:p-6 overflow-y-auto"
                     role="dialog"
                     aria-labelledby="modal-title"
+                    aria-describedby="modal-description"
                     aria-modal="true"
                     onClick={closeModal}
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-8 max-w-4xl w-full mt-16 sm:mt-20 max-h-[90vh] overflow-y-auto shadow-2xl border border-teal-200/30"
+                        className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full mt-16 sm:mt-20 max-h-[90vh] overflow-y-auto shadow-2xl border border-teal-200/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -361,72 +362,70 @@ function ProjectsPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <h3 id="modal-title" className="text-3xl sm:text-4xl font-poppins font-bold text-teal-600 mb-6">
+                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-poppins font-bold text-teal-600 mb-6">
                             {selectedProject.title}
                         </h3>
-                        <div className="relative w-full h-[28rem] sm:h-[32rem] mb-8 overflow-hidden rounded-xl shadow-md">
+                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-100/50 rounded-xl shadow-md overflow-hidden">
                             {selectedProject.images && selectedProject.images.length > 0 ? (
                                 <>
                                     <img
                                         ref={imageRef}
                                         src={selectedProject.images[currentImageIndex] || '/assets/images/placeholder.jpg'}
                                         alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                                        className="w-full h-full object-cover transition-transform duration-300"
+                                        className="max-w-full max-h-full object-contain transition-transform duration-300"
                                     />
                                     {selectedProject.images.length > 1 && (
-                                        <div className="absolute inset-y-0 left-0 flex items-center">
-                                            <button
-                                                onClick={prevImage}
-                                                className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
-                                                aria-label="Previous image"
-                                            >
-                                                <ChevronLeft className="w-6 h-6" />
-                                            </button>
-                                        </div>
-                                    )}
-                                    {selectedProject.images.length > 1 && (
-                                        <div className="absolute inset-y-0 right-0 flex items-center">
-                                            <button
-                                                onClick={nextImage}
-                                                className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
-                                                aria-label="Next image"
-                                            >
-                                                <ChevronRight className="w-6 h-6" />
-                                            </button>
-                                        </div>
-                                    )}
-                                    {selectedProject.images.length > 1 && (
-                                        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-                                            {selectedProject.images.map((_, index) => (
+                                        <>
+                                            <div className="absolute inset-y-0 left-0 flex items-center">
                                                 <button
-                                                    key={index}
-                                                    onClick={() => {
-                                                        setCurrentImageIndex(index);
-                                                        gsap.fromTo(
-                                                            imageRef.current,
-                                                            { opacity: 0, scale: 0.98 },
-                                                            { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }
-                                                        );
-                                                    }}
-                                                    className={`w-3 h-3 rounded-full ${index === currentImageIndex
-                                                            ? 'bg-teal-600'
-                                                            : 'bg-gray-400/50 hover:bg-gray-400'
-                                                        } transition-all duration-200`}
-                                                    aria-label={`Go to image ${index + 1}`}
-                                                />
-                                            ))}
-                                        </div>
+                                                    onClick={prevImage}
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    aria-label="Previous image"
+                                                >
+                                                    <ChevronLeft className="w-6 h-6" />
+                                                </button>
+                                            </div>
+                                            <div className="absolute inset-y-0 right-0 flex items-center">
+                                                <button
+                                                    onClick={nextImage}
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    aria-label="Next image"
+                                                >
+                                                    <ChevronRight className="w-6 h-6" />
+                                                </button>
+                                            </div>
+                                            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                                                {selectedProject.images.map((_, index) => (
+                                                    <button
+                                                        key={index}
+                                                        onClick={() => {
+                                                            setCurrentImageIndex(index);
+                                                            gsap.fromTo(
+                                                                imageRef.current,
+                                                                { opacity: 0, scale: 0.98 },
+                                                                { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }
+                                                            );
+                                                        }}
+                                                        className={`w-3 h-3 rounded-full ${index === currentImageIndex
+                                                                ? 'bg-teal-600'
+                                                                : 'bg-gray-400/50 hover:bg-gray-400'
+                                                            } transition-all duration-200`}
+                                                        aria-label={`Go to image ${index + 1}`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </>
                                     )}
                                 </>
                             ) : (
                                 <img
                                     src="/assets/images/placeholder.jpg"
                                     alt="No images available"
-                                    className="w-full h-full object-cover"
+                                    className="max-w-full max-h-full object-contain"
                                 />
                             )}
                         </div>
-                        <p className="text-lg sm:text-xl font-inter text-gray-700 mb-8 leading-relaxed">
+                        <p id="modal-description" className="text-base sm:text-lg font-inter text-gray-700 mb-8 leading-relaxed">
                             {selectedProject.description}
                         </p>
                         <div className="flex flex-wrap gap-3 mb-8">
@@ -453,7 +452,7 @@ function ProjectsPage() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variant="primary"
-                                className="text-lg sm:text-xl font-semibold px-8 py-3 bg-teal-600 text-white hover:bg-teal-700 transition-all duration-300 rounded-lg"
+                                className="text-base sm:text-lg font-semibold px-6 py-2 bg-teal-600 text-white hover:bg-teal-700 transition-all duration-300 rounded-lg"
                                 aria-label={`Visit ${selectedProject.title} on GitHub`}
                             />
                             {selectedProject.liveDemo && (
@@ -463,7 +462,7 @@ function ProjectsPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     variant="secondary"
-                                    className="text-lg sm:text-xl font-semibold px-8 py-3 bg-gray-100 text-teal-600 hover:bg-teal-100 transition-all duration-300 rounded-lg"
+                                    className="text-base sm:text-lg font-semibold px-6 py-2 bg-gray-100 text-teal-600 hover:bg-teal-100 transition-all duration-300 rounded-lg"
                                     aria-label={`View live demo of ${selectedProject.title}`}
                                 />
                             )}

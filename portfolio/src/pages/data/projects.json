@@ -56,6 +56,43 @@
         "category": "Fintech"
     },
     {
+        "id": 12,
+        "title": "CarbuCarbu Ride-Sharing App",
+        "description": "CarbuCarbu is a mobile-first ride-sharing application built with Expo and React Native, designed to connect users with drivers for seamless urban transportation. The app leverages Clerk for secure authentication (email/password and Google OAuth), Google Maps API for real-time location services and ride booking, and Stripe for secure payment processing. It features a sleek tab-based navigation system (Home, Rides, Chat, Profile) with animated transitions and a bottom sheet interface for ride details. The UI is styled with Tailwind CSS via NativeWind, adopting a modern neon purple aesthetic with PlusJakartaSans fonts for a responsive and visually appealing experience. Key functionalities include ride searching, booking, and confirmation, user profile management, ride history tracking, and real-time driver-user communication. The backend uses serverless APIs with Neon database for efficient user and ride management, ensuring scalability and performance. Robust error handling addresses network issues and authentication failures, making CarbuCarbu a reliable and user-friendly solution for modern mobility needs across iOS and Android platforms.",
+        "technologies": [
+            "React Native",
+            "Expo",
+            "Clerk",
+            "Google Maps API",
+            "Stripe",
+            "Tailwind CSS",
+            "NativeWind",
+            "Neon Database",
+            "TypeScript"
+        ],
+        "images": [
+            "/assets/images/welcomescreen1.png",
+            "/assets/images/welcomescreen2.png",
+            "/assets/images/welcomescreen3.png",
+            "/assets/images/welcomescreen3.gif",
+            "/assets/images/signinscreen.png",
+            "/assets/images/signupscreen.gif",
+            "/assets/images/homescreen2.png",
+            "/assets/images/ridesscreen.png",
+            "/assets/images/profilescreen.png",
+            "/assets/images/findridescreen1.png",
+            "/assets/images/findridescreen2.png",
+            "/assets/images/selectridescreen1.png",
+            "/assets/images/selectridescreen2.png",
+            "/assets/images/bookridescreen.png",
+            "/assets/images/confirmridescreen.png",
+            "/assets/images/paymentscreen.png"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/CarbuCarbu",
+        "liveDemo": "",
+        "category": "Mobile Apps"
+    },
+    {
         "id": 11,
         "title": "MERN Admin Dashboard",
         "description": "A responsive admin dashboard built with the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Tailwind CSS, designed to streamline business operations and data management. The dashboard provides a comprehensive interface for managing users, products, orders, and analytics, featuring real-time data visualization with interactive charts and graphs powered by Chart.js. Key functionalities include role-based access control (admin, editor, viewer) for secure and tiered access, JWT-based authentication to protect sensitive operations, and full CRUD operations for seamless data management. The backend, powered by Express.js and MongoDB, ensures efficient data storage, retrieval, and scalability, with robust error handling and logging. The React frontend leverages a modular component structure for maintainability and performance, while Tailwind CSS delivers a modern, responsive design with customizable themes, ensuring usability across desktop and mobile devices. Additional features include exportable reports in CSV and PDF formats, a notification system for critical updates (e.g., order status changes or user activity), and integration with third-party APIs for extended functionality, such as email services or payment gateways. This dashboard is ideal for businesses seeking a powerful, user-friendly tool to monitor and manage operations effectively, from small startups to large enterprises.",
@@ -152,7 +189,7 @@
     {
         "id": 3,
         "title": "AI-Powered Recommendation Engine",
-        "description": "An advanced AI-driven recommendation engine tailored for e-commerce platforms to deliver personalized product suggestions that enhance user engagement and sales. The system combines collaborative filtering and content-based algorithms, leveraging user behavior data (e.g., browsing history, purchases, and ratings) and product metadata to generate real-time recommendations. Built with Python and TensorFlow, the engine uses machine learning models to predict user preferences with high accuracy. The backend, powered by Flask and PostgreSQL, ensures scalability and efficient data retrieval, while Redis caches frequently accessed recommendations for performance optimization. The system includes an admin dashboard for monitoring recommendation performance, A/B testing for algorithm tuning, and analytics for user engagement metrics. Integration with RESTful APIs allows seamless embedding into existing e-commerce platforms, making it a versatile solution for businesses aiming to improve customer experiences and drive conversions.",
+        "description": "An advanced AI-driven recommendation engine tailored for e-commerce platforms to deliver personalized product suggestions that enhance user engagement and sales. The system combines collaborative filtering and content-based algorithms, leveraging Stadtuser behavior data (e.g., browsing history, purchases, and ratings) and product metadata to generate real-time recommendations. Built with Python and TensorFlow, the engine uses machine learning models to predict user preferences with high accuracy. The backend, powered by Flask and PostgreSQL, ensures scalability and efficient data retrieval, while Redis caches frequently accessed recommendations for performance optimization. The system includes an admin dashboard for monitoring recommendation performance, A/B testing for algorithm tuning, and analytics for user engagement metrics. Integration with RESTful APIs allows seamless embedding into existing e-commerce platforms, making it a versatile solution for businesses aiming to improve customer experiences and drive conversions.",
         "technologies": [
             "Python",
             "TensorFlow",
@@ -262,4 +299,5 @@
         "liveDemo": "https://predictive-maintenance-demo.vercel.app",
         "category": "AI"
     }
+    
 ]

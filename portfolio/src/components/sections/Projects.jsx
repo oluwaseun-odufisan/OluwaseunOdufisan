@@ -227,7 +227,7 @@ function Projects() {
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-white/90 backdrop-blur-md rounded-xl p-10 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto glass shadow-2xl border border-teal-200/30"
+                        className="relative bg-white/90 backdrop-blur-md rounded-xl p-6 sm:p-10 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto glass shadow-2xl border border-teal-200/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -239,17 +239,17 @@ function Projects() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <h3 id="modal-title" className="text-3xl sm:text-4xl font-poppins font-semibold text-teal-primary mb-6">
+                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-poppins font-semibold text-teal-primary mb-6">
                             {selectedProject.title}
                         </h3>
-                        <div className="relative w-full h-[28rem] sm:h-[32rem] mb-8 overflow-hidden rounded-lg shadow-md">
+                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-100/50 rounded-lg shadow-md overflow-hidden">
                             {selectedProject.images && selectedProject.images.length > 0 ? (
                                 <>
                                     <img
                                         ref={imageRef}
                                         src={selectedProject.images[currentImageIndex] || '/assets/images/placeholder.jpg'}
                                         alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                                        className="w-full h-full object-cover transition-transform duration-300"
+                                        className="max-w-full max-h-full object-contain transition-transform duration-300"
                                     />
                                     {selectedProject.images.length > 1 && (
                                         <>
@@ -262,7 +262,7 @@ function Projects() {
                                                     <ChevronLeft className="w-6 h-6" />
                                                 </button>
                                             </div>
-                                            <div className="absolute inset-y-0 right-0 flex items-center">
+                                            <div className="absolute inset Kern-y-0 right-0 flex items-center">
                                                 <button
                                                     onClick={nextImage}
                                                     className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
@@ -284,8 +284,8 @@ function Projects() {
                                                             );
                                                         }}
                                                         className={`w-3 h-3 rounded-full ${index === currentImageIndex
-                                                            ? 'bg-teal-600'
-                                                            : 'bg-gray-400/50 hover:bg-gray-400'
+                                                                ? 'bg-teal-600'
+                                                                : 'bg-gray-400/50 hover:bg-gray-400'
                                                             } transition-all duration-200`}
                                                         aria-label={`Go to image ${index + 1}`}
                                                     />
@@ -298,11 +298,11 @@ function Projects() {
                                 <img
                                     src="/assets/images/placeholder.jpg"
                                     alt="No images available"
-                                    className="w-full h-full object-cover"
+                                    className="max-w-full max-h-full object-contain"
                                 />
                             )}
                         </div>
-                        <p className="text-lg sm:text-xl font-inter text-gray-accent mb-8 leading-relaxed">
+                        <p className="text-base sm:text-lg font-inter text-gray-accent mb-8 leading-relaxed">
                             {selectedProject.description}
                         </p>
                         <div className="flex justify-center space-x-4">
@@ -312,7 +312,7 @@ function Projects() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variant="primary"
-                                className="text-lg sm:text-xl font-semibold px-8 py-3 hover:bg-teal-dark"
+                                className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-teal-dark"
                                 aria-label={`Visit ${selectedProject.title} on GitHub`}
                             />
                             {selectedProject.liveDemo && (
@@ -322,7 +322,7 @@ function Projects() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     variant="secondary"
-                                    className="text-lg sm:text-xl font-semibold px-8 py-3 hover:bg-teal-600"
+                                    className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-teal-600"
                                     aria-label={`Visit live demo of ${selectedProject.title}`}
                                 />
                             )}
