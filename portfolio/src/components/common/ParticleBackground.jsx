@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 import Particles from '@tsparticles/react';
-import { loadSlim } from '@tsparticles/slim'; // Use loadSlim for a lighter bundle
+import { loadSlim } from '@tsparticles/slim';
 
 function ParticleBackground() {
     const particlesInit = useCallback(async (engine) => {
-        // Load the slim version of tsParticles (full version can be used if needed)
         await loadSlim(engine);
     }, []);
 
@@ -15,7 +14,7 @@ function ParticleBackground() {
             options={{
                 background: {
                     color: {
-                        value: '#ffffff',
+                        value: '#000000',
                     },
                 },
                 fpsLimit: 60,
@@ -30,7 +29,7 @@ function ParticleBackground() {
                             mode: 'push',
                         },
                         resize: {
-                            enable: true, // Updated syntax for resize event
+                            enable: true,
                         },
                     },
                     modes: {
@@ -45,13 +44,13 @@ function ParticleBackground() {
                 },
                 particles: {
                     color: {
-                        value: '#14b8a6',
+                        value: '#FFFFFF',
                     },
                     links: {
-                        color: '#14b8a6',
+                        color: '#FFFFFF',
                         distance: 150,
                         enable: true,
-                        opacity: 0.5,
+                        opacity: 0.3,
                         width: 1,
                     },
                     collisions: {
@@ -64,7 +63,7 @@ function ParticleBackground() {
                             default: 'bounce',
                         },
                         random: false,
-                        speed: 2,
+                        speed: 1.5,
                         straight: false,
                     },
                     number: {
@@ -72,16 +71,16 @@ function ParticleBackground() {
                             enable: true,
                             area: 800,
                         },
-                        value: 80,
+                        value: 60,
                     },
                     opacity: {
-                        value: 0.5,
+                        value: 0.4,
                     },
                     shape: {
                         type: 'circle',
                     },
                     size: {
-                        value: { min: 1, max: 5 },
+                        value: { min: 1, max: 4 },
                     },
                 },
                 detectRetina: true,

@@ -14,9 +14,9 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-primary to-white-bg font-inter">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 font-inter">
       <Navbar />
-      <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading...</div>}>
+      <Suspense fallback={<div className="flex justify-center items-center h-screen text-gray-300">Loading...</div>}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />

@@ -1,12 +1,11 @@
 import { useEffect, useRef, useMemo, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
-import { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
+import { ScrollTrigger, ScrollToPlugin, CustomEase } from 'gsap/all';
 import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
-import ParticleBackground from '../common/ParticleBackground.jsx';
 import Button from '../common/Button.jsx';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, CustomEase);
 
 function Footer() {
     const footerRef = useRef(null);
@@ -69,6 +68,8 @@ function Footer() {
     );
 
     useEffect(() => {
+        CustomEase.create('holographic', 'M0,0 C0.2,0.8 0.4,1 1,1');
+
         const footer = footerRef.current;
         const nav = navRef.current;
         const social = socialRef.current;
@@ -77,23 +78,24 @@ function Footer() {
 
         gsap.fromTo(
             footer,
-            { opacity: 0, y: 20 },
+            { opacity: 0, y: 20, filter: 'blur(3px)' },
             {
                 opacity: 1,
                 y: 0,
+                filter: 'blur(0px)',
                 duration: 0.5,
-                ease: 'power3.out',
+                ease: 'holographic',
                 scrollTrigger: {
                     trigger: footer,
                     start: 'top 100%',
                     end: 'bottom bottom',
                     toggleActions: 'play none none none',
-                    invalidateOnRefresh: true, // Ensures trigger recalculates on navigation
+                    invalidateOnRefresh: true,
                 },
             }
         );
 
-        if (nav) {
+        if (nav && nav.children) {
             gsap.fromTo(
                 nav.children,
                 { opacity: 0, x: -10 },
@@ -111,9 +113,36 @@ function Footer() {
                     },
                 }
             );
+
+            Array.from(nav.children).forEach((link) => {
+                link.addEventListener('mouseenter', () => {
+                    gsap.to(link, {
+                        textShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    });
+                    gsap.to(link.querySelector('.underline'), {
+                        width: '100%',
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    });
+                });
+                link.addEventListener('mouseleave', () => {
+                    gsap.to(link, {
+                        textShadow: 'none',
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    });
+                    gsap.to(link.querySelector('.underline'), {
+                        width: '0',
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    });
+                });
+            });
         }
 
-        if (social) {
+        if (social && social.children) {
             gsap.fromTo(
                 social.children,
                 { opacity: 0, scale: 0.9 },
@@ -131,6 +160,27 @@ function Footer() {
                     },
                 }
             );
+
+            Array.from(social.children).forEach((link) => {
+                link.addEventListener('mouseenter', () => {
+                    gsap.to(link, {
+                        scale: 1.1,
+                        rotate: 15,
+                        boxShadow: '0 0 10px rgba(255, 255, 255, 0.6)',
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    });
+                });
+                link.addEventListener('mouseleave', () => {
+                    gsap.to(link, {
+                        scale: 1,
+                        rotate: 0,
+                        boxShadow: 'none',
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    });
+                });
+            });
         }
 
         if (button) {
@@ -150,6 +200,40 @@ function Footer() {
                     },
                 }
             );
+
+            button.addEventListener('mouseenter', () => {
+                gsap.to(button, {
+                    border: '2px solid white',
+                    boxShadow: '0 0 12px rgba(255, 255, 255, 0.7)',
+                    duration: 0.3,
+                    ease: 'power3.out',
+                });
+            });
+            button.addEventListener('mouseleave', () => {
+                gsap.to(button, {
+                    border: 'none',
+                    boxShadow: 'none',
+                    duration: 0.3,
+                    ease: 'power3.out',
+                });
+            });
+
+            button.addEventListener('click', () => {
+                const particle = document.createElement('span');
+                particle.className = 'particle-burst';
+                button.appendChild(particle);
+                gsap.fromTo(
+                    particle,
+                    { scale: 0, opacity: 0.8, x: '50%', y: '50%' },
+                    {
+                        scale: 2,
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                        onComplete: () => particle.remove(),
+                    }
+                );
+            });
         }
 
         if (backToTop) {
@@ -169,24 +253,97 @@ function Footer() {
                     },
                 }
             );
+
+            backToTop.addEventListener('mouseenter', () => {
+                gsap.to(backToTop, {
+                    scale: 1.2,
+                    textShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+                    duration: 0.3,
+                    ease: 'back.out(1.7)',
+                });
+            });
+            backToTop.addEventListener('mouseleave', () => {
+                gsap.to(backToTop, {
+                    scale: 1,
+                    textShadow: 'none',
+                    duration: 0.3,
+                    ease: 'power3.out',
+                });
+            });
         }
 
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            if (nav && nav.children) {
+                Array.from(nav.children).forEach((link) => {
+                    link.removeEventListener('mouseenter', () => {});
+                    link.removeEventListener('mouseleave', () => {});
+                });
+            }
+            if (social && social.children) {
+                Array.from(social.children).forEach((link) => {
+                    link.removeEventListener('mouseenter', () => {});
+                    link.removeEventListener('mouseleave', () => {});
+                });
+            }
+            if (button) {
+                button.removeEventListener('mouseenter', () => {});
+                button.removeEventListener('mouseleave', () => {});
+                button.removeEventListener('click', () => {});
+            }
+            if (backToTop) {
+                backToTop.removeEventListener('mouseenter', () => {});
+                backToTop.removeEventListener('mouseleave', () => {});
+            }
         };
     }, []);
 
     return (
         <footer
             ref={footerRef}
-            className="relative bg-gradient-to-t from-teal-primary/20 via-teal-light/30 to-white-bg bg-opacity-90 backdrop-blur-glass py-12"
+            className="relative bg-gradient-to-t from-gray-dark/20 via-gray-medium/30 to-gray-950 bg-opacity-90 backdrop-blur-glass py-16"
             aria-label="Footer"
         >
-            <ParticleBackground />
+            <style>
+                {`
+                    .grid-overlay {
+                        position: absolute;
+                        inset: 0;
+                        background: repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255, 255, 255, 0.1) 21px), 
+                                    repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255, 255, 255, 0.1) 21px);
+                        opacity: 0.2;
+                        animation: grid-pulse 5s ease-in-out infinite;
+                    }
+                    .underline {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        background: white;
+                        transition: width 0.3s ease;
+                    }
+                    .particle-burst {
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 10%, transparent 70%);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        transform: translate(-50%, -50%);
+                    }
+                    @keyframes grid-pulse {
+                        0% { opacity: 0.2; }
+                        50% { opacity: 0.3; }
+                        100% { opacity: 0.2; }
+                    }
+                `}
+            </style>
+            <div className="grid-overlay" />
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="text-center md:text-left">
-                        <h3 className="text-xl font-poppins font-semibold text-teal-primary mb-4">Explore</h3>
+                        <h3 className="text-xl font-ars-maquette font-semibold text-white mb-4">Explore</h3>
                         <nav
                             ref={navRef}
                             className="flex flex-col space-y-2 items-center md:items-start"
@@ -196,16 +353,17 @@ function Footer() {
                                 <button
                                     key={index}
                                     onClick={() => handleSectionNav(link.sectionId)}
-                                    className={`text-gray-accent font-inter text-lg hover:text-teal-primary transition-colors w-full text-center md:text-left ${location.pathname === '/' && location.hash === `#${link.sectionId}` ? 'text-teal-primary font-bold' : ''}`}
+                                    className={`text-white font-ars-maquette text-lg hover:text-gray-300 transition-colors w-full text-center md:text-left relative ${location.pathname === '/' && location.hash === `#${link.sectionId}` ? 'text-white font-bold' : ''}`}
                                     aria-label={`Scroll to ${link.label} section`}
                                 >
                                     {link.label}
+                                    <span className="underline" />
                                 </button>
                             ))}
                         </nav>
                     </div>
                     <div className="text-center">
-                        <h3 className="text-xl font-poppins font-semibold text-teal-primary mb-4">Connect</h3>
+                        <h3 className="text-xl font-ars-maquette font-semibold text-white mb-4">Connect</h3>
                         <div ref={socialRef} className="flex justify-center space-x-6" aria-label="Social Media Links">
                             {socialLinks.map((link, index) => (
                                 <a
@@ -213,7 +371,7 @@ function Footer() {
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-accent hover:text-teal-primary transition-colors"
+                                    className="text-white hover:text-gray-300 transition-colors"
                                     aria-label={link.label}
                                 >
                                     {link.icon}
@@ -222,7 +380,7 @@ function Footer() {
                         </div>
                     </div>
                     <div className="text-center md:text-right">
-                        <h3 className="text-xl font-poppins font-semibold text-teal-primary mb-4 px-9">Get in Touch</h3>
+                        <h3 className="text-xl font-ars-maquette font-semibold text-white mb-4 px-9">Get in Touch</h3>
                         <Button
                             ref={buttonRef}
                             text={
@@ -233,13 +391,13 @@ function Footer() {
                             }
                             onClick={() => handleSectionNav('contact')}
                             variant="primary"
-                            className="glass px-8 py-4 text-lg font-semibold text-teal-primary hover:bg-teal-dark hover:text-white transition-all duration-300"
+                            className="glass px-8 py-4 text-lg font-semibold text-white hover:bg-white hover:text-black bg-gray-medium transition-all duration-300 relative overflow-hidden"
                             aria-label="Navigate to Contact Section"
                         />
                     </div>
                 </div>
                 <div className="text-center mt-12">
-                    <p className="text-gray-accent font-inter text-sm">
+                    <p className="text-white font-ars-maquette text-sm">
                         © {new Date().getFullYear()} Oluwaseun Odufisan. All rights reserved.
                     </p>
                 </div>
@@ -247,7 +405,7 @@ function Footer() {
                     <button
                         ref={backToTopRef}
                         onClick={() => handleSectionNav('hero')}
-                        className="text-teal-primary text-sm font-inter"
+                        className="text-white text-sm font-ars-maquette"
                         aria-label="Scroll to Hero Section"
                     >
                         <ArrowUp className="w-8 h-8 mx-auto" />

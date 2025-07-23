@@ -7,23 +7,35 @@ import Button from '../components/common/Button.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProjectCard({ title, description, technologies = [], images = [], liveDemo, category, index, onViewProject }) {
+function ProjectCard({ id, title, description, images = [], link, liveDemo, index, onViewProject }) {
     const cardRef = useRef(null);
     const imageRef = useRef(null);
+    const overlayRef = useRef(null);
+    const borderRef = useRef(null);
 
     const handleHoverEnter = useCallback(() => {
         gsap.to(cardRef.current, {
-            scale: 1.04,
-            y: -12,
-            boxShadow: '0 15px 30px rgba(20, 184, 166, 0.4), 0 0 20px rgba(20, 184, 166, 0.3)',
+            scale: 1.08,
+            y: -5,
+            boxShadow: '0 15px 30px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.3)',
             duration: 0.4,
             ease: 'power3.out',
         });
         gsap.to(imageRef.current, {
-            scale: 1.08,
-            filter: 'brightness(1.15) contrast(1.05)',
+            scale: 1.1,
+            filter: 'brightness(1.2)',
             duration: 0.4,
             ease: 'power3.out',
+        });
+        gsap.to(overlayRef.current, {
+            opacity: 0.85,
+            duration: 0.4,
+            ease: 'power3.out',
+        });
+        gsap.to(borderRef.current, {
+            strokeDashoffset: 0,
+            duration: 0.6,
+            ease: 'power2.out',
         });
     }, []);
 
@@ -31,26 +43,48 @@ function ProjectCard({ title, description, technologies = [], images = [], liveD
         gsap.to(cardRef.current, {
             scale: 1,
             y: 0,
-            boxShadow: '0 6px 15px rgba(0, 0, 0, 0.15)',
+            boxShadow: '0 4px 6px rgba(255, 255, 255, 0.05)',
             duration: 0.4,
             ease: 'power3.out',
         });
         gsap.to(imageRef.current, {
             scale: 1,
-            filter: 'brightness(1) contrast(1)',
+            filter: 'brightness(1)',
             duration: 0.4,
             ease: 'power3.out',
+        });
+        gsap.to(overlayRef.current, {
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power3.out',
+        });
+        gsap.to(borderRef.current, {
+            strokeDashoffset: 100,
+            duration: 0.6,
+            ease: 'power2.out',
+        });
+    }, []);
+
+    const handleMouseMove = useCallback((e) => {
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(imageRef.current, {
+            x: x * 0.03,
+            y: y * 0.03,
+            duration: 0.3,
+            ease: 'power2.out',
         });
     }, []);
 
     useEffect(() => {
         gsap.fromTo(
             cardRef.current,
-            { opacity: 0, y: 40, scale: 0.92 },
+            { opacity: 0, rotationY: 90, y: 50 },
             {
                 opacity: 1,
+                rotationY: 0,
                 y: 0,
-                scale: 1,
                 duration: 0.8,
                 ease: 'back.out(1.7)',
                 delay: index * 0.15,
@@ -65,78 +99,87 @@ function ProjectCard({ title, description, technologies = [], images = [], liveD
         const card = cardRef.current;
         card.addEventListener('mouseenter', handleHoverEnter);
         card.addEventListener('mouseleave', handleHoverLeave);
+        card.addEventListener('mousemove', handleMouseMove);
 
         return () => {
             card.removeEventListener('mouseenter', handleHoverEnter);
             card.removeEventListener('mouseleave', handleHoverLeave);
+            card.removeEventListener('mousemove', handleMouseMove);
             ScrollTrigger.getAll().forEach((trigger) => {
                 if (trigger.trigger === cardRef.current) {
                     trigger.kill();
                 }
             });
         };
-    }, [handleHoverEnter, handleHoverLeave, index]);
+    }, [handleHoverEnter, handleHoverLeave, handleMouseMove, index]);
 
     return (
         <div
             ref={cardRef}
-            className="relative bg-white/95 backdrop-blur-lg rounded-2xl p-6 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="relative glass p-6 rounded-xl overflow-hidden transition-all duration-300 group bg-gray-700/80 backdrop-blur-md"
             role="article"
             aria-label={`Project: ${title}`}
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onViewProject();
+                }
+            }}
         >
-            <div className="relative w-full h-52 sm:h-60 mb-5 overflow-hidden rounded-lg">
+            <svg
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                ref={borderRef}
+            >
+                <rect
+                    x="2"
+                    y="2"
+                    width="calc(100% - 4px)"
+                    height="calc(100% - 4px)"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="3"
+                    strokeDasharray="25 75"
+                    strokeDashoffset="100"
+                />
+            </svg>
+            <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
                 <LazyLoadImage
                     src={images[0] || '/assets/images/placeholder.jpg'}
                     alt={title}
                     effect="blur"
-                    className="w-full h-full object-cover transition-transform duration-300"
+                    className="project-image w-full h-full object-cover transition-transform duration-300"
                     placeholderSrc="/assets/images/placeholder.jpg"
                     ref={imageRef}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div
+                    ref={overlayRef}
+                    className="absolute inset-0 bg-gradient-to-tr from-gray-700/70 to-gray-600/30 opacity-0 transition-opacity duration-300"
+                />
             </div>
-            <h3 className="text-xl sm:text-2xl font-poppins font-semibold text-gray-800 mb-3">
+            <h3 className="text-xl font-ars-maquette font-semibold text-white mb-3 animate-fade-in">
                 {title}
             </h3>
-            <p className="text-base font-inter text-gray-600 mb-4 line-clamp-2">
+            <p className="text-base font-ars-maquette text-white mb-4 line-clamp-3">
                 {description}
             </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-                {technologies.length > 0 ? (
-                    technologies.map((tech, index) => (
-                        <span
-                            key={index}
-                            className="px-3 py-1 bg-teal-100/90 text-teal-700 rounded-full text-sm font-medium shadow-sm"
-                        >
-                            {tech}
-                        </span>
-                    ))
-                ) : (
-                    <span className="px-3 py-1 bg-gray-100/90 text-gray-500 rounded-full text-sm font-medium shadow-sm">
-                        No technologies listed
-                    </span>
-                )}
-            </div>
-            <p className="text-sm font-inter text-gray-500 mb-4">Category: {category}</p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex space-x-4">
                 <Button
                     text="View Project"
                     onClick={onViewProject}
                     variant="primary"
-                    className="flex-1 text-base font-semibold bg-teal-600 text-white hover:bg-teal-700 transition-all duration-300 rounded-lg"
+                    className="flex-1 text-lg font-semibold hover:bg-white hover:text-black animate-pulse-slow bg-gray-medium text-white"
                     aria-label={`View details of ${title}`}
                 />
-                {liveDemo && (
-                    <Button
-                        text="Live Demo"
-                        href={liveDemo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variant="secondary"
-                        className="flex-1 text-base font-semibold bg-gray-100 text-teal-600 hover:bg-teal-100 transition-all duration-300 rounded-lg"
-                        aria-label={`View live demo of ${title}`}
-                    />
-                )}
+                <Button
+                    text="Live Demo"
+                    href={liveDemo || link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                    className="flex-1 text-lg font-semibold hover:bg-white hover:text-black text-white"
+                    aria-label={`Visit live demo of ${title}`}
+                />
             </div>
         </div>
     );

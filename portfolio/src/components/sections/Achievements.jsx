@@ -7,17 +7,15 @@ import achievementsData from '../../data/achievements.json';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Lazy-load ParticleBackground only when needed
 const ParticleBackground = memo(() => import('../common/ParticleBackground.jsx').then((mod) => mod.default));
 
 function Achievements() {
     const sectionRef = useRef(null);
     const titleRef = useRef(null);
     const timelineRef = useRef(null);
-    const markersRef = useRef([]); // Array to store marker refs
+    const markersRef = useRef([]);
 
     useEffect(() => {
-        // Simplified title animation
         gsap.fromTo(
             titleRef.current,
             { opacity: 0, y: 20 },
@@ -30,12 +28,11 @@ function Achievements() {
                     trigger: titleRef.current,
                     start: 'top 100%',
                     toggleActions: 'play none none none',
-                    invalidateOnRefresh: true, // Ensure recalculation on navigation
+                    invalidateOnRefresh: true,
                 },
             }
         );
 
-        // Simplified timeline animation (static gradient, no repeat)
         gsap.fromTo(
             timelineRef.current,
             { height: '0%' },
@@ -53,7 +50,6 @@ function Achievements() {
             }
         );
 
-        // Simplified marker animations
         markersRef.current.forEach((marker, index) => {
             if (marker) {
                 gsap.fromTo(
@@ -86,16 +82,16 @@ function Achievements() {
             <section
                 ref={sectionRef}
                 id="achievements"
-                className="relative py-12 bg-gradient-to-b from-white to-teal-100/20"
+                className="relative py-12 bg-gradient-to-b from-black to-gray-dark/20 font-ars-maquette"
             >
                 <div className="max-w-5xl mx-auto px-4 text-center">
                     <h2
                         ref={titleRef}
-                        className="text-3xl font-poppins font-bold text-teal-500 mb-8 tracking-tight"
+                        className="text-3xl font-extrabold text-white mb-8 tracking-tight"
                     >
                         My Achievements
                     </h2>
-                    <p className="text-base text-gray-600">No achievements available at the moment.</p>
+                    <p className="text-base text-gray-accent">No achievements available at the moment.</p>
                 </div>
             </section>
         );
@@ -105,35 +101,33 @@ function Achievements() {
         <section
             ref={sectionRef}
             id="achievements"
-            className="relative py-12 bg-gradient-to-b from-white to-teal-100/20"
+            className="relative py-12 bg-gradient-to-b from-black to-gray-dark/20 font-ars-maquette"
             aria-label="Achievements Timeline"
         >
             <div className="relative z-10 max-w-5xl mx-auto px-4">
                 <h2
                     ref={titleRef}
-                    className="text-3xl font-poppins font-bold text-teal-500 text-center mb-12 tracking-tight"
+                    className="text-3xl font-extrabold text-white text-center mb-12 tracking-tight"
                     aria-label="My Achievements Section"
                 >
                     My Achievements
                 </h2>
 
-                {/* Timeline Container */}
                 <div className="relative">
                     <div
                         ref={timelineRef}
-                        className="absolute left-1/2 transform -translate-x-1/2 w-1.5 bg-teal-500 rounded-full"
+                        className="absolute left-1/2 transform -translate-x-1/2 w-1.5 bg-white rounded-full"
                         style={{ height: '100%' }}
                     />
 
-                    {/* Timeline Items */}
                     {achievementsData.map((achievement, index) => (
                         <div
                             key={achievement.id}
                             className={`relative flex items-center mb-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
                         >
                             <div
-                                ref={(el) => (markersRef.current[index] = el)} // Assign ref dynamically
-                                className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-teal-100 rounded-full z-10"
+                                ref={(el) => (markersRef.current[index] = el)}
+                                className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-light rounded-full z-10"
                                 aria-label={`Timeline marker for ${achievement.title}`}
                             />
                             <AchievementCard
@@ -144,16 +138,16 @@ function Achievements() {
                                 icon={achievement.icon}
                                 link={achievement.link}
                                 index={index}
+                                markerRef={markersRef.current[index]}
                             />
                         </div>
                     ))}
                 </div>
 
-                {/* Scroll Indicator */}
                 <div className="text-center mt-8">
                     <Link
                         to="/#contact"
-                        className="text-teal-500 text-sm font-inter hover:text-teal-600 transition-colors"
+                        className="text-white text-sm hover:text-gray-accent transition-colors"
                         aria-label="Scroll to Contact section"
                     >
                         <svg

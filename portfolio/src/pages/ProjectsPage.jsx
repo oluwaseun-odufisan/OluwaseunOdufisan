@@ -24,10 +24,8 @@ function ProjectsPage() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Unique categories for filtering
     const categories = ['All', ...new Set(projectsData.map((project) => project.category))];
 
-    // Filtered projects based on selected category
     const filteredProjects = useMemo(() => {
         if (selectedCategory === 'All') return projectsData;
         return projectsData.filter((project) => project.category === selectedCategory);
@@ -54,7 +52,7 @@ function ProjectsPage() {
 
     const openModal = (project) => {
         setSelectedProject(project);
-        setCurrentImageIndex(0); // Reset to first image
+        setCurrentImageIndex(0);
         setIsModalOpen(true);
         window.scrollTo({ top: 0, behavior: 'instant' });
         gsap.fromTo(
@@ -112,7 +110,6 @@ function ProjectsPage() {
     };
 
     useEffect(() => {
-        // Title entrance with enhanced glow effect
         gsap.fromTo(
             titleRef.current,
             { opacity: 0, y: 50, scale: 0.9 },
@@ -129,7 +126,7 @@ function ProjectsPage() {
                 },
                 onComplete: () => {
                     gsap.to(titleRef.current, {
-                        textShadow: '0 0 25px rgba(20, 184, 166, 0.9), 0 0 15px rgba(20, 184, 166, 0.6)',
+                        textShadow: '0 0 25px rgba(255, 255, 255, 0.9), 0 0 15px rgba(255, 255, 255, 0.6)',
                         duration: 1.8,
                         repeat: -1,
                         yoyo: true,
@@ -139,7 +136,6 @@ function ProjectsPage() {
             }
         );
 
-        // Filter buttons entrance with scale effect
         gsap.fromTo(
             filterRef.current.children,
             { opacity: 0, scale: 0.8, y: 20 },
@@ -158,7 +154,6 @@ function ProjectsPage() {
             }
         );
 
-        // Project cards entrance
         cardRefs.current.forEach((card, index) => {
             if (card) {
                 gsap.fromTo(
@@ -215,12 +210,12 @@ function ProjectsPage() {
         <section
             ref={sectionRef}
             id="projects"
-            className="relative min-h-[calc(100vh-5rem)] pt-20 pb-16 sm:pb-24 bg-gradient-to-br from-teal-50 via-white to-teal-100/20 bg-opacity-95 backdrop-blur-xl"
+            className="relative min-h-[calc(100vh-5rem)] pt-20 pb-16 sm:pb-24 bg-gradient-to-br from-gray-dark to-gray-medium/20 bg-opacity-90 backdrop-blur-xl"
             aria-label="Projects Section"
         >
-            <ParticleBackground className="absolute inset-0 z-0 opacity-20" />
+            <ParticleBackground className="absolute inset-0 z-0 opacity-50" />
             <svg
-                className="absolute bottom-0 left-0 w-full h-32 text-teal-200"
+                className="absolute bottom-0 left-0 w-full h-32 text-gray-dark"
                 viewBox="0 0 1440 100"
                 preserveAspectRatio="none"
             >
@@ -243,7 +238,7 @@ function ProjectsPage() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <h1
                     ref={titleRef}
-                    className="text-4xl sm:text-5xl md:text-6xl font-poppins font-extrabold text-teal-600 text-center mb-10 tracking-tight"
+                    className="text-4xl sm:text-5xl md:text-6xl font-ars-maquette font-extrabold text-white text-center mb-10 tracking-tight"
                     aria-label="My Projects"
                 >
                     Explore My Work
@@ -261,7 +256,7 @@ function ProjectsPage() {
                             onMouseEnter={() => {
                                 gsap.to(filterRef.current.children[index], {
                                     scale: 1.1,
-                                    boxShadow: '0 6px 16px rgba(20, 184, 166, 0.4)',
+                                    boxShadow: '0 6px 16px rgba(255, 255, 255, 0.4)',
                                     duration: 0.3,
                                     ease: 'power2.out',
                                 });
@@ -274,10 +269,11 @@ function ProjectsPage() {
                                     ease: 'power2.out',
                                 });
                             }}
-                            className={`glass px-6 py-3 rounded-full font-inter text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-teal-200/50 ${selectedCategory === category
-                                ? 'bg-teal-600 text-white shadow-xl shadow-teal-600/40'
-                                : 'text-teal-700 bg-white/70 hover:bg-teal-50 hover:text-teal-800'
-                                }`}
+                            className={`glass px-6 py-3 rounded-full font-ars-maquette text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-white/50 ${
+                                selectedCategory === category
+                                    ? 'bg-white text-black shadow-xl shadow-white/40'
+                                    : 'text-white bg-gray-medium/70 hover:bg-white hover:text-black'
+                            }`}
                             role="tab"
                             aria-selected={selectedCategory === category}
                             aria-label={`Filter by ${category}`}
@@ -318,7 +314,7 @@ function ProjectsPage() {
                             </div>
                         ))
                     ) : (
-                        <p className="text-center text-gray-600 col-span-full text-lg font-inter">
+                        <p className="text-center text-white col-span-full text-lg font-ars-maquette">
                             No projects found for this category.
                         </p>
                     )}
@@ -333,15 +329,14 @@ function ProjectsPage() {
                         }
                         onClick={handleHomeClick}
                         variant="primary"
-                        className="glass px-8 py-4 text-lg font-semibold text-teal-600 hover:bg-teal-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-teal-600/30"
+                        className="glass px-8 py-4 text-lg font-semibold text-white hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-white/30 bg-gray-medium"
                         aria-label="Return to Home Page"
                     />
                 </div>
-
             </div>
             {isModalOpen && selectedProject && (
                 <div
-                    className="fixed inset-0 bg-black/80 flex items-start justify-center z-50 p-4 sm:p-6 overflow-y-auto"
+                    className="fixed inset-0 bg-black/70 flex items-start justify-center z-50 p-4 sm:p-6 overflow-y-auto"
                     role="dialog"
                     aria-labelledby="modal-title"
                     aria-describedby="modal-description"
@@ -350,22 +345,22 @@ function ProjectsPage() {
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full mt-16 sm:mt-20 max-h-[90vh] overflow-y-auto shadow-2xl border border-teal-200/30"
+                        className="relative bg-gray-700/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full mt-16 sm:mt-20 max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-600/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
                             onClick={closeModal}
-                            className="absolute top-4 right-4 text-gray-800 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-full p-2 transition-colors duration-200"
+                            className="absolute top-4 right-4 text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-2 transition-colors duration-200"
                             aria-label="Close project details"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-poppins font-bold text-teal-600 mb-6">
+                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-ars-maquette font-bold text-white mb-6">
                             {selectedProject.title}
                         </h3>
-                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-100/50 rounded-xl shadow-md overflow-hidden">
+                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-800/50 rounded-xl shadow-md overflow-hidden">
                             {selectedProject.images && selectedProject.images.length > 0 ? (
                                 <>
                                     <img
@@ -379,7 +374,7 @@ function ProjectsPage() {
                                             <div className="absolute inset-y-0 left-0 flex items-center">
                                                 <button
                                                     onClick={prevImage}
-                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-200"
                                                     aria-label="Previous image"
                                                 >
                                                     <ChevronLeft className="w-6 h-6" />
@@ -388,7 +383,7 @@ function ProjectsPage() {
                                             <div className="absolute inset-y-0 right-0 flex items-center">
                                                 <button
                                                     onClick={nextImage}
-                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-200"
                                                     aria-label="Next image"
                                                 >
                                                     <ChevronRight className="w-6 h-6" />
@@ -406,10 +401,11 @@ function ProjectsPage() {
                                                                 { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }
                                                             );
                                                         }}
-                                                        className={`w-3 h-3 rounded-full ${index === currentImageIndex
-                                                                ? 'bg-teal-600'
-                                                                : 'bg-gray-400/50 hover:bg-gray-400'
-                                                            } transition-all duration-200`}
+                                                        className={`w-3 h-3 rounded-full ${
+                                                            index === currentImageIndex
+                                                                ? 'bg-white'
+                                                                : 'bg-gray-600/50 hover:bg-gray-600'
+                                                        } transition-all duration-200`}
                                                         aria-label={`Go to image ${index + 1}`}
                                                     />
                                                 ))}
@@ -425,7 +421,7 @@ function ProjectsPage() {
                                 />
                             )}
                         </div>
-                        <p id="modal-description" className="text-base sm:text-lg font-inter text-gray-700 mb-8 leading-relaxed">
+                        <p id="modal-description" className="text-base sm:text-lg font-ars-maquette text-white mb-8 leading-relaxed">
                             {selectedProject.description}
                         </p>
                         <div className="flex flex-wrap gap-3 mb-8">
@@ -433,18 +429,18 @@ function ProjectsPage() {
                                 selectedProject.technologies.map((tech, index) => (
                                     <span
                                         key={index}
-                                        className="px-4 py-1.5 bg-teal-100/90 text-teal-700 rounded-full text-sm sm:text-base font-medium shadow-sm"
+                                        className="px-4 py-1.5 bg-gray-medium text-white rounded-full text-sm sm:text-base font-medium shadow-sm"
                                     >
                                         {tech}
                                     </span>
                                 ))
                             ) : (
-                                <span className="px-4 py-1.5 bg-gray-100/90 text-gray-500 rounded-full text-sm sm:text-base font-medium shadow-sm">
+                                <span className="px-4 py-1.5 bg-gray-medium text-white rounded-full text-sm sm:text-base font-medium shadow-sm">
                                     No technologies listed
                                 </span>
                             )}
                         </div>
-                        <p className="text-base sm:text-lg font-inter text-gray-500 mb-8">Category: {selectedProject.category}</p>
+                        <p className="text-base sm:text-lg font-ars-maquette text-white mb-8">Category: {selectedProject.category}</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button
                                 text="Visit GitHub"
@@ -452,7 +448,7 @@ function ProjectsPage() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variant="primary"
-                                className="text-base sm:text-lg font-semibold px-6 py-2 bg-teal-600 text-white hover:bg-teal-700 transition-all duration-300 rounded-lg"
+                                className="text-base sm:text-lg font-semibold px-6 py-2 bg-gray-medium text-white hover:bg-white hover:text-black transition-all duration-300 rounded-lg"
                                 aria-label={`Visit ${selectedProject.title} on GitHub`}
                             />
                             {selectedProject.liveDemo && (
@@ -462,7 +458,7 @@ function ProjectsPage() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     variant="secondary"
-                                    className="text-base sm:text-lg font-semibold px-6 py-2 bg-gray-100 text-teal-600 hover:bg-teal-100 transition-all duration-300 rounded-lg"
+                                    className="text-base sm:text-lg font-semibold px-6 py-2 bg-gray-medium text-white hover:bg-white hover:text-black transition-all duration-300 rounded-lg"
                                     aria-label={`View live demo of ${selectedProject.title}`}
                                 />
                             )}

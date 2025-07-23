@@ -2,20 +2,20 @@
 export default {
     content: [
         './index.html',
-        './src/**/*.{js,jsx,ts,tsx,css}', // Added .css to scan CSS files
+        './src/**/*.{js,jsx,ts,tsx,css}',
     ],
     theme: {
         extend: {
             colors: {
-                'teal-primary': '#14b8a6',
-                'teal-dark': '#0d9488',
-                'teal-light': '#5eead4',
-                'white-bg': '#ffffff',
-                'gray-accent': '#4b5563',
+                'black': '#000000',
+                'gray-dark': '#1A1A1A',
+                'gray-medium': '#333333',
+                'gray-light': '#4A4A4A',
+                'white': '#FFFFFF',
+                'gray-accent': '#D1D1D1',
             },
             fontFamily: {
-                inter: ['Inter', 'sans-serif'],
-                poppins: ['Poppins', 'sans-serif'],
+                'ars-maquette': ['Ars Maquette', 'sans-serif'],
             },
             animation: {
                 'float': 'float 3s ease-in-out infinite',
@@ -57,10 +57,10 @@ export default {
                 },
             },
             boxShadow: {
-                'glass': '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
+                'glass': '0 4px 6px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(255, 255, 255, 0.08)',
             },
             backdropBlur: {
-                'glass': '10px',
+                'glass': '8px',
             },
         },
     },

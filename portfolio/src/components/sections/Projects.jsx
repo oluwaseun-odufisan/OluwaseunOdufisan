@@ -96,7 +96,7 @@ function Projects() {
                 },
                 onComplete: () => {
                     gsap.to(titleRef.current, {
-                        textShadow: '0 0 20px rgba(20, 184, 166, 0.7)',
+                        textShadow: '0 0 20px rgba(255, 255, 255, 0.7)',
                         duration: 1.5,
                         repeat: -1,
                         yoyo: true,
@@ -108,7 +108,7 @@ function Projects() {
 
         gsap.to(buttonRef.current, {
             scale: 1.05,
-            boxShadow: '0 0 15px rgba(20, 184, 166, 0.5)',
+            boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)',
             duration: 1,
             repeat: -1,
             yoyo: true,
@@ -149,16 +149,16 @@ function Projects() {
             <section
                 ref={sectionRef}
                 id="projects"
-                className="relative py-16 sm:py-24 bg-gradient-to-b from-white-bg via-teal-light/20 to-teal-primary/10 bg-opacity-90 backdrop-blur-glass"
+                className="relative py-16 sm:py-24 bg-gradient-to-b from-gray-dark to-gray-medium/20 bg-opacity-90 backdrop-blur-glass"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2
                         ref={titleRef}
-                        className="text-4xl sm:text-5xl font-poppins font-extrabold text-teal-primary mb-12 animate-float tracking-tight"
+                        className="text-4xl sm:text-5xl font-ars-maquette font-extrabold text-white mb-12 animate-float tracking-tight"
                     >
                         My Projects
                     </h2>
-                    <p className="text-lg text-gray-accent">No projects available at the moment.</p>
+                    <p className="text-lg text-white font-ars-maquette">No projects available at the moment.</p>
                 </div>
             </section>
         );
@@ -168,11 +168,11 @@ function Projects() {
         <section
             ref={sectionRef}
             id="projects"
-            className="relative py-16 sm:py-24 bg-gradient-to-b from-white-bg via-teal-light/20 to-teal-primary/10 bg-opacity-90 backdrop-blur-glass"
+            className="relative py-16 sm:py-24 bg-gradient-to-b from-gray-dark to-gray-medium/20 bg-opacity-90 backdrop-blur-glass"
         >
             <ParticleBackground className="absolute inset-0 z-0 opacity-50" />
             <svg
-                className="absolute bottom-0 left-0 w-full h-24 text-teal-light"
+                className="absolute bottom-0 left-0 w-full h-24 text-gray-dark"
                 viewBox="0 0 1440 100"
                 preserveAspectRatio="none"
             >
@@ -184,7 +184,7 @@ function Projects() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2
                     ref={titleRef}
-                    className="text-4xl sm:text-5xl font-poppins font-extrabold text-teal-primary text-center mb-12 animate-float tracking-tight"
+                    className="text-4xl sm:text-5xl font-ars-maquette font-extrabold text-white text-center mb-12 animate-float tracking-tight"
                     aria-label="My Projects Section"
                 >
                     My Projects
@@ -209,7 +209,7 @@ function Projects() {
                         to="/projects"
                         ref={buttonRef}
                         className={({ isActive }) =>
-                            `relative text-lg font-semibold px-8 py-4 glass bg-teal-primary text-white-bg hover:bg-teal-dark transition-all duration-300 ${isActive ? 'text-teal-500 font-bold border-b-2 border-teal-500' : ''}`
+                            `relative text-lg font-semibold px-8 py-4 glass bg-gray-medium text-white hover:bg-white hover:text-black transition-all duration-300 ${isActive ? 'text-white font-bold border-b-2 border-white' : ''}`
                         }
                         aria-label="View all projects"
                     >
@@ -227,22 +227,22 @@ function Projects() {
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-white/90 backdrop-blur-md rounded-xl p-6 sm:p-10 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto glass shadow-2xl border border-teal-200/30"
+                        className="relative bg-gray-700/90 backdrop-blur-md rounded-xl p-6 sm:p-10 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto glass shadow-2xl border border-gray-600/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
                             onClick={closeModal}
-                            className="absolute top-4 right-4 text-gray-800 hover:text-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-full p-2 transition-colors duration-200"
+                            className="absolute top-4 right-4 text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-white rounded-full p-2 transition-colors duration-200"
                             aria-label="Close project details"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-poppins font-semibold text-teal-primary mb-6">
+                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-ars-maquette font-semibold text-white mb-6">
                             {selectedProject.title}
                         </h3>
-                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-100/50 rounded-lg shadow-md overflow-hidden">
+                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-800/50 rounded-lg shadow-md overflow-hidden">
                             {selectedProject.images && selectedProject.images.length > 0 ? (
                                 <>
                                     <img
@@ -256,16 +256,16 @@ function Projects() {
                                             <div className="absolute inset-y-0 left-0 flex items-center">
                                                 <button
                                                     onClick={prevImage}
-                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-r-full focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-200"
                                                     aria-label="Previous image"
                                                 >
                                                     <ChevronLeft className="w-6 h-6" />
                                                 </button>
                                             </div>
-                                            <div className="absolute inset Kern-y-0 right-0 flex items-center">
+                                            <div className="absolute inset-y-0 right-0 flex items-center">
                                                 <button
                                                     onClick={nextImage}
-                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors duration-200"
+                                                    className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-l-full focus:outline-none focus:ring-2 focus:ring-white transition-colors duration-200"
                                                     aria-label="Next image"
                                                 >
                                                     <ChevronRight className="w-6 h-6" />
@@ -284,8 +284,8 @@ function Projects() {
                                                             );
                                                         }}
                                                         className={`w-3 h-3 rounded-full ${index === currentImageIndex
-                                                                ? 'bg-teal-600'
-                                                                : 'bg-gray-400/50 hover:bg-gray-400'
+                                                                ? 'bg-white'
+                                                                : 'bg-gray-600/50 hover:bg-gray-600'
                                                             } transition-all duration-200`}
                                                         aria-label={`Go to image ${index + 1}`}
                                                     />
@@ -302,7 +302,7 @@ function Projects() {
                                 />
                             )}
                         </div>
-                        <p className="text-base sm:text-lg font-inter text-gray-accent mb-8 leading-relaxed">
+                        <p className="text-base sm:text-lg font-ars-maquette text-white mb-8 leading-relaxed">
                             {selectedProject.description}
                         </p>
                         <div className="flex justify-center space-x-4">
@@ -312,7 +312,7 @@ function Projects() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variant="primary"
-                                className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-teal-dark"
+                                className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-white hover:text-black bg-gray-medium text-white"
                                 aria-label={`Visit ${selectedProject.title} on GitHub`}
                             />
                             {selectedProject.liveDemo && (
@@ -322,7 +322,7 @@ function Projects() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     variant="secondary"
-                                    className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-teal-600"
+                                    className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-white hover:text-black text-white"
                                     aria-label={`Visit live demo of ${selectedProject.title}`}
                                 />
                             )}

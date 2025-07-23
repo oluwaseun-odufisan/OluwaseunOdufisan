@@ -4,7 +4,7 @@
 
 @layer components {
   .glass {
-    @apply bg-white bg-opacity-20 backdrop-blur-[10px] border border-gray-200 shadow-glass rounded-lg;
+    @apply bg-gray-900 bg-opacity-30 backdrop-blur-[8px] border border-gray-700 shadow-glass rounded-lg;
   }
 }
 
@@ -13,6 +13,10 @@
     @apply scroll-smooth;
   }
   body {
-    @apply text-gray-accent antialiased;
+    @apply text-white antialiased bg-black font-ars-maquette;
+  }
+
+  * {
+    font-family: 'Ars Maquette', sans-serif;
   }
 }

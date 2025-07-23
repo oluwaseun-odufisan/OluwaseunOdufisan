@@ -17,7 +17,7 @@ function ProjectCard({ id, title, description, images = [], link, liveDemo, inde
         gsap.to(cardRef.current, {
             scale: 1.08,
             y: -5,
-            boxShadow: '0 15px 30px rgba(20, 184, 166, 0.5), 0 0 20px rgba(20, 184, 166, 0.3)',
+            boxShadow: '0 15px 30px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.3)',
             duration: 0.4,
             ease: 'power3.out',
         });
@@ -43,7 +43,7 @@ function ProjectCard({ id, title, description, images = [], link, liveDemo, inde
         gsap.to(cardRef.current, {
             scale: 1,
             y: 0,
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 4px 6px rgba(255, 255, 255, 0.05)',
             duration: 0.4,
             ease: 'power3.out',
         });
@@ -116,7 +116,7 @@ function ProjectCard({ id, title, description, images = [], link, liveDemo, inde
     return (
         <div
             ref={cardRef}
-            className="relative glass p-6 rounded-xl overflow-hidden transition-all duration-300 group"
+            className="relative glass p-6 rounded-xl overflow-hidden transition-all duration-300 group bg-gray-700/80 backdrop-blur-md"
             role="article"
             aria-label={`Project: ${title}`}
             tabIndex={0}
@@ -137,7 +137,7 @@ function ProjectCard({ id, title, description, images = [], link, liveDemo, inde
                     width="calc(100% - 4px)"
                     height="calc(100% - 4px)"
                     fill="none"
-                    stroke="#14b8a6"
+                    stroke="white"
                     strokeWidth="3"
                     strokeDasharray="25 75"
                     strokeDashoffset="100"
@@ -154,13 +154,13 @@ function ProjectCard({ id, title, description, images = [], link, liveDemo, inde
                 />
                 <div
                     ref={overlayRef}
-                    className="absolute inset-0 bg-gradient-to-tr from-teal-primary/70 to-teal-dark/30 opacity-0 transition-opacity duration-300"
+                    className="absolute inset-0 bg-gradient-to-tr from-gray-700/70 to-gray-600/30 opacity-0 transition-opacity duration-300"
                 />
             </div>
-            <h3 className="text-xl font-poppins font-semibold text-gray-accent mb-3 animate-fade-in">
+            <h3 className="text-xl font-ars-maquette font-semibold text-white mb-3 animate-fade-in">
                 {title}
             </h3>
-            <p className="text-base font-inter text-gray-accent mb-4 line-clamp-3">
+            <p className="text-base font-ars-maquette text-white mb-4 line-clamp-3">
                 {description}
             </p>
             <div className="flex space-x-4">
@@ -168,16 +168,16 @@ function ProjectCard({ id, title, description, images = [], link, liveDemo, inde
                     text="View Project"
                     onClick={onViewProject}
                     variant="primary"
-                    className="flex-1 text-lg font-semibold hover:bg-teal-dark animate-pulse-slow"
+                    className="flex-1 text-lg font-semibold hover:bg-white hover:text-black animate-pulse-slow bg-gray-medium text-white"
                     aria-label={`View details of ${title}`}
                 />
                 <Button
                     text="Live Demo"
-                    href={liveDemo || link} // Fallback to GitHub link if liveDemo is not provided
+                    href={liveDemo || link}
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="secondary"
-                    className="flex-1 text-lg font-semibold hover:bg-teal-600"
+                    className="flex-1 text-lg font-semibold hover:bg-white hover:text-black text-white"
                     aria-label={`Visit live demo of ${title}`}
                 />
             </div>

@@ -1,7 +1,6 @@
 import { useRef, useEffect, forwardRef } from 'react';
 import { gsap } from 'gsap';
 
-// Use forwardRef to allow the parent component to pass a ref
 const Button = forwardRef(({ text = 'Button', href, to, variant = 'primary', className = '', ...props }, ref) => {
     const buttonRef = useRef(null);
     const targetRef = ref || buttonRef;
@@ -21,7 +20,7 @@ const Button = forwardRef(({ text = 'Button', href, to, variant = 'primary', cla
         const handleMouseEnter = (e) => {
             const rect = button.getBoundingClientRect();
             const ripple = document.createElement('span');
-            ripple.className = 'absolute bg-white bg-opacity-30 rounded-full pointer-events-none';
+            ripple.className = 'absolute bg-white bg-opacity-20 rounded-full pointer-events-none';
             ripple.style.zIndex = '-1';
             const diameter = Math.max(rect.width, rect.height);
             ripple.style.width = ripple.style.height = `${diameter}px`;
@@ -54,9 +53,6 @@ const Button = forwardRef(({ text = 'Button', href, to, variant = 'primary', cla
         };
     }, [targetRef]);
 
-    console.log('Button text prop:', text);
-
-    // Use Link for internal routing if 'to' is provided, otherwise use 'a' for external links
     const Component = to ? 'Link' : 'a';
     const componentProps = to ? { to } : { href };
 
@@ -64,10 +60,11 @@ const Button = forwardRef(({ text = 'Button', href, to, variant = 'primary', cla
         <Component
             {...componentProps}
             ref={targetRef}
-            className={`relative inline-block px-6 py-3 rounded-lg font-semibold transition-all duration-300 overflow-hidden ${variant === 'primary'
-                    ? 'bg-teal-500 hover:bg-teal-600 text-white animate-pulse-slow'
-                    : 'bg-gray-500 hover:bg-gray-600 text-white'
-                } ${className}`}
+            className={`relative inline-block px-6 py-3 rounded-lg font-semibold transition-all duration-300 font-ars-maquette ${
+                variant === 'primary'
+                    ? 'bg-gray-500 hover:bg-white hover:text-black text-black animate-pulse-slow'
+                    : 'bg-gray-700 hover:bg-gray-600 hover:text-black text-white'
+            } ${className}`}
             {...props}
         >
             {typeof text === 'string' ? text : text || 'Button'}
