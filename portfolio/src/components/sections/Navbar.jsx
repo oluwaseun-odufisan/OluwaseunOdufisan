@@ -13,14 +13,19 @@ function Navbar() {
     const logoRef = useRef(null);
     const navLinksRef = useRef([]);
     const socialLinksRef = useRef([]);
+    const mobileSocialLinksRef = useRef([]);
     const buttonRef = useRef(null);
     const progressRef = useRef(null);
+    const mobileMenuRef = useRef(null);
     const location = useLocation();
     const navigate = useNavigate();
-    const hoverTimeout = useRef({}); // Debounce timeout for each social link
+    const hoverTimeout = useRef({});
 
     const toggleMenu = useCallback(() => {
-        setIsOpen((prev) => !prev);
+        setIsOpen((prev) => {
+            console.log('Toggling menu, new isOpen:', !prev); // Debug state change
+            return !prev;
+        });
     }, []);
 
     const handleSectionNav = useCallback(
@@ -53,9 +58,11 @@ function Navbar() {
         if (isOpen) toggleMenu();
     }, [isOpen, toggleMenu, location.pathname, navigate]);
 
+    // Main animations for navbar, logo, nav links, social links, and button
     useEffect(() => {
         CustomEase.create('holographic', 'M0,0 C0.2,0.8 0.4,1 1,1');
 
+        // Handle hash navigation
         const hash = location.hash.replace('#', '');
         if (location.pathname === '/' && hash) {
             setTimeout(() => {
@@ -66,10 +73,12 @@ function Navbar() {
             }, 100);
         }
 
+        // Scroll to top on non-home pages
         if (location.pathname !== '/' && !location.hash) {
             gsap.to(window, { scrollTo: { y: 0, offsetY: 80 }, duration: 0.8, ease: 'power3.out' });
         }
 
+        // Navbar animation
         gsap.fromTo(
             navbarRef.current,
             { y: '-100%', opacity: 0 },
@@ -92,6 +101,7 @@ function Navbar() {
             }
         );
 
+        // Logo animation
         if (logoRef.current) {
             gsap.fromTo(
                 logoRef.current,
@@ -116,6 +126,7 @@ function Navbar() {
             });
         }
 
+        // Nav links animation
         navLinksRef.current.forEach((link, index) => {
             if (link) {
                 gsap.fromTo(
@@ -150,6 +161,7 @@ function Navbar() {
             }
         });
 
+        // Desktop social links animation
         socialLinksRef.current.forEach((link, index) => {
             if (link) {
                 gsap.fromTo(
@@ -186,6 +198,7 @@ function Navbar() {
             }
         });
 
+        // Button animation
         if (buttonRef.current) {
             gsap.fromTo(
                 buttonRef.current,
@@ -226,6 +239,7 @@ function Navbar() {
             });
         }
 
+        // Progress bar animation
         gsap.to(progressRef.current, {
             width: '100%',
             background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))',
@@ -246,28 +260,8 @@ function Navbar() {
             },
         });
 
-        if (isOpen) {
-            gsap.fromTo(
-                '.mobile-menu',
-                { x: '100%' },
-                { x: '0%', duration: 0.5, ease: 'power3.out' }
-            );
-            Array.from(document.querySelectorAll('.mobile-menu a, .mobile-menu button')).forEach((el, index) => {
-                gsap.fromTo(
-                    el,
-                    { opacity: 0, y: 10 },
-                    { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: index * 0.1 }
-                );
-            });
-        } else {
-            gsap.to('.mobile-menu', { x: '100%', duration: 0.5, ease: 'power3.in' });
-        }
-
-        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-            document.body.style.overflow = 'auto';
             if (logoRef.current) {
                 logoRef.current.removeEventListener('mouseenter', () => {});
                 logoRef.current.removeEventListener('mouseleave', () => {});
@@ -291,7 +285,92 @@ function Navbar() {
                 buttonRef.current.removeEventListener('click', () => {});
             }
         };
-    }, [isOpen, location, handleSectionNav]);
+    }, [location, handleSectionNav, handleHomeClick]);
+
+    // Mobile menu animation
+    useEffect(() => {
+        if (!mobileMenuRef.current) {
+            console.log('mobileMenuRef is null'); // Debug ref
+            return;
+        }
+
+        console.log('Mobile menu useEffect, isOpen:', isOpen); // Debug state
+        if (isOpen) {
+            gsap.set(mobileMenuRef.current, { display: 'block', visibility: 'visible', x: '100%' });
+            gsap.to(mobileMenuRef.current, {
+                x: '0%',
+                duration: 0.4,
+                ease: 'power3.out',
+            });
+            Array.from(mobileMenuRef.current.querySelectorAll('a, button')).forEach((el, index) => {
+                gsap.fromTo(
+                    el,
+                    { opacity: 0, y: 10 },
+                    { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: index * 0.1 }
+                );
+            });
+            document.body.style.overflow = 'hidden';
+        } else {
+            gsap.to(mobileMenuRef.current, {
+                x: '100%',
+                duration: 0.4,
+                ease: 'power3.in',
+                onComplete: () => {
+                    gsap.set(mobileMenuRef.current, { display: 'none', visibility: 'hidden' });
+                    document.body.style.overflow = 'auto';
+                },
+            });
+        }
+
+        return () => {
+            gsap.killTweensOf([mobileMenuRef.current, mobileMenuRef.current?.querySelectorAll('a, button')]);
+            document.body.style.overflow = 'auto';
+        };
+    }, [isOpen]);
+
+    // Mobile social links animation
+    useEffect(() => {
+        mobileSocialLinksRef.current.forEach((link, index) => {
+            if (link) {
+                link.addEventListener('mouseenter', () => {
+                    clearTimeout(hoverTimeout.current[`mobile-${index}`]);
+                    hoverTimeout.current[`mobile-${index}`] = setTimeout(() => {
+                        gsap.to(link, {
+                            rotateY: 180,
+                            boxShadow: '0 0 10px rgba(255, 255, 255, 0.6)',
+                            transformPerspective: 400,
+                            transformOrigin: 'center center',
+                            duration: 0.3,
+                            ease: 'power3.out',
+                        });
+                    }, 100);
+                });
+                link.addEventListener('mouseleave', () => {
+                    clearTimeout(hoverTimeout.current[`mobile-${index}`]);
+                    hoverTimeout.current[`mobile-${index}`] = setTimeout(() => {
+                        gsap.to(link, {
+                            rotateY: 0,
+                            boxShadow: 'none',
+                            transformPerspective: 400,
+                            transformOrigin: 'center center',
+                            duration: 0.3,
+                            ease: 'power3.out',
+                        });
+                    }, 100);
+                });
+            }
+        });
+
+        return () => {
+            mobileSocialLinksRef.current.forEach((link, index) => {
+                if (link) {
+                    link.removeEventListener('mouseenter', () => {});
+                    link.removeEventListener('mouseleave', () => {});
+                    clearTimeout(hoverTimeout.current[`mobile-${index}`]);
+                }
+            });
+        };
+    }, []);
 
     return (
         <nav
@@ -302,6 +381,10 @@ function Navbar() {
         >
             <style>
                 {`
+                    .backdrop-blur-glass {
+                        backdrop-filter: blur(8px);
+                        -webkit-backdrop-filter: blur(8px);
+                    }
                     .grid-overlay {
                         position: absolute;
                         inset: 0;
@@ -336,6 +419,9 @@ function Navbar() {
                         0% { opacity: 0.2; }
                         50% { opacity: 0.3; }
                         100% { opacity: 0.2; }
+                    }
+                    .mobile-menu {
+                        transform: translateX(100%);
                     }
                 `}
             </style>
@@ -490,7 +576,10 @@ function Navbar() {
                     </div>
                 </div>
                 {isOpen && (
-                    <div className="md:hidden mobile-menu bg-black bg-opacity-95 backdrop-blur-[8px] border-t border-gray-700 absolute w-full top-20 left-0 z-50">
+                    <div
+                        ref={mobileMenuRef}
+                        className="md:hidden mobile-menu bg-black bg-opacity-95 backdrop-blur-glass border-t border-gray-700 absolute w-full top-20 left-0 z-[100]"
+                    >
                         <div className="px-4 pt-4 pb-6 space-y-3">
                             <NavLink
                                 to="/"
@@ -537,6 +626,7 @@ function Navbar() {
                                     href="https://github.com/oluwaseun-odufisan"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    ref={(el) => (mobileSocialLinksRef.current[0] = el)}
                                     className="social-icon"
                                     aria-label="GitHub Profile"
                                     onKeyDown={(e) => {
@@ -545,34 +635,6 @@ function Navbar() {
                                             window.open('https://github.com/oluwaseun-odufisan', '_blank', 'noopener,noreferrer');
                                         }
                                     }}
-                                    onMouseEnter={() => {
-                                        const link = document.querySelector('.mobile-menu a[href="https://github.com/oluwaseun-odufisan"]');
-                                        clearTimeout(hoverTimeout.current['mobile-github']);
-                                        hoverTimeout.current['mobile-github'] = setTimeout(() => {
-                                            gsap.to(link, {
-                                                rotateY: 180,
-                                                boxShadow: '0 0 10px rgba(255, 255, 255, 0.6)',
-                                                transformPerspective: 400,
-                                                transformOrigin: 'center center',
-                                                duration: 0.3,
-                                                ease: 'power3.out',
-                                            });
-                                        }, 100);
-                                    }}
-                                    onMouseLeave={() => {
-                                        const link = document.querySelector('.mobile-menu a[href="https://github.com/oluwaseun-odufisan"]');
-                                        clearTimeout(hoverTimeout.current['mobile-github']);
-                                        hoverTimeout.current['mobile-github'] = setTimeout(() => {
-                                            gsap.to(link, {
-                                                rotateY: 0,
-                                                boxShadow: 'none',
-                                                transformPerspective: 400,
-                                                transformOrigin: 'center center',
-                                                duration: 0.3,
-                                                ease: 'power3.out',
-                                            });
-                                        }, 100);
-                                    }}
                                 >
                                     <Github className="w-6 h-6 text-white hover:text-gray-accent" />
                                 </a>
@@ -580,6 +642,7 @@ function Navbar() {
                                     href="https://linkedin.com/in/oluwaseun-odufisan"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    ref={(el) => (mobileSocialLinksRef.current[1] = el)}
                                     className="social-icon"
                                     aria-label="LinkedIn Profile"
                                     onKeyDown={(e) => {
@@ -587,34 +650,6 @@ function Navbar() {
                                             e.preventDefault();
                                             window.open('https://linkedin.com/in/oluwaseun-odufisan', '_blank', 'noopener,noreferrer');
                                         }
-                                    }}
-                                    onMouseEnter={() => {
-                                        const link = document.querySelector('.mobile-menu a[href="https://linkedin.com/in/oluwaseun-odufisan"]');
-                                        clearTimeout(hoverTimeout.current['mobile-linkedin']);
-                                        hoverTimeout.current['mobile-linkedin'] = setTimeout(() => {
-                                            gsap.to(link, {
-                                                rotateY: 180,
-                                                boxShadow: '0 0 10px rgba(255, 255, 255, 0.6)',
-                                                transformPerspective: 400,
-                                                transformOrigin: 'center center',
-                                                duration: 0.3,
-                                                ease: 'power3.out',
-                                            });
-                                        }, 100);
-                                    }}
-                                    onMouseLeave={() => {
-                                        const link = document.querySelector('.mobile-menu a[href="https://linkedin.com/in/oluwaseun-odufisan"]');
-                                        clearTimeout(hoverTimeout.current['mobile-linkedin']);
-                                        hoverTimeout.current['mobile-linkedin'] = setTimeout(() => {
-                                            gsap.to(link, {
-                                                rotateY: 0,
-                                                boxShadow: 'none',
-                                                transformPerspective: 400,
-                                                transformOrigin: 'center center',
-                                                duration: 0.3,
-                                                ease: 'power3.out',
-                                            });
-                                        }, 100);
                                     }}
                                 >
                                     <Linkedin className="w-6 h-6 text-white hover:text-gray-accent" />
@@ -631,18 +666,21 @@ function Navbar() {
                                     onClick={() => {
                                         const particle = document.createElement('span');
                                         particle.className = 'particle-burst';
-                                        document.querySelector('.mobile-menu .glass').appendChild(particle);
-                                        gsap.fromTo(
-                                            particle,
-                                            { scale: 0, opacity: 0.8, x: '50%', y: '50%' },
-                                            {
-                                                scale: 2,
-                                                opacity: 0,
-                                                duration: 0.5,
-                                                ease: 'power2.out',
-                                                onComplete: () => particle.remove(),
-                                            }
-                                        );
+                                        const button = document.querySelector('.mobile-menu .glass');
+                                        if (button) {
+                                            button.appendChild(particle);
+                                            gsap.fromTo(
+                                                particle,
+                                                { scale: 0, opacity: 0.8, x: '50%', y: '50%' },
+                                                {
+                                                    scale: 2,
+                                                    opacity: 0,
+                                                    duration: 0.5,
+                                                    ease: 'power2.out',
+                                                    onComplete: () => particle.remove(),
+                                                }
+                                            );
+                                        }
                                     }}
                                 />
                             </div>
