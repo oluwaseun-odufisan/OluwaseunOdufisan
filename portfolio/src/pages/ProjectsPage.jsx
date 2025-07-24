@@ -163,12 +163,12 @@ function ProjectsPage() {
                         opacity: 1,
                         y: 0,
                         scale: 1,
-                        duration: 0.8,
+                        duration: 0.5, // Changed from 0.8 to 0.5
                         ease: 'back.out(1.7)',
-                        delay: index * 0.1,
+                        delay: index * 0.05, // Changed from index * 0.1 to index * 0.05
                         scrollTrigger: {
                             trigger: card,
-                            start: 'top 80%',
+                            start: 'top 85%', // Changed from 'top 80%' to 'top 85%'
                             toggleActions: 'play none none reverse',
                         },
                     }
@@ -213,6 +213,16 @@ function ProjectsPage() {
             className="relative min-h-[calc(100vh-5rem)] pt-20 pb-16 sm:pb-24 bg-gradient-to-br from-gray-dark to-gray-medium/20 bg-opacity-90 backdrop-blur-xl"
             aria-label="Projects Section"
         >
+            <style>
+                {`
+                    @media (max-width: 640px) {
+                        .filter-button.active {
+                            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(255, 255, 255, 0.08);
+                            backdrop-filter: blur(4px);
+                        }
+                    }
+                `}
+            </style>
             <ParticleBackground className="absolute inset-0 z-0 opacity-50" />
             <svg
                 className="absolute bottom-0 left-0 w-full h-32 text-gray-dark"
@@ -269,9 +279,9 @@ function ProjectsPage() {
                                     ease: 'power2.out',
                                 });
                             }}
-                            className={`glass px-6 py-3 rounded-full font-ars-maquette text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-white/50 ${
+                            className={`glass px-6 py-3 rounded-full font-ars-maquette text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-white/50 filter-button ${
                                 selectedCategory === category
-                                    ? 'bg-white text-black shadow-xl shadow-white/40'
+                                    ? 'bg-white text-black shadow-md shadow-white/20 backdrop-blur-[4px]'
                                     : 'text-white bg-gray-medium/70 hover:bg-white hover:text-black'
                             }`}
                             role="tab"

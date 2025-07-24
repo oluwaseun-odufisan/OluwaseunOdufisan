@@ -479,7 +479,7 @@ function Skills() {
                         ))}
                 </div>
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-                    <span className="text-white text-sm mb-2">Scroll</span>
+                    <span className="text-white text-sm mb-2"></span>
                     <svg
                         className="w-6 h-6 text-white animate-bounce"
                         fill="none"
