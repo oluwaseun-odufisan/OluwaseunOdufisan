@@ -336,7 +336,7 @@ function Skills() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <h2
                     ref={titleRef}
-                    className="text-4xl sm:text-5xl font-extrabold text-white text-center mb-12 tracking-tight relative"
+                    className="text-4xl sm:text-5xl font-extrabold text-green-500 text-center mb-12 tracking-tight relative"
                     aria-label="My Expertise Section"
                 >
                     My Expertise

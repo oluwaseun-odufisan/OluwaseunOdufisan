@@ -343,7 +343,7 @@ function Footer() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="text-center md:text-left">
-                        <h3 className="text-xl font-ars-maquette font-semibold text-white mb-4">Explore</h3>
+                        <h3 className="text-xl font-ars-maquette font-semibold text-green-500 mb-4">Explore</h3>
                         <nav
                             ref={navRef}
                             className="flex flex-col space-y-2 items-center md:items-start"
@@ -363,7 +363,7 @@ function Footer() {
                         </nav>
                     </div>
                     <div className="text-center">
-                        <h3 className="text-xl font-ars-maquette font-semibold text-white mb-4">Connect</h3>
+                        <h3 className="text-xl font-ars-maquette font-semibold text-green-500 mb-4">Connect</h3>
                         <div ref={socialRef} className="flex justify-center space-x-6" aria-label="Social Media Links">
                             {socialLinks.map((link, index) => (
                                 <a
@@ -380,7 +380,7 @@ function Footer() {
                         </div>
                     </div>
                     <div className="text-center md:text-right">
-                        <h3 className="text-xl font-ars-maquette font-semibold text-white mb-4 px-9">Get in Touch</h3>
+                        <h3 className="text-xl font-ars-maquette font-semibold text-green-500 mb-4 px-9">Get in Touch</h3>
                         <Button
                             ref={buttonRef}
                             text={

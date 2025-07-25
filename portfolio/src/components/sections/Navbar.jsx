@@ -243,7 +243,7 @@ function Navbar() {
                     <Link
                         to="/"
                         ref={logoRef}
-                        className="text-3xl font-sans font-extrabold text-white hover:text-gray-300 transition-colors"
+                        className="text-3xl font-sans font-extrabold text-green-500 hover:text-gray-300 transition-colors"
                         aria-label="Oluwaseun's Portfolio Home"
                         onClick={handleHomeClick}
                     >

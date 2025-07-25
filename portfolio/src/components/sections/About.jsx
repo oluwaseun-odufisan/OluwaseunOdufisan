@@ -341,7 +341,7 @@ function About() {
                     <div ref={contentRef} className="space-y-12">
                         <h2
                             ref={titleRef}
-                            className="text-5xl sm:text-6xl font-extrabold text-white tracking-tight"
+                            className="text-5xl sm:text-6xl font-extrabold text-green-500 tracking-tight"
                         >
                             About Me
                         </h2>

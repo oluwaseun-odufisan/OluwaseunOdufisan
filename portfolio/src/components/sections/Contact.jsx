@@ -353,7 +353,7 @@ function Contact() {
             <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2
                     ref={titleRef}
-                    className="text-4xl sm:text-5xl font-extrabold text-white text-center mb-12 tracking-tight"
+                    className="text-4xl sm:text-5xl font-extrabold text-green-500 text-center mb-12 tracking-tight"
                     aria-label="Get in Touch"
                 >
                     Get in Touch

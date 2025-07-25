@@ -184,7 +184,7 @@ function Projects() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2
                     ref={titleRef}
-                    className="text-4xl sm:text-5xl font-ars-maquette font-extrabold text-white text-center mb-12 animate-float tracking-tight"
+                    className="text-4xl sm:text-5xl font-ars-maquette font-extrabold text-green-500 text-center mb-12 animate-float tracking-tight"
                     aria-label="My Projects Section"
                 >
                     My Projects
