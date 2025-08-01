@@ -279,10 +279,11 @@ function ProjectsPage() {
                                     ease: 'power2.out',
                                 });
                             }}
-                            className={`glass px-6 py-3 rounded-full font-ars-maquette text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-white/50 filter-button ${selectedCategory === category
-                                ? 'bg-white text-black shadow-md shadow-white/20 backdrop-blur-[4px]'
-                                : 'text-white bg-gray-medium/70 hover:bg-white hover:text-black'
-                                }`}
+                            className={`glass px-6 py-3 rounded-full font-ars-maquette text-base sm:text-lg font-medium transition-all duration-300 backdrop-blur-lg border border-white/50 filter-button ${
+                                selectedCategory === category
+                                    ? 'bg-white text-black shadow-md shadow-white/20 backdrop-blur-[4px]'
+                                    : 'text-white bg-gray-medium/70 hover:bg-white hover:text-black'
+                            }`}
                             role="tab"
                             aria-selected={selectedCategory === category}
                             aria-label={`Filter by ${category}`}
@@ -345,7 +346,7 @@ function ProjectsPage() {
             </div>
             {isModalOpen && selectedProject && (
                 <div
-                    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 sm:p-6 overflow-y-auto"
+                    className="fixed inset-0 bg-black/70 flex items-start justify-center z-50 p-4 sm:p-6 overflow-y-auto"
                     role="dialog"
                     aria-labelledby="modal-title"
                     aria-describedby="modal-description"
@@ -354,7 +355,7 @@ function ProjectsPage() {
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-gray-700/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-600/30"
+                        className="relative bg-gray-700/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full mt-16 sm:mt-20 max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-600/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -366,7 +367,7 @@ function ProjectsPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-ars-maquette font-semibold text-white mb-6">
+                        <h3 id="modal-title" className="text-2xl sm:text-3xl font-ars-maquette font-bold text-white mb-6">
                             {selectedProject.title}
                         </h3>
                         <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-800/50 rounded-xl shadow-md overflow-hidden">
@@ -410,10 +411,11 @@ function ProjectsPage() {
                                                                 { opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' }
                                                             );
                                                         }}
-                                                        className={`w-3 h-3 rounded-full ${index === currentImageIndex
-                                                            ? 'bg-white'
-                                                            : 'bg-gray-600/50 hover:bg-gray-600'
-                                                            } transition-all duration-200`}
+                                                        className={`w-3 h-3 rounded-full ${
+                                                            index === currentImageIndex
+                                                                ? 'bg-white'
+                                                                : 'bg-gray-600/50 hover:bg-gray-600'
+                                                        } transition-all duration-200`}
                                                         aria-label={`Go to image ${index + 1}`}
                                                     />
                                                 ))}
@@ -429,12 +431,26 @@ function ProjectsPage() {
                                 />
                             )}
                         </div>
-                        <p
-                            id="modal-description"
-                            className="text-base sm:text-lg font-ars-maquette text-white mb-8 leading-relaxed"
-                        >
+                        <p id="modal-description" className="text-base sm:text-lg font-ars-maquette text-white mb-8 leading-relaxed">
                             {selectedProject.description}
                         </p>
+                        <div className="flex flex-wrap gap-3 mb-8">
+                            {selectedProject.technologies && selectedProject.technologies.length > 0 ? (
+                                selectedProject.technologies.map((tech, index) => (
+                                    <span
+                                        key={index}
+                                        className="px-4 py-1.5 bg-gray-medium text-white rounded-full text-sm sm:text-base font-medium shadow-sm"
+                                    >
+                                        {tech}
+                                    </span>
+                                ))
+                            ) : (
+                                <span className="px-4 py-1.5 bg-gray-medium text-white rounded-full text-sm sm:text-base font-medium shadow-sm">
+                                    No technologies listed
+                                </span>
+                            )}
+                        </div>
+                        <p className="text-base sm:text-lg font-ars-maquette text-white mb-8">Category: {selectedProject.category}</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button
                                 text="Visit GitHub"
@@ -453,7 +469,7 @@ function ProjectsPage() {
                                     rel="noopener noreferrer"
                                     variant="secondary"
                                     className="text-base sm:text-lg font-semibold px-6 py-2 bg-gray-medium text-white hover:bg-white hover:text-black transition-all duration-300 rounded-lg"
-                                    aria-label={`Visit live demo of ${selectedProject.title}`}
+                                    aria-label={`View live demo of ${selectedProject.title}`}
                                 />
                             )}
                         </div>

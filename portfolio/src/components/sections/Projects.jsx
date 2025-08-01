@@ -219,7 +219,7 @@ function Projects() {
             </div>
             {isModalOpen && selectedProject && (
                 <div
-                    className="fixed inset-0 bg-black/70 flex items-start justify-center z-50 p-4 sm:p-6 overflow-y-auto"
+                    className="fixed inset-0 bg-black/70 flex sm:items-start items-center justify-center z-50 p-4 sm:p-6 overflow-y-auto modal-container"
                     role="dialog"
                     aria-labelledby="modal-title"
                     aria-describedby="modal-description"
@@ -228,7 +228,7 @@ function Projects() {
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-gray-700/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full mt-16 sm:mt-20 max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-600/30"
+                        className="relative bg-gray-700/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full sm:mt-20 mt-0 mx-2 sm:mx-0 max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-600/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -285,8 +285,8 @@ function Projects() {
                                                             );
                                                         }}
                                                         className={`w-3 h-3 rounded-full ${index === currentImageIndex
-                                                                ? 'bg-white'
-                                                                : 'bg-gray-600/50 hover:bg-gray-600'
+                                                            ? 'bg-white'
+                                                            : 'bg-gray-600/50 hover:bg-gray-600'
                                                             } transition-all duration-200`}
                                                         aria-label={`Go to image ${index + 1}`}
                                                     />
