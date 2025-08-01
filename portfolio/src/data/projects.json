@@ -30,27 +30,20 @@
     },
     {
         "id": 3,
-        "title": "CarbuCarbu Ride-Sharing App",
-        "description": "CarbuCarbu is a mobile-first ride-sharing application built with Expo, React Native, and Clerk for secure authentication, designed to connect users with drivers for seamless transportation. The app features a sleek tab-based navigation system with screens for home, rides, chat, and profile, integrated with Google Maps API for real-time ride booking and location services. Users can sign in or up using email/password or Google OAuth, manage profiles, view ride history, and process payments via Stripe. The UI is styled with Tailwind CSS via NativeWind, featuring a modern neon purple aesthetic and PlusJakartaSans fonts for a responsive design. The backend leverages serverless APIs with Neon database for user and ride management, ensuring scalability and performance. Key features include animated tab navigation, bottom sheet interfaces for ride details, and robust error handling for network and authentication issues. CarbuCarbu offers a user-friendly, secure, and efficient solution for urban mobility.",
+        "title": "Cointomic Crypto Portfolio Manager",
+        "description": "Cointomic is a cross-platform fintech application built with React Native and Expo 53, designed to empower users in navigating the complexities of cryptocurrency markets. It addresses key challenges such as market volatility, cross-currency transactions, and secure portfolio management. With real-time CoinMarketCap API integration, users can track top cryptocurrencies (e.g., Bitcoin at ~$85,230, Ethereum at ~$4,512 in July 2025), view detailed price trends, and manage transactions with seamless EUR/NGN conversions. The app features a neumorphic UI with smooth animations, Clerk authentication for security, and Drizzle ORM for offline data persistence. Customizable widgets and accessibility-focused design ensure inclusivity and efficiency for all users, making Cointomic a reliable solution for both novice and experienced investors in the fintech space.",
         "images": [
-            "/assets/images/welcomescreen1.png",
-            "/assets/images/welcomescreen2.png",
-            "/assets/images/welcomescreen3.png",
-            "/assets/images/welcomescreen3.gif",
-            "/assets/images/signinscreen.png",
-            "/assets/images/signupscreen.gif",
-            "/assets/images/homescreen2.png",
-            "/assets/images/ridesscreen.png",
-            "/assets/images/profilescreen.png",
-            "/assets/images/findridescreen1.png",
-            "/assets/images/findridescreen2.png",
-            "/assets/images/selectridescreen1.png",
-            "/assets/images/selectridescreen2.png",
-            "/assets/images/bookridescreen.png",
-            "/assets/images/confirmridescreen.png",
-            "/assets/images/paymentscreen.png"
+            "/assets/images/cointomic-splash.png",
+            "/assets/images/cointomic-signin.gif",
+            "/assets/images/cointomic-home.png",
+            "/assets/images/cointomic-home.gif",
+            "/assets/images/cointomic-crypto.gif",
+            "/assets/images/cointomic-transfers.gif",
+            "/assets/images/cointomic-invest.gif",
+            "/assets/images/cointomic-lifestyle.png",
+            "/assets/images/cointomic-profile.png"
         ],
-        "link": "https://github.com/oluwaseun-odufisan/CarbuCarbu",
+        "link": "https://github.com/oluwaseun-odufisan/Cointomic",
         "liveDemo": ""
     }
 ]

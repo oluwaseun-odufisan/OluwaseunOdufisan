@@ -93,6 +93,36 @@
         "category": "Mobile Apps"
     },
     {
+        "id": 13,
+        "title": "Cointomic Crypto Portfolio Manager",
+        "description": "Cointomic is a cross-platform fintech application built with React Native and Expo 53, designed to empower users in navigating the complexities of cryptocurrency markets. It addresses critical fintech challenges, including market volatility, cross-currency transactions, and secure portfolio management. Powered by real-time CoinMarketCap API integration, users can track top cryptocurrencies (e.g., Bitcoin at ~$85,230, Ethereum at ~$4,512 in July 2025), view detailed price trends, and manage transactions with seamless EUR/NGN conversions. The app features a modern neumorphic UI with smooth animations, secure Clerk authentication, and Drizzle ORM for offline data persistence. Customizable widgets and an accessibility-focused design ensure inclusivity and efficiency, making Cointomic a reliable solution for both novice and experienced investors in the fintech space. The platform’s robust architecture supports scalable API-driven data fetching, real-time updates, and offline functionality, delivering a seamless user experience across iOS and Android.",
+        "technologies": [
+            "React Native",
+            "Expo",
+            "Clerk",
+            "CoinMarketCap API",
+            "TypeScript",
+            "Drizzle ORM",
+            "Zustand",
+            "Axios",
+            "React Query"
+        ],
+        "images": [
+            "/assets/images/cointomic-splash.png",
+            "/assets/images/cointomic-signin.gif",
+            "/assets/images/cointomic-home.png",
+            "/assets/images/cointomic-home.gif",
+            "/assets/images/cointomic-crypto.png",
+            "/assets/images/cointomic-transfers.png",
+            "/assets/images/cointomic-invest.png",
+            "/assets/images/cointomic-lifestyle.png",
+            "/assets/images/cointomic-uml.png"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/Cointomic",
+        "liveDemo": "",
+        "category": "Fintech"
+    },
+    {
         "id": 11,
         "title": "MERN Admin Dashboard",
         "description": "A responsive admin dashboard built with the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Tailwind CSS, designed to streamline business operations and data management. The dashboard provides a comprehensive interface for managing users, products, orders, and analytics, featuring real-time data visualization with interactive charts and graphs powered by Chart.js. Key functionalities include role-based access control (admin, editor, viewer) for secure and tiered access, JWT-based authentication to protect sensitive operations, and full CRUD operations for seamless data management. The backend, powered by Express.js and MongoDB, ensures efficient data storage, retrieval, and scalability, with robust error handling and logging. The React frontend leverages a modular component structure for maintainability and performance, while Tailwind CSS delivers a modern, responsive design with customizable themes, ensuring usability across desktop and mobile devices. Additional features include exportable reports in CSV and PDF formats, a notification system for critical updates (e.g., order status changes or user activity), and integration with third-party APIs for extended functionality, such as email services or payment gateways. This dashboard is ideal for businesses seeking a powerful, user-friendly tool to monitor and manage operations effectively, from small startups to large enterprises.",
