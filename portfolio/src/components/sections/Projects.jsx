@@ -219,15 +219,16 @@ function Projects() {
             </div>
             {isModalOpen && selectedProject && (
                 <div
-                    className="fixed inset-0 bg-black/70 flex items-start justify-center z-50 p-4 sm:p-6 mt-16 sm:mt-20"
+                    className="fixed inset-0 bg-black/70 flex items-start justify-center z-50 p-4 sm:p-6 overflow-y-auto"
                     role="dialog"
                     aria-labelledby="modal-title"
+                    aria-describedby="modal-description"
                     aria-modal="true"
                     onClick={closeModal}
                 >
                     <div
                         ref={modalRef}
-                        className="relative bg-gray-700/90 backdrop-blur-md rounded-xl p-6 sm:p-10 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto glass shadow-2xl border border-gray-600/30"
+                        className="relative bg-gray-700/90 backdrop-blur-xl rounded-2xl p-6 sm:p-8 max-w-4xl w-full mt-16 sm:mt-20 max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-600/30"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button
@@ -242,7 +243,7 @@ function Projects() {
                         <h3 id="modal-title" className="text-2xl sm:text-3xl font-ars-maquette font-semibold text-white mb-6">
                             {selectedProject.title}
                         </h3>
-                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-800/50 rounded-lg shadow-md overflow-hidden">
+                        <div className="relative w-full h-[20rem] sm:h-[28rem] mb-8 flex items-center justify-center bg-gray-800/50 rounded-xl shadow-md overflow-hidden">
                             {selectedProject.images && selectedProject.images.length > 0 ? (
                                 <>
                                     <img
@@ -302,17 +303,20 @@ function Projects() {
                                 />
                             )}
                         </div>
-                        <p className="text-base sm:text-lg font-ars-maquette text-white mb-8 leading-relaxed">
+                        <p
+                            id="modal-description"
+                            className="text-base sm:text-lg font-ars-maquette text-white mb-8 leading-relaxed"
+                        >
                             {selectedProject.description}
                         </p>
-                        <div className="flex justify-center space-x-4">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button
                                 text="Visit GitHub"
                                 href={selectedProject.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 variant="primary"
-                                className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-white hover:text-black bg-gray-medium text-white"
+                                className="text-base sm:text-lg font-semibold px-6 py-2 bg-gray-medium text-white hover:bg-white hover:text-black transition-all duration-300 rounded-lg"
                                 aria-label={`Visit ${selectedProject.title} on GitHub`}
                             />
                             {selectedProject.liveDemo && (
@@ -322,7 +326,7 @@ function Projects() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     variant="secondary"
-                                    className="text-base sm:text-lg font-semibold px-6 py-2 hover:bg-white hover:text-black text-white"
+                                    className="text-base sm:text-lg font-semibold px-6 py-2 bg-gray-medium text-white hover:bg-white hover:text-black transition-all duration-300 rounded-lg"
                                     aria-label={`Visit live demo of ${selectedProject.title}`}
                                 />
                             )}
