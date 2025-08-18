@@ -1,5 +1,34 @@
 [
     {
+        "id": 14,
+        "title": "Lejar: Personal Finance",
+        "description": "Lejar is a fintech application crafted for Nigerian users, simplifying personal finance with tools tailored to local needs. Built with Next.js and Prisma it enables users to manage accounts, track transactions in real-time, and create Naira-based budgets with precision. Its standout feature, AI-powered receipt scanning, automatically extracts transaction details from photos, streamlining expense logging for busy individuals. Interactive charts visualize spending trends, while personalized budget plans help users achieve savings goals. Transaction confirmation emails, powered by Resend, enhance transparency, and Inngest handles background tasks like notifications for scalability. With secure Clerk authentication and accessibility optimized for low-end devices, Lejar empower users to easily work around daily expenses and plan long-term financial stability with confidence and cultural relevance.",
+        "technologies": [
+            "Next.js",
+            "Prisma",
+            "Clerk",
+            "Tailwind CSS",
+            "Inngest",
+            "Resend",
+            "Recharts",
+            "React Hook Form",
+            "Zod"
+        ],
+        "images": [
+            "/assets/images/lj1.png",
+            "/assets/images/lj2.png",
+            "/assets/images/lj3.png",
+            "/assets/images/lj4.png",
+            "/assets/images/lj5.png",
+            "/assets/images/lj6.png",
+            "/assets/images/lj7.png",
+            "/assets/images/lj8.png"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/lejar",
+        "liveDemo": "https://lejar.vercel.app",
+        "category": "Fintech"
+    },
+    {
         "id": 5,
         "title": "AI-Powered Task Management Application",
         "description": "This AI-powered Task Management Application is a comprehensive, web-based productivity platform designed for organizations to manage teams and operations more efficiently through automation and intelligent insights. It features a dynamic task management system with AI-assisted scheduling, auto-assignment, and smart prioritization based on machine learning models that analyze task urgency, team availability, and historical performance data. The platform includes a real-time chat system with end-to-end encryption, a social feed for company-wide updates and announcements, and a distributed file storage system inspired by Google Drive, supporting version control and collaborative editing. Employees benefit from AI-generated task summaries, personalized productivity suggestions, and automated reminders, while managers access role-based dashboards with real-time analytics, detailed performance reports, and goal-tracking features. The system integrates a custom payment mechanism for employee rewards, a secure URL shortener for sharing resources, and seamless Microsoft Outlook integration to sync tasks and meetings from emails. Scalable AI capabilities, including predictive analytics for workload forecasting, sentiment tracking for team morale, and a smart assistant chatbot for task queries, make this platform a transformative tool for optimizing workflows across organizations of all sizes.",

@@ -1,5 +1,23 @@
 [
     {
+        "id": 1,
+        "title": "Lejar: Personal Finance for Nigeria and Nigerians",
+        "description": "Lejar is a user-centric financial management app for Nigerian users, empowering individuals to take control of their finances with intuitive tools and local relevance. Built with Next.js, and Prisma, it offers easy account management, real-time transaction tracking, and budget planning in Naira (₦). A standout feature is its AI-powered receipt scanning, which automatically extracts transaction details from photos, simplifying expense logging. Users can monitor spending patterns through interactive charts, set personalized budgets, and receive transaction confirmation emails via Resend. Designed for accessibility, Lejar supports low-end devices and includes culturally relevant terminology under the 'Lejar' brand. With secure authentication and background job processing via Inngest, Lejar delivers a reliable, scalable solution for everyday financial clarity, from tracking daily expenses to planning long-term savings.",
+        "images": [
+            "/assets/images/lj1.png",
+            "/assets/images/lj2.png",
+            "/assets/images/lj3.png",
+            "/assets/images/lj4.png",
+            "/assets/images/lj5.png",
+            "/assets/images/lj6.png",
+            "/assets/images/lj7.png",
+            "/assets/images/lj8.png"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/lejar",
+        "linkName": "GitHub Repository",
+        "liveDemo": "https://lejar.vercel.app"
+    },
+    {
         "id": 2,
         "title": "AI-Powered Task Management Application",
         "description": "This AI-powered Task Management Application is a comprehensive, web-based productivity platform designed for organizations to manage teams and operations more efficiently through automation and intelligent insights. It features a dynamic task management system with AI-assisted scheduling, auto-assignment, and smart prioritization, alongside built-in real-time chat, a social feed for company-wide updates, and a distributed file storage system similar to Google Drive. Employees can receive AI-generated task summaries, productivity suggestions, and reminders, while managers benefit from role-based dashboards, detailed reports, performance appraisals, and goal tracking. The system includes a custom payment mechanism for employee rewards, a secure URL shortener, and seamless Microsoft Outlook integration for syncing tasks from emails and meetings. With scalable AI capabilities such as predictive analytics, sentiment tracking, and a smart assistant chatbot, the platform transforms how work is organized, communicated, and optimized across teams.",
@@ -19,7 +37,7 @@
         "liveDemo": "https://negaitm.vercel.app"
     },
     {
-        "id": 1,
+        "id": 3,
         "title": "NEG AI Banking Platform",
         "description": "The NEG AI Banking Platform is a secure, modern digital banking solution designed for seamless financial management in Nigeria. It offers a suite of features powered by Node.js, MongoDB, Flutterwave, and Express.js. Users can manage digital wallets, check real-time balances, and perform instant internal or external transfers to Nigerian banks, all validated through Flutterwave’s account resolution API. The platform ensures security through JWT authentication, input sanitization, and rate limiting, while providing detailed transaction email alerts—debit alerts for senders with fee details and credit alerts for receivers. With real-time webhook support, comprehensive error logging, and a scalable, API-driven architecture, it caters to both individuals and businesses. The system delivers transparency, reliability, and ease of use for funding, transferring, and tracking finances. Additionally, the platform supports the payment of various bills, including electricity, waste management, school fees, government charges, religious donations, and more—offering everything expected from a modern fintech application.",
         "images": [
@@ -29,7 +47,7 @@
         "liveDemo": ""
     },
     {
-        "id": 3,
+        "id": 4,
         "title": "Cointomic Crypto Portfolio Manager",
         "description": "Cointomic is a cross-platform fintech application built with React Native and Expo 53, designed to empower users in navigating the complexities of cryptocurrency markets. It addresses key challenges such as market volatility, cross-currency transactions, and secure portfolio management. With real-time CoinMarketCap API integration, users can track top cryptocurrencies (e.g., Bitcoin at ~$85,230, Ethereum at ~$4,512 in July 2025), view detailed price trends, and manage transactions with seamless EUR/NGN conversions. The app features a neumorphic UI with smooth animations, Clerk authentication for security, and Drizzle ORM for offline data persistence. Customizable widgets and accessibility-focused design ensure inclusivity and efficiency for all users, making Cointomic a reliable solution for both novice and experienced investors in the fintech space.",
         "images": [
@@ -44,6 +62,44 @@
             "/assets/images/cointomic-profile.png"
         ],
         "link": "https://github.com/oluwaseun-odufisan/Cointomic",
+        "liveDemo": ""
+    },
+    {
+        "id": 5,
+        "title": "CarbuCarbu Ride-Sharing App",
+        "description": "CarbuCarbu is a mobile-first ride-sharing app built with Expo and React Native, connecting users with drivers for seamless urban mobility. It integrates Clerk for secure authentication (email/password, Google OAuth), Google Maps API for real-time ride booking and location tracking, and Stripe for reliable payment processing. The app offers intuitive tab-based navigation (Home, Rides, Chat, Profile) with animated transitions and a bottom sheet for ride details. Key features include ride searching, booking, confirmation, user profile management, ride history, and real-time driver-user chat. Powered by serverless APIs and Neon database, it ensures scalability and robust error handling for network and authentication issues. CarbuCarbu delivers a user-friendly, cross-platform solution for modern transportation needs, enhancing accessibility and efficiency for iOS and Android users.",
+        "images": [
+            "/assets/images/welcomescreen1.png",
+            "/assets/images/welcomescreen2.png",
+            "/assets/images/welcomescreen3.png",
+            "/assets/images/welcomescreen3.gif",
+            "/assets/images/signinscreen.png",
+            "/assets/images/signupscreen.gif",
+            "/assets/images/homescreen2.png",
+            "/assets/images/ridesscreen.png",
+            "/assets/images/profilescreen.png",
+            "/assets/images/findridescreen1.png",
+            "/assets/images/findridescreen2.png",
+            "/assets/images/selectridescreen1.png",
+            "/assets/images/selectridescreen2.png",
+            "/assets/images/bookridescreen.png",
+            "/assets/images/confirmridescreen.png",
+            "/assets/images/paymentscreen.png"
+        ],
+        "link": "https://github.com/oluwaseun-odufisan/CarbuCarbu",
+        "liveDemo": ""
+    },
+    {
+        "id": 6,
+        "title": "Fraud Detection Research",
+        "description": "This research explores AI and Machine Learning’s role in combating fraud within Nigeria’s digital economy, spanning finance, e-commerce, healthcare, and education. It critiques traditional fraud detection’s reliance on static rules, which struggle against evolving fraud tactics. Using supervised learning for labeled data, unsupervised learning for anomaly detection, and deep learning for pattern recognition, the study showcases real-time anomaly detection, behavioral analysis, and risk scoring. It addresses Nigeria-specific challenges like data quality and regulatory compliance, offering recommendations such as increased AI infrastructure investment, robust data security, and cross-sector collaboration. Published in a peer-reviewed journal, this work contributes to global AI-driven fraud prevention, enhancing security and trust in Nigeria’s digital landscape.",
+        "images": [
+            "/assets/images/research.png",
+            "/assets/images/fraud-detection-graph.jpg",
+            "/assets/images/fraud-detection-analysis.jpg",
+            "/assets/images/fraud-detection-model.jpg"
+        ],
+        "link": "https://doi.org/10.1016/j.jeconc.2025.100127",
         "liveDemo": ""
     }
 ]
